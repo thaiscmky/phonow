@@ -4,7 +4,7 @@
   "description": "Menu maintenance web site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "moment": "^2.22.1",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
+    "nightmare": "^3.0.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "sequelize": "^4.37.7"
