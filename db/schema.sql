@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS Phonow;
 CREATE DATABASE Phonow;
 Use Phonow;
 -- Resturant Info
-CREATE Table Resturants(restaurant_id int auto_increment,restaurant_name varchar(50),restaurant_address1 varchar(80),
+CREATE Table Resturants(restaurant_id int auto_increment,restaurant_name varchar(50), address varchar(80),
 restaurant_address2 varchar(80),resturant_city varchar(80),restaurant_state varchar(50),restaurant_zip varchar(50),
 created_by varchar(128),created_on datetime,lastModified_by varchar(128),lastModified_on datetime, deleted boolean,primary key(restaurant_id));
 
