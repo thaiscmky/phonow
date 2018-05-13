@@ -7,5 +7,25 @@ router.get('/', (req,res) => {
     res.render('./admin/index', {title: title });
 });
 
+// -------- Add category
+router.get('/addcategories', (req,res) => {
+    res.render('./admin/add-categ');
+});
+
+// -------- Add item
+router.get('/additem', (req,res) => {
+    res.render('./admin/add-item');
+});
+
+// ----------- Inactivate a category,
+router.delete('/:id',(req,res) => {
+    db.menuCategory.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(() => { res.redirect('/admin');} );
+});
 
 module.exports = router;
+
