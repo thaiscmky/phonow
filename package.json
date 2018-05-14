@@ -4,7 +4,7 @@
   "description": "Menu maintenance web site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "repository": {
@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/thaiscmky/phonow#readme",
   "dependencies": {
-    " ": "^2.15.0",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "express": "^4.16.3",
@@ -27,6 +26,7 @@
     "express-session": "^1.15.6",
     "method-override": "^2.3.10",
     "moment": "^2.22.1",
+    "nightmare": "^3.0.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "sequelize": "^4.37.7"
