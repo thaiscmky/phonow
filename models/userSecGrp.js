@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     var UserSecGrp = sequelize.define('User_sec_grp', {
-        
         grp_code:{
         type:DataTypes.STRING,
         primaryKey: true,
@@ -25,9 +24,8 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     UserSecGrp.associate = function(models) {
-      //TODO  Restaurant belongsTo user , Restaurant ,
-      // UserSecGrp.hasMany(models.User);
-      UserSecGrp.hasMany(models.user,{as: 'userId', foreignKey: 'user_id'})
+      //TODO  
+      UserSecGrp.hasMany(models.user);
     };
     return UserSecGrp;
   };

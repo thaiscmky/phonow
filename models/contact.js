@@ -1,10 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     var contact= sequelize.define('contact', {
-        contact_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true // Automatically gets converted to SERIAL for postgres
-          },
           contact_name:{
         type:DataTypes.STRING,
       },

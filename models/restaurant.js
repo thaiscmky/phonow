@@ -1,10 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     var Restaurant = sequelize.define('restaurant', {
-        restaurant_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true // Automatically gets converted to SERIAL for postgres
-          },
           restaurant_name:{
         type:DataTypes.STRING,
       },
@@ -34,10 +29,9 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     Restaurant.associate = function(models) {
-      //TODO  Restaurant belongsTo user , Restaurant ,
-      // Restaurant.hasMany(models.restaurant_hour);
-      Restaurant.hasMany(models.restaurant_hour,{as: 'restHourId', foreignKey: 'id'})
-  
+      //TODO  
+      Restaurant.hasMany(models.restaurant_hour);
+      Restaurant.hasMany(models.menu_type)
     };
     return Restaurant;
   };

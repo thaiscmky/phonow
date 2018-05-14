@@ -1,8 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     var RestaurantHour = sequelize.define('restaurant_hour', {
-      restaurant_id:{
-      type:DataTypes.INTEGER,
-      },
       day_name:{
         type:DataTypes.STRING,
       },
@@ -24,8 +21,7 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     RestaurantHour.associate = function(models) {
-      //TODO  Restaurant belongsTo user , Restaurant ,
-      // RestaurantHour.belongsTo(models.Restaurant);
+      //TODO  
     };
     return RestaurantHour;
   };

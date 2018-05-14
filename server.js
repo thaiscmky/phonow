@@ -20,9 +20,9 @@ app.set("view engine","handlebars");
 
 //start server
  var db=require("./models")
-   db.contact.sequelize.sync();
+   //db.contact.sequelize.sync();
   //db.customer.sequelize.sync();
-  //db.burger.sequelize.sync({force:true});
+  //db.sequelize.sync({force:true});
 // .then(function(){
  
     console.log("sync database")
