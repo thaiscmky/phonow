@@ -114,4 +114,6 @@ Temporary Items
 !.vscode/launch.json
 !.vscode/extensions.json
 
-package-lock.json
+package-json.lock
+db/schema.sql
+db/seeds.sql

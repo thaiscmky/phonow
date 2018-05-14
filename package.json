@@ -4,13 +4,14 @@
   "description": "Menu maintenance web site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thaiscmky/phonow.git"
   },
-  "author": "The Carlos\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D,\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C,Thais,Yewbdar,Vinanti",
+  "author": "Carlos M,Thais Cailet,Yewbdar Girma,Vinanti Naik,The Mai",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/thaiscmky/phonow/issues"
@@ -21,13 +22,14 @@
     "connect-flash": "^0.1.1",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
+    "mysql2": "^1.5.3",
     "express-session": "^1.15.6",
     "method-override": "^2.3.10",
     "moment": "^2.22.1",
-    "mysql": "^2.15.0",
-    "mysql2": "^1.5.3",
+    "nightmare": "^3.0.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "sequelize": "^4.37.7"
-  }
+  },
+  "keywords": []
 }
