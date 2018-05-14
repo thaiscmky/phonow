@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname,'./public')));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
     extended: true

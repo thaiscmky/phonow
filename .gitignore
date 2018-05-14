@@ -118,3 +118,4 @@ package-lock.json
 db/schema.sql
 db/seeds.sql
 config/config.json
+db/schema.sql
