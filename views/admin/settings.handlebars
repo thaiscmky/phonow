@@ -1,4 +1,4 @@
-{{!-- #if general_info.editmode --}}
+{{#if this.general_info.editmode}}
     <fieldset class="card card-body edit-mode">
         <h3>General Information</h3>
         <form id="geninfo" action="/admin/settings" method="post">
@@ -80,10 +80,83 @@
             </div>
         </form>
     </fieldset>
-{{!--else --}}
+{{else}}
     <div class="card card-body inform-form view-mode">
+        <h3>General Information <i class="fa fa-edit">edit</i></h3>
         <div id="geninfo">
-            <h3>General Information <i class="fa fa-edit">edit</i></h3>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Name: </label>
+                    <span id="restaurant_name">
+                        {{#if this.general_info.restaurant_name}}
+                            {{this.general_info.restaurant_name}}
+                        {{else}}
+                            <span class="missing-data">No name listed</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Owner: </label>
+                    <span id="contact_name">
+                        {{#if this.general_info.contact_name}}
+                            {{this.general_info.contact_name}}
+                        {{else}}
+                            <span class="missing-data">No name listed</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Phone Number: </label>
+                    <span id="contact_phone">
+                        {{#if this.general_info.contact_phone}}
+                            {{this.general_info.contact_phone}}
+                        {{else}}
+                            <span class="missing-data">No phone number specified</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Contact Email: </label>
+                    <span id="contact_email">
+                        {{#if this.general_info.contact_email}}
+                            {{this.general_info.contact_email}}
+                        {{else}}
+                            <span class="missing-data">No email specified</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Address: </label>
+                    <span class="address">
+                        {{#if this.general_info.address_line1}}
+                            {{this.general_info.address_line1}},
+                            {{#if this.general_info.address_line2}}
+                                {{this.general_info.address_line2}},
+                            {{/if}}
+                        {{else}}
+                            <span class="missing-data">No street specified</span>,
+                        {{/if}}
+                        {{#if this.general_info.restaurant_state}}
+                            {{this.general_info.restaurant_state}},
+                        {{else}}
+                            <span class="missing-data">No State</span>,
+                        {{/if}}
+                        {{#if this.general_info.restaurant_zipcode}}
+                            {{this.general_info.restaurant_zipcode}},
+                        {{else}}
+                            <span class="missing-data">No Zipcode</span>,
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
-{{!-- /if --}}
+{{/if}}
