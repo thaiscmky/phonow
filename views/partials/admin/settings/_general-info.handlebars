@@ -1,0 +1,162 @@
+{{#if this.general_info.editmode}}
+    <fieldset class="card card-body edit-mode">
+        <h3>General Information</h3>
+        <form id="geninfo" action="/admin/settings" method="post">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="restaurant_name">Restaurant Name</label>
+                        <input type="text" class="form-control" name="restaurant_name" id="restaurant_name"
+                            {{#if this.general_info.restaurant_name}} value="{{this.general_info.restaurant_name}}" {{/if}}
+                        />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="contact_name">Restaurant Owner</label>
+                        <input type="text" class="form-control" name="contact_name" id="contact_name"
+                            {{#if this.general_info.contact_name}} value="{{this.general_info.contact_name}}" {{/if}}
+                        />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="contact_phone">Restaurant Phone Number</label>
+                        <input type="email" class="form-control" name="contact_phone" id="contact_phone"
+                            {{#if this.general_info.contact_phone}} value="{{this.general_info.contact_phone}}" {{/if}}
+                        />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="contact_email">Contact Email</label>
+                        <input type="tel" class="form-control" name="contact_email" id="contact_email"
+                            {{#if this.general_info.contact_email}} value="{{this.general_info.contact_email}}" {{/if}}
+                        />
+                    </div>
+                </div>
+                <h2>Address</h2>
+                <div class="form-row">
+                    <div class="col input-group">
+                         <label for="address_line1">Street 1</label>
+                         <input type="text" class="form-control" name="address_line1" id="address_line1"
+                             {{#if this.general_info.address.line1}} value="{{this.general_info.address.line1}}" {{/if}}
+                         />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                         <label for="address_line2">Street 2</label>
+                         <input type="text" class="form-control" name="address_line2" id="address_line2"
+                             {{#if this.general_info.address.line2}} value="{{this.general_info.address.line2}}" {{/if}}
+                         />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-6 input-group">
+                         <label for="restaurant_city">City</label>
+                         <input type="text" class="form-control" name="restaurant_city" id="address_line2"
+                             {{#if this.general_info.address.restaurant_city}} value="{{this.general_info.address.restaurant_city}}" {{/if}}
+                         />
+                    </div>
+                    <div class="col-3 input-group">
+                         <label for="address_line2">State</label>
+                         <input type="text" class="form-control" name="address_line2" id="address_line2"
+                             {{#if this.general_info.address.restaurant_state}} value="{{this.general_info.address.restaurant_state}}" {{/if}}
+                         />
+                    </div>
+                    <div class="col input-group">
+                         <label for="restaurant_zip">Zip Code</label>
+                         <input type="text" class="form-control" name="address_line2" id="address_line2"
+                             {{#if this.general_info.address.restaurant_zip}} value="{{this.general_info.address.restaurant_zip}}" {{/if}}
+                         />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                         <button type="submit" class="btn btn-warning">Submit Item</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+{{else}}
+    <div class="card card-body inform-form view-mode">
+        <h3>General Information <i class="fa fa-edit">edit</i></h3>
+        <div id="geninfo">
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Name: </label>
+                    <span id="restaurant_name">
+                        {{#if this.general_info.restaurant_name}}
+                            {{this.general_info.restaurant_name}}
+                        {{else}}
+                            <span class="missing-data">No name listed</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Owner: </label>
+                    <span id="contact_name">
+                        {{#if this.general_info.contact_name}}
+                            {{this.general_info.contact_name}}
+                        {{else}}
+                            <span class="missing-data">No name listed</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Phone Number: </label>
+                    <span id="contact_phone">
+                        {{#if this.general_info.contact_phone}}
+                            {{this.general_info.contact_phone}}
+                        {{else}}
+                            <span class="missing-data">No phone number specified</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Contact Email: </label>
+                    <span id="contact_email">
+                        {{#if this.general_info.contact_email}}
+                            {{this.general_info.contact_email}}
+                        {{else}}
+                            <span class="missing-data">No email specified</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Restaurant Address: </label>
+                    <span class="address">
+                        {{#if this.general_info.address_line1}}
+                            {{this.general_info.address_line1}},
+                            {{#if this.general_info.address_line2}}
+                                {{this.general_info.address_line2}},
+                            {{/if}}
+                        {{else}}
+                            <span class="missing-data">No street specified</span>,
+                        {{/if}}
+                        {{#if this.general_info.restaurant_state}}
+                            {{this.general_info.restaurant_state}},
+                        {{else}}
+                            <span class="missing-data">No State</span>,
+                        {{/if}}
+                        {{#if this.general_info.restaurant_zipcode}}
+                            {{this.general_info.restaurant_zipcode}},
+                        {{else}}
+                            <span class="missing-data">No Zipcode</span>
+                        {{/if}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
