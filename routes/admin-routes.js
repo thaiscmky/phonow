@@ -17,7 +17,23 @@ router.get('/dash', (req,res) => {
 // -------- Set settings
 router.get('/settings', (req,res) => {
     const title='Pho Now\'s settings';
-    res.render('./admin/settings', {layout:'main-admin', title: title});
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    var settingsObj = {
+        "geninfo": {
+            "restaurant_name": "Pho Now",
+            "contact_name": "Uyen Tran",
+            "contact_email": "phonow@example.com",
+            "address": {
+                "line1": "[phonow.restaurants.address]",
+                "line2": "",
+                "restaurant_state": "Texas",
+                "restaurant_city": "Houston",
+                "restaurant_zip": "77077"
+            }
+        }
+    };
+    res.render('./admin/settings', {layout:'main-admin', title: title, settings: settingsObj});
 });
 
 // -------- Add category

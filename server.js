@@ -18,8 +18,8 @@ const db=require("./models");
 require('./config/passport')(passport);
 
 //handlebars helpers
-const {capitalize} = require('./helpers/hbs.js');
-
+const hbshelpers = require('./helpers/hbs.js');
+const capitalize = hbshelpers.capitalize;
 // Routes
 const auth = require('./routes/auth');
 const html = require('./routes/html-routes');
