@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     var User = sequelize.define('user', {
-        
-        user_id:{
-          type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-      },
       user_unique_id:{
       type:DataTypes.STRING,
         allowNull:false,
@@ -41,8 +35,7 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     User.associate = function(models) {
-      //TODO  Restaurant belongsTo user , Restaurant ,
-      // User.belongsTo(models.User_Sec_Grp);
+      //TODO  
     };
     return User;
   };

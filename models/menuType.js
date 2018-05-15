@@ -1,14 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
-    var MenuType = sequelize.define('Menu_Type', {
-        categrories_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true // Automatically gets converted to SERIAL for postgres
-          },
-        category_name:{
+    var MenuType = sequelize.define('menu_type', {
+      
+          MenuType_name:{
         type:DataTypes.STRING,
       },
-      category_description:{
+      MenuType_description:{
        type:DataTypes.STRING
       },
        isActive:{
@@ -23,10 +19,7 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     MenuType.associate = function(models) {
-      //TODO  Restaurant belongsTo user , Restaurant ,
-      // Menu_Type.hasMany(models.User);
-      MenuType.hasMany(models.user,{as: 'userId', foreignKey: 'user_id'})
-  
+      //TODO  
     };
     return MenuType;
   };
