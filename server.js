@@ -40,7 +40,7 @@ app.engine('handlebars', exphbs({
     helpers: {
         capitalize: capitalize
     },
-    defaultLayout: 'main'
+    defaultLayout: 'main',
 }));
 app.set('view engine', 'handlebars');
 

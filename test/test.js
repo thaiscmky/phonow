@@ -130,10 +130,5 @@ describe('Load a Page', function () {
                 .catch(done);
         });
     });
-
-
-
-
-
 });
 
