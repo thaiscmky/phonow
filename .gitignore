@@ -120,4 +120,3 @@ db/schema.sql
 db/seeds.sql
 config/config.json
 config/keys_dev.js
-db/schema.sql
