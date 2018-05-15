@@ -12,17 +12,14 @@
 </head>
 
 <body>
-    {{> _navbar}}
-    <div class="container">
-        {{> _msg}}
-        {{> _errors}}
-        {{{body}}}
-    </div>
-    <footer class="footer">
+
+    {{> _msg}} {{> _errors}} {{{body}}}
+
+    {{!-- <footer class="footer">
         <div class="container">
-            <span class="text-muted"> 2018 ::  Pho Now</span>
+            <span class="text-muted"> 2018 :: Pho Now</span>
         </div>
-    </footer>
+    </footer> --}}
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
