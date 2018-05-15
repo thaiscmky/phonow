@@ -1,0 +1,22 @@
+{{#if editmode }}
+    <fieldset class="card card-body">
+        <h3>General Information</h3>
+        <form action="/admin" method="post">
+            <div class="form-group">
+                <label for="item">Title</label>
+                <input type="text" class="form-control" name="item">
+                <label for="item-desc">Description</label>
+                <input type="text" class="form-control" name="item-desc">
+                <label for="item-price">Price</label>
+                <input type="text" class="form-control" name="item-price">
+                <label for="item-price">Size</label>
+                <input type="text" class="form-control" name="item-size">
+            </div>
+            <button type="submit" class="btn btn-warning">Submit Item</button>
+        </form>
+    </fieldset>
+{{else}}
+    <div class="card card-body">
+        <h3>General Information <i class="fa fa-edit">edit</i></h3>
+    </div>
+{{/if}}

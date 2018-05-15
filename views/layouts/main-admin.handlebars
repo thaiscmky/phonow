@@ -6,17 +6,15 @@
     <div class="row row-offcanvas row-offcanvas-left">
         {{> admin/_navbar }}
         {{> admin/_sidebar}}
-        <div class="container" id="main">
+        <div class="container">
             {{> admin/_main-top }}
             {{{body}}}
             {{> admin/_main-bottom }}
         </div>
+    </div>
 <!--/col-->
-{{!-- <!--/.container-->
-<footer class="container-fluid">
-    <p class="text-right small">©2016-2018 Company</p>
-</footer> --}}
-
+{{> admin/_footer-block }}
+</div>
 </body>
 
 </html>

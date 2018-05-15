@@ -14,6 +14,12 @@ router.get('/dash', (req,res) => {
     res.render('./admin/dash-sample', {layout:'main-admin',title: title });
 });
 
+// -------- Set settings
+router.get('/settings', (req,res) => {
+    const title='Pho Now\'s settings';
+    res.render('./admin/settings', {layout:'main-admin', title: title});
+});
+
 // -------- Add category
 router.get('/addcategories', (req,res) => {
     res.render('./admin/add-categ', {layout:'main-admin'});
