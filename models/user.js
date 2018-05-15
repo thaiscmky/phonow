@@ -1,9 +1,4 @@
 module.exports = (sequelize, DataTypes) => {
-<<<<<<< HEAD
-=======
-  var User = sequelize.define('user', {
->>>>>>> backendAdmin
-
   var User = sequelize.define('user', {
     user_id: {
       type: DataTypes.INTEGER,
@@ -49,8 +44,4 @@ module.exports = (sequelize, DataTypes) => {
   //   // User.belongsTo(models.User_Sec_Grp);
   // };
   return User;
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> backendAdmin
