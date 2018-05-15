@@ -1,22 +1,23 @@
 {
   "development": {
-    "username": [ENVIRONMENT VARIABLE HERE],
-    "password": [ENVIRONMENT VARIABLE HERE],
-    "database": [ENVIRONMENT VARIABLE HERE],
-    "host": [ENVIRONMENT VARIABLE HERE],
-    "port":[ENVIRONMENT VARIABLE HERE]
+    "username": "root",
+    "password": "",
+    "database": "phonow",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
-    "username": [ENVIRONMENT VARIABLE HERE],
-    "password": [ENVIRONMENT VARIABLE HERE],
-    "database": [ENVIRONMENT VARIABLE HERE],
-    "host": [ENVIRONMENT VARIABLE HERE],
-    "dialect": [ENVIRONMENT VARIABLE HERE]
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "production": {
-    "username": [ENVIRONMENT VARIABLE HERE],
-    "password": [ENVIRONMENT VARIABLE HERE],
-    "database": [ENVIRONMENT VARIABLE HERE],
-    "dialect": [ENVIRONMENT VARIABLE HERE]
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }

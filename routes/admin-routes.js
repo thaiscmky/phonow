@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
 
 // -------- Homepage route
 router.get('/', (req,res) => {
@@ -17,14 +18,14 @@ router.get('/additem', (req,res) => {
     res.render('./admin/add-item');
 });
 
-// ----------- Inactivate a category,
-router.delete('/:id',(req,res) => {
-    db.menuCategory.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(() => { res.redirect('/admin');} );
+// -------- fail route
+router.get('/403', (req,res) => {
+    res.render('./admin/403');
+});
+
+// -------- Authorized route - dashboard
+router.get('/dashboard',ensureAuthenticated, (req,res) => {
+    res.render('./admin/index');
 });
 
 module.exports = router;
