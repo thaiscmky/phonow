@@ -1,0 +1,33 @@
+machine:
+  node:
+    version: 8.11.1
+
+deployment:
+  staging:
+    branch: staging
+    commands:
+      # set up the heroku-toolbet CLI so we
+      # to deploy the app
+      - |
+        cat >~/.netrc <<EOF
+        machine api.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_TOKEN
+        machine git.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_TOKEN
+        EOF
+      - chmod 600 ~/.netrc
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+
+      # Deploy the app to heroku
+      - git push https://git.heroku.com/phosho-phonow-staging.git $CIRCLE_SHA1:refs/heads/staging
+
+      - |
+        curl -u $ASSERTIBLE_TOKEN: -XPOST --fail "https://assertible.com/deployments" -d'{
+          "service": "'"${ASSERTIBLE_SERVICE_ID}"'",
+          "environmentName": "staging",
+          "version": "'"${CIRCLE_SHA1}"'",
+          "ref": "'"${CIRCLE_SHA1}"'",
+          "github": true
+        }'
