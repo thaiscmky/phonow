@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
+  
   var User = sequelize.define('user', {
-
     user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -46,3 +46,4 @@ module.exports = (sequelize, DataTypes) => {
   // };
   return User;
 };
+

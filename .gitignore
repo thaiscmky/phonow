@@ -119,5 +119,5 @@ package-lock.json
 db/schema.sql
 db/seeds.sql
 config/config.json
+config/config.json.devel
 config/keys_dev.js
-db/schema.sql
