@@ -86,5 +86,49 @@ describe('Load a Page', function () {
                 .catch(done);
         });
     });
+
+    describe('/ (ADMIN: Dashboard)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/dashboard')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: site page to edit content)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/editcontent')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: site page home page)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/sitehomepage')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: Landing page for adding items)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/addingitems')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
 });
 

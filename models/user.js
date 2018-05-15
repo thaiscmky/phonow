@@ -1,4 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
+<<<<<<< HEAD
+=======
+  var User = sequelize.define('user', {
+>>>>>>> backendAdmin
 
   var User = sequelize.define('user', {
     user_id: {
@@ -45,4 +49,8 @@ module.exports = (sequelize, DataTypes) => {
   //   // User.belongsTo(models.User_Sec_Grp);
   // };
   return User;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> backendAdmin
