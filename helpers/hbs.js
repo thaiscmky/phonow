@@ -10,8 +10,7 @@ module.exports = {
         return string.charAt(0).toUpperCase() + string.slice(1);
     },
     debug: function(value, context){
-        console.log(this);
-        console.log('passed:');
+        console.log('Passed in handlebars:');
         console.log(value);
     }
 };

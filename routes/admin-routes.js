@@ -31,6 +31,32 @@ router.get('/settings', (req,res) => {
                 "restaurant_city": "Houston",
                 "restaurant_zip": "77077"
             }
+        },
+        "restaurant_hour":
+        {
+            "list": [
+                {
+                    "id": 1,
+                    "day_name": "Monday",
+                    "start_time": "1:00",
+                    "end_time": "1:00",
+                    "isActive": true
+                },
+                {
+                    "id": 2,
+                    "day_name": "Tuesday",
+                    "start_time": "1:00",
+                    "end_time": "1:00",
+                    "isActive": false
+                },
+                {
+                    "id": 3,
+                    "day_name": "Wednesday",
+                    "start_time": "1:00",
+                    "end_time": "",
+                    "isActive": true
+                }
+            ]
         }
     };
     res.render('./admin/settings', {layout:'main-admin', title: title, settings: settingsObj});
