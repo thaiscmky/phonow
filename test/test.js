@@ -2,7 +2,7 @@ const Nightmare = require('nightmare');
 const assert = require('assert');
 
 describe('Load a Page', function () {
-     // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
+    // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
     this.timeout('5s');
 
     let nightmare = null;
@@ -87,3 +87,4 @@ describe('Load a Page', function () {
         });
     });
 });
+

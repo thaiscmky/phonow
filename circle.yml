@@ -1,6 +1,9 @@
 machine:
   node:
-    version: 8.11.1
+    version: v8.2.0
+
+  npm:
+    version: stable
 
 deployment:
   staging:

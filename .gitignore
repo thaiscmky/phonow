@@ -5,6 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
 # Runtime data
 pids
 *.pid
@@ -118,3 +119,4 @@ package-lock.json
 db/schema.sql
 db/seeds.sql
 config/config.json
+config/keys_dev.js
