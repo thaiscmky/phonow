@@ -18,9 +18,7 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     menuCategory.associate = function(models) {
-      //TODO  
-     
-       menuCategory.hasMany(models.menu_items);
+      
       };
     return menuCategory;
   };

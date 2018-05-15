@@ -2,7 +2,7 @@ const Nightmare = require('nightmare');
 const assert = require('assert');
 
 describe('Load a Page', function () {
-     // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
+    // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
     this.timeout('5s');
 
     let nightmare = null;
@@ -86,4 +86,49 @@ describe('Load a Page', function () {
                 .catch(done);
         });
     });
+
+    describe('/ (ADMIN: Dashboard)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/dashboard')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: site page to edit content)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/editcontent')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: site page home page)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/sitehomepage')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: Landing page for adding items)', () => {
+        it('should load without error', done => {
+            nightmare.goto('http://localhost:3000/admin/addingitems')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
 });
+
