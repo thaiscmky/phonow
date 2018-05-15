@@ -1,0 +1,53 @@
+{{!--#if settings.additional.hours_ops.on--}}
+    {{#if settings.restaurant_hour.editmode}}
+        <fieldset class="card card-body edit-mode">
+            <h3 class="w-100">Hours of Operation
+                <span class="float-right"><button type="reset" class="btn">Cancel</button><button type="submit" class="btn btn-warning">Save</button></span>
+            </h3>
+            <form id="geninfo" action="/admin/settings" method="post">
+                <div class="form-group">
+                {{#each settings.restaurant_hour.list}}
+                    <div class="form-row m-3">
+                        <div class="form-check col input-group">
+                          <input class="form-check-input" type="checkbox" value="{{this.id}}" id="day_name" name="day_name">
+                          <label class="form-check-label" for="defaultCheck1">
+                            {{this.day_name}}
+                          </label>
+                        </div>
+                        <div class="form-check col input-group">
+                          <input type="text" class="form-control" name="daystart_{{this.id}}" id="daystart_{{this.id}}"
+                               value="{{#if this.start_time}}{{this.start_time}}{{/if}}"
+                           />
+                        </div>
+                        -
+                        <div class="form-check col input-group">
+                          <input type="text" class="form-control" name="dayend_{{this.id}}" id="dayend_{{this.id}}"
+                               value="{{#if this.end_time}}{{this.end_time}}{{/if}}"
+                           />
+                        </div>
+                    </div>
+                {{/each}}
+                </div>
+            </form>
+        </fieldset>
+    {{else}}
+        <div class="card card-body inform-form view-mode">
+            <h3>Hours of Operation <i class="fa fa-edit">edit</i></h3>
+            <div id="geninfo">
+            {{#each settings.restaurant_hour.list}}
+                <div class="row">
+                    <div class="col">
+                        <label>{{this.day_name}}: </label>
+                        {{#if this.isActive}}
+                            {{#if this.start_time}}{{this.start_time}}{{else}}???{{/if}} -
+                            {{#if this.end_time}}{{this.end_time}}{{else}}???{{/if}}
+                        {{else}}
+                            Closed
+                        {{/if}}
+                    </div>
+                </div>
+            {{/each}}
+            </div>
+        </div>
+    {{/if}}
+{{!--/if--}}

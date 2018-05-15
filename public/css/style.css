@@ -2,6 +2,10 @@ body,
 html {
     height: 100%;
 }
+h1 {
+    font-size: 200% !important;
+    margin-top:20px;
+}
 
 /*
    * Off Canvas sidebar at medium breakpoint
@@ -115,4 +119,54 @@ html {
     padding: 12px;
     border: 1px solid #000;
     margin-right: -1px;
+}
+
+/** form switch **/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 20px;
+}
+.switch input {display:none;}
+.slider {
+    border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #ffc107;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #ffc107;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider:before {
+    border-radius: 50%;
 }
