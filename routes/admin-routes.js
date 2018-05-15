@@ -20,12 +20,13 @@ router.get('/settings', (req,res) => {
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     var settingsObj = {
-        "geninfo": {
+        "general_info": {
             "restaurant_name": "Pho Now",
             "contact_name": "Uyen Tran",
             "contact_email": "phonow@example.com",
+            "contact_phone": "",
             "address": {
-                "line1": "[phonow.restaurants.address]",
+                "line1": "phonow restaurants address",
                 "line2": "",
                 "restaurant_state": "Texas",
                 "restaurant_city": "Houston",
@@ -57,7 +58,12 @@ router.get('/settings', (req,res) => {
                     "isActive": true
                 }
             ]
-        }
+        },
+        "additional": [
+            {"google_maps": {"on": true, "label": "Google Maps"} },
+            {"contact_form": {"on": false, "label": "Contact Us Form"} },
+            {"hours_ops": {"on": true, "label": "Hours of Operation"} },
+        ]
     };
     res.render('./admin/settings', {layout:'main-admin', title: title, settings: settingsObj});
 });

@@ -55,13 +55,13 @@
                 <div class="form-row">
                     <div class="col-6 input-group">
                          <label for="restaurant_city">City</label>
-                         <input type="text" class="form-control" name="restaurant_city" id="address_line2"
+                         <input type="text" class="form-control" name="restaurant_city" id="restaurant_city"
                              {{#if settings.general_info.address.restaurant_city}} value="{{settings.general_info.address.restaurant_city}}" {{/if}}
                          />
                     </div>
                     <div class="col-3 input-group">
-                         <label for="address_line2">State</label>
-                         <input type="text" class="form-control" name="address_line2" id="address_line2"
+                         <label for="restaurant_state">State</label>
+                         <input type="text" class="form-control" name="restaurant_state" id="restaurant_state"
                              {{#if settings.general_info.address.restaurant_state}} value="{{settings.general_info.address.restaurant_state}}" {{/if}}
                          />
                     </div>
@@ -81,6 +81,7 @@
         </form>
     </fieldset>
 {{else}}
+{{debug settings}}
     <div class="card card-body inform-form view-mode">
         <h3>General Information <i class="fa fa-edit">edit</i></h3>
         <div id="geninfo">
@@ -136,21 +137,21 @@
                 <div class="col">
                     <label>Restaurant Address: </label>
                     <span class="address">
-                        {{#if settings.general_info.address_line1}}
-                            {{settings.general_info.address_line1}},
-                            {{#if settings.general_info.address_line2}}
-                                {{settings.general_info.address_line2}},
+                        {{#if settings.general_info.address.line1}}
+                            {{settings.general_info.address.line1}},
+                            {{#if settings.general_info.address.line2}}
+                                {{settings.general_info.address.line2}},
                             {{/if}}
                         {{else}}
                             <span class="missing-data">No street specified</span>,
                         {{/if}}
-                        {{#if settings.general_info.restaurant_state}}
-                            {{settings.general_info.restaurant_state}},
+                        {{#if settings.general_info.address.restaurant_state}}
+                            {{settings.general_info.address.restaurant_state}},
                         {{else}}
                             <span class="missing-data">No State</span>,
                         {{/if}}
-                        {{#if settings.general_info.restaurant_zipcode}}
-                            {{settings.general_info.restaurant_zipcode}},
+                        {{#if settings.general_info.address.restaurant_zip}}
+                            {{settings.general_info.address.restaurant_zip}},
                         {{else}}
                             <span class="missing-data">No Zipcode</span>
                         {{/if}}
