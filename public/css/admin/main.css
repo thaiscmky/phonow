@@ -68,6 +68,10 @@ input:checked + .slider:before {
 }
 .grid .id {
     width: 5%;
+    text-align: center;
+}
+#menu_items .edit-mode .description{
+    margin-left: 5%;
 }
 
 #main .container{
