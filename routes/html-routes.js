@@ -3,23 +3,26 @@ const router = express.Router();
 
 // -------- Homepage route
 router.get('', (req,res) => {
-    const title='Welcome to Pho Now!';
+    const title='index';
     res.render('./main/index', {title: title });
 });
 
 // --------------- Menu
 router.get('/menu', (req, res) => {
-    res.render('./main/menu');
+    const title='menu';
+    res.render('./main/menu', {title: title });
 });
 
 // --------------- Store Info
 router.get('/about', (req, res) => {
-    res.render('./main/about');
+    const title='about';
+    res.render('./main/about', {title: title });
 });
 
 // --------------- Contact Us
 router.get('/contact', (req, res) => {
-    res.render('./main/contact');
+    const title='contact';
+    res.render('./main/contact', {title: title});
 });
 
 module.exports = router;

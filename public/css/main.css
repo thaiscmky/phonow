@@ -37,7 +37,8 @@ section.hero {
 
 /* Main Section CSS */
 section.section {    
-    padding: 1.618em;        
+    padding: 1.618em 0;
+    background-color: #333;
 }
 
 section.menu {
@@ -54,14 +55,13 @@ section.contact {
 
 .section .title {
     font-size: 2.618em;
-    color: #fff;
-    margin-bottom: 1rem;
+    color: #fff;    
 }
 
 .section .subtitle {    
     font-size: 1rem;
     color: #fff;
-    margin-bottom: 1rem;    
+    margin: 1rem 0;    
 }
 
 /* End Main Section CSS */
@@ -73,6 +73,11 @@ section.contact {
 /*********************/
 /*   Sub-Pages CSS   */
 /*********************/
+
+.section .content {
+    margin-top: 1.618em;
+    /* background-color: white; */
+}
 
 /*********************/
 /* End Sub-Pages CSS */
@@ -86,3 +91,15 @@ section.contact {
 /***********************/
 /* End General classes */
 /***********************/
+
+/***************************/
+/*   Bootstrap Overrides   */
+/***************************/
+
+.navbar-brand {
+    margin: 0 1rem;
+}
+
+/***************************/
+/* End Bootstrap Overrides */
+/***************************/
