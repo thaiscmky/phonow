@@ -134,6 +134,32 @@ section.contact {
 
 /*   About Page CSS   */
 
+#info {
+    color: #fff;
+    background: #333;    
+}
+
+#info > div {
+    margin-bottom: 1rem;
+}
+
+.small-title {
+    margin-bottom: .618em;
+}
+
+.small-title > span {
+    font-weight: bold;
+    border-bottom: 3px solid #fff;
+    margin-bottom: .618em;
+}
+
+#contact > div,
+#contact > a {
+    margin-bottom: .618em;
+}
+
+/* End About Page CSS */
+
 .about-hero {    
     background: url("http://via.placeholder.com/2000x300");
 }
@@ -145,8 +171,6 @@ section.contact {
 .contact-hero {    
     background: url("http://via.placeholder.com/2000x300");
 }
-
-/* End About Page CSS */
 
 .section .content {    
     background-color: white;
@@ -165,6 +189,13 @@ section.contact {
 /***********************/
 /*   General classes   */
 /***********************/
+
+.vcenter-img {
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 /***********************/
 /* End General classes */
