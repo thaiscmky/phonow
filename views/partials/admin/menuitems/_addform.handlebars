@@ -1,0 +1,30 @@
+<div class="edit-mode">
+    <fieldset class="card card-body">
+    <h2>Add new menu item</h2>
+        <form id="newitem" action="/api/addmenuitem" method="post">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="item_name">Item Name</label>
+                        <input type="text" class="form-control" name="item_name" id="item_name"/>
+                    </div>
+                    <div class="col input-group">
+                        <label for="item_price">Item Price</label>
+                        <input type="text" class="form-control" name="item_price" id="item_price"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="item_description">Item Description</label>
+                        <textarea class="form-control" name="item_description" id="category_description"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                         <button type="submit" class="btn btn-warning">Add Item</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
