@@ -30,10 +30,12 @@
                                 <textarea class="form-control" name="category_description-" id="category_description-{{this.id}}">{{this.category_description}}</textarea>
                              </td>
                              <td class="form-check input-group status">
-                                 <input class="form-check-input" type="checkbox" value="" id="status-{{this.id}}" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
-                                 <label class="form-check-label">
-                                     Enabled
-                                 </label>
+                                  <div class="col input-group status my-2">
+                                     <label class="form-check-label switch">
+                                         <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
+                                         <span class="slider"></span>
+                                     </label>
+                                 </div>
                              </td>
                              <td class="created">
                                  <p>{{this.createdAt}}</p>
@@ -42,7 +44,7 @@
                                  <p>{{this.updatedAt}}</p>
                              </td>
                              <td class="action">
-                                 <button type="submit" class="btn btn-warning">Save Changes</button>
+                                 <button type="reset" class="btn">Cancel</button> <button type="submit" class="btn btn-warning">Update</button>
                              </td>
                          </tr>
                          <tr id="category-{{this.id}}">
