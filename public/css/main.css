@@ -109,6 +109,7 @@ section.contact {
 }
 
 #menu-content {
+    background: #fff;
     padding: 1.618em;
 }
 
@@ -135,8 +136,7 @@ section.contact {
 /*   About Page CSS   */
 
 #info {
-    color: #fff;
-    background: #333;    
+    color: #fff;  
 }
 
 #info > div {
@@ -160,6 +160,31 @@ section.contact {
 
 /* End About Page CSS */
 
+/*   Contact Page CSS   */
+
+#contact {
+    color: #fff;
+}
+
+.name {
+    font-size: 1.618rem;    
+}
+
+.nameplate {
+    margin-bottom: 2.618rem;
+}
+
+#owner-img {
+    margin-bottom: 2.618rem;
+}
+
+.message {
+    margin-bottom: 1.61rem;
+}
+
+
+/* End Contact Page CSs */
+
 .about-hero {    
     background: url("http://via.placeholder.com/2000x300");
 }
@@ -170,10 +195,6 @@ section.contact {
 
 .contact-hero {    
     background: url("http://via.placeholder.com/2000x300");
-}
-
-.section .content {    
-    background-color: white;
 }
 
 .mini-hero-img {
@@ -191,7 +212,7 @@ section.contact {
 /***********************/
 
 .vcenter-img {
-    background-color: #333;
+    background: #333;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -219,3 +240,11 @@ section.contact {
 /***************************/
 /* End Bootstrap Overrides */
 /***************************/
+
+/*********************/
+/*   Media Queries   */
+/*********************/
+
+/*********************/
+/* End Media Queries */
+/*********************/
