@@ -101,7 +101,35 @@ router.get('/categories', (req,res) => {
 
 // -------- Menu Items route
 router.get('/menuitems', (req,res) => {
-    res.render('./admin/menuitems', {layout:'main-admin', });
+
+    const title='Pho Now\'s menu items';
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    let settingsObj = {
+        "item": {
+            "list": [
+                {
+                    "id": 1,
+                    "item_name_english": "Shrimp Noodles with eggs",
+                    "item_description": "Glutten free options available. We serve with fresh eggs",
+                    "item_price": 5.00,
+                    "isActive": true,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                },
+                {
+                    "id": 2,
+                    "item_name_english": "Rice with Lo Mein",
+                    "item_description": "Special and seasonal fried rice and lo mein mix",
+                    "item_price": 5.00,
+                    "isActive": false,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                }
+            ]
+        }
+    };
+    res.render('./admin/menuitems', {layout:'main-admin', title: title, settings: settingsObj});
 });
 
 // -------- fail route

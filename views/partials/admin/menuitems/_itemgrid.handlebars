@@ -1,22 +1,22 @@
- <div class="row my-4 mx-0 grid" id="category-items">
-     <div class="col">
-     <form id="editcategory-" action="/api/newcategory" method="post">
-         <div class="table-responsive">
-             <table class="table table-striped">
-                 <thead class="thead-inverse">
-                     <tr>
-                         <th>#ID</th>
-                         <th>Name</th>
-                         <th>Description</th>
-                         <th>Status</th>
-                         <th>Created</th>
-                         <th>Modified</th>
-                         <th>Action</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                 {{#if settings.category.list}}
+<div class="row my-4 mx-0 grid" id="category-items">
+    <div class="col">
+    <form id="editcategory-" action="/api/newcategory" method="post">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
                 {{!-- TODO add form field visibility to manipulated via on-click events --}}
+                {{#if settings.menuitem.list}}
                     {{#each settings.category.list}}
                          <tr class="edit-mode" id="edit-category-">
                              <td class="id">
@@ -57,16 +57,16 @@
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
                          </tr>
                     {{/each}}
-                    {{else}}
-                    <tr class="no-results">
-                        <td colspan="7">
-                            <p>There are no categories in your menu</p>
-                        </td>
-                    </tr>
-                    {{/if}}
+                {{else}}
+                        <tr class="no-results">
+                            <td colspan="7">
+                                <p>There are no items in your menu</p>
+                            </td>
+                        </tr>
+                {{/if}}
                  </tbody>
              </table>
          </div>
      </form>
-     </div>
+    </div>
   </div>

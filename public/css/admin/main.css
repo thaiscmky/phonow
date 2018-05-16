@@ -76,11 +76,9 @@ input:checked + .slider:before {
 /***************************/
 /*   Bootstrap Overrides   */
 /***************************/
-
-#main .container {
-
+.table-responsive {
+    display: table;
 }
-
 /***************************/
 /* End Bootstrap Overrides */
 /***************************/
