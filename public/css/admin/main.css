@@ -72,6 +72,7 @@ input:checked + .slider:before {
 }
 #menu_items .edit-mode .description{
     margin-left: 5%;
+
 }
 
 #main .container{
