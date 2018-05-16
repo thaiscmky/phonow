@@ -7,7 +7,8 @@
                 <tr>
                     <th>#ID</th>
                     <th>Name</th>
-                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
                     <th>Status</th>
                     <th>Created</th>
                     <th>Modified</th>
@@ -17,22 +18,30 @@
                 <tbody>
                 {{!-- TODO add form field visibility to manipulated via on-click events --}}
                 {{#if settings.menuitem.list}}
-                    {{#each settings.category.list}}
-                         <tr class="edit-mode" id="edit-category-">
+                    {{#each settings.menuitem.list}}
+                        {{debug this}}
+                         <tr class="edit-mode" id="edit-mitem-{{this.id}}">
                              <td class="id">
                                  <p>{{this.id}}</p>
-                                 <input id="category_id" name="category_id" type="hidden" value="{{this.id}}">
+                                 <input id="item_id" name="item_id" type="hidden" value="{{this.id}}">
                              </td>
                              <td class="name">
-                                 <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}"/>
+                                 <input type="text" class="form-control" name="item_name-{{this.id}}" id="item_name-{{this.id}}" value="{{this.item_name_english}}"/>
                              </td>
-                             <td class="description">
-                                <textarea class="form-control" name="category_description-" id="category_description-">
-                                    {{this.category_description}}
-                                </textarea>
+                             <td class="price">
+                                 <input type="text" class="form-control" name="item_price-{{this.id}}" id="item_price-{{this.id}}" value="{{this.item_price}}"/>
+                             </td>
+                             <td class="category">
+                                 <select class="form-control" id="item_category">
+                                     {{#unless this.isActive}}<option value="">Select..</option>{{/unless}}
+                                     <option>2</option>
+                                     <option>3</option>
+                                     <option>4</option>
+                                     <option>5</option>
+                                 </select>
                              </td>
                              <td class="form-check input-group status">
-                                 <input class="form-check-input" type="checkbox" value="" id="status-" name="status-" {{#if this.isActive}}checked{{/if}}>
+                                 <input class="form-check-input" type="checkbox" value="" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
                                  <label class="form-check-label">
                                      Enabled
                                  </label>
@@ -47,10 +56,11 @@
                                  <button type="submit" class="btn btn-warning">Save Changes</button>
                              </td>
                          </tr>
-                         <tr id="category-">
+                         <tr id="category-{{this.id}}">
                              <td class="id">{{this.id}}</td>
-                             <td class="name">{{this.category_name}}</td>
-                             <td class="description">{{this.category_description}}</td>
+                             <td class="name">{{this.item_name_english}}</td>
+                             <td class="price">{{this.item_price}}</td>
+                             <td class="category">{{this.item_category}}</td>
                              <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
                              <td class="created">{{this.createdAt}}</td>
                              <td class="modified">{{this.createdAt}}</td>
@@ -59,7 +69,7 @@
                     {{/each}}
                 {{else}}
                         <tr class="no-results">
-                            <td colspan="7">
+                            <td colspan="8">
                                 <p>There are no items in your menu</p>
                             </td>
                         </tr>

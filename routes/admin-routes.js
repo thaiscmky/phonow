@@ -106,13 +106,14 @@ router.get('/menuitems', (req,res) => {
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
-        "item": {
+        "menuitem": {
             "list": [
                 {
                     "id": 1,
                     "item_name_english": "Shrimp Noodles with eggs",
                     "item_description": "Glutten free options available. We serve with fresh eggs",
                     "item_price": 5.00,
+                    "item_category": "Noodles",
                     "isActive": true,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
@@ -122,10 +123,15 @@ router.get('/menuitems', (req,res) => {
                     "item_name_english": "Rice with Lo Mein",
                     "item_description": "Special and seasonal fried rice and lo mein mix",
                     "item_price": 5.00,
+                    "item_category": "Rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
                 }
+            ],
+            "categories": [
+                {"id": 1, "name": "Noodles"},
+                {"id": 2, "name": "Rice"}
             ]
         }
     };
