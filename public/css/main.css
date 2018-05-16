@@ -174,10 +174,6 @@ section.contact {
 /*   Bootstrap Overrides   */
 /***************************/
 
-.navbar-brand {
-    margin: 0 1rem;
-}
-
 .row.no-gutters {
     margin-right: 0;
     margin-left: 0;
