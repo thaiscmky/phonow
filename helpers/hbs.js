@@ -8,5 +8,9 @@ module.exports = {
     },
     capitalize: function(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    debug: function(value, context){
+        console.log('Passed in handlebars:');
+        console.log(value);
     }
 };
