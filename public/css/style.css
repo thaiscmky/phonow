@@ -1,102 +1,6 @@
-
-/* Root Stuff for media query stuff */
-html {font-size: 1rem;}
-body {font-size: 1em;}
-
-/****************/
-/*   Main CSS   */
-/****************/
-
-/* Main Hero CSS */
-section.hero {
-    height: 100vh;    
-    background: url("http://via.placeholder.com/1920x1080");
-    background-size: cover;
-    resize: both;
-}
-.hero-island .title {
-    font-size: 2.618em;
-    color: #333;
-    margin-bottom: 1rem;
-    
-}
-
-.hero-island .subtitle {
-    font-size: 1.618rem;
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.hero-center {
-    position: absolute;    
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);    
-}
-
-/* End Main Hero CSS */
-
-/* Main Section CSS */
-section.section {    
-    padding: 1.618em;        
-}
-
-section.menu {
-    background-color: #333;
-}
-
-section.info {
-    background-color: #666;
-}
-
-section.contact {
-    background-color: #999;
-}
-
-.section .title {
-    font-size: 2.618em;
-    color: #fff;
-    margin-bottom: 1rem;
-}
-
-.section .subtitle {    
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 1rem;    
-}
-
-/* End Main Section CSS */
-
-/****************/
-/* End Main Css */
-/****************/
-
-/***********************/
-/*   General classes   */
-/***********************/
-
-
-/***********************/
-/* End General classes */
-/***********************/
-
-
-
-
-
-
-
-
-
-/* Other CSS stuff */
-=======
 body,
 html {
     height: 100%;
-}
-h1 {
-    font-size: 200% !important;
-    margin-top:20px;
 }
 
 /*
@@ -169,7 +73,7 @@ h1 {
     transform: rotate(-44deg);
 }
 
-
+/* Other CSS stuff */
 .footer {
     position: fixed;
     bottom: 0;
@@ -214,31 +118,6 @@ h1 {
     margin-right: -1px;
 }
 
-
-/*********************/
-/*   Media Queries   */
-/*********************/
-
-@media (min-width: 1200px) {    
-    
-}
-
-@media (min-width: 992px) {
-    
-}
-
-@media (min-width: 768px) {
-    
-}
-
-@media (min-width: 576px) {
-
-}
-
-/*********************/
-/* End Media Queries */
-/*********************/
-=======
 /** form switch **/
 .switch {
     position: relative;
