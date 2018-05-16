@@ -6,14 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    user_unique_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        unique: true,
-        message: 'user id  must be a unique value.'
-      }
-    },
     user_first_name: {
       type: DataTypes.STRING,
     },
@@ -40,10 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
   }, {});
-  // User.associate = function (models) {
-  //   //TODO  Restaurant belongsTo user , Restaurant ,
-  //   // User.belongsTo(models.User_Sec_Grp);
-  // };
+  
   return User;
 };
-

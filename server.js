@@ -18,8 +18,9 @@ const db=require("./models");
 require('./config/passport')(passport);
 
 //handlebars helpers
-const {capitalize} = require('./helpers/hbs.js');
-
+const hbshelpers = require('./helpers/hbs.js');
+const capitalize = hbshelpers.capitalize;
+const debug = hbshelpers.debug;
 // Routes
 const auth = require('./routes/auth');
 const html = require('./routes/html-routes');
@@ -40,7 +41,8 @@ app.use(bodyParser.json());
 // --------------------------------------------Handle-bars middleware
 app.engine('handlebars', exphbs({
     helpers: {
-        capitalize: capitalize
+        capitalize: capitalize,
+        debug: debug
     },
     defaultLayout: 'main',
 }));

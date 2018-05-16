@@ -29,9 +29,10 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     MenuItems.associate = function(models) {
-      //TODO  
+      MenuItems.belongsTo(models.menu_category);
+      MenuItems.belongsTo(models.menu_type);
       
-      MenuItems.hasMany(models.restaurant);
+      
     };
     return MenuItems;
   };
