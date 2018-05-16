@@ -111,6 +111,7 @@ router.get('/menuitems', (req,res) => {
                 {
                     "id": 1,
                     "item_name_english": "Shrimp Noodles with eggs",
+                    "item_name_vietnamese": "Mì tôm với trứng",
                     "item_description": "Glutten free options available. We serve with fresh eggs",
                     "item_price": 5.00,
                     "item_category": "Noodles",
@@ -121,6 +122,7 @@ router.get('/menuitems', (req,res) => {
                 {
                     "id": 2,
                     "item_name_english": "Rice with Lo Mein",
+                    "item_name_vietnamese": "Cơm với Lo Mein",
                     "item_description": "Special and seasonal fried rice and lo mein mix",
                     "item_price": 5.00,
                     "item_category": "Rice",
