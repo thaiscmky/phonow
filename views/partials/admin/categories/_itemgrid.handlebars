@@ -1,53 +1,60 @@
-{{!--#if settings.additional.hours_ops.on--}}
-    {{#if settings.restaurant_hour.editmode}}
-        <fieldset class="card card-body edit-mode">
-            <h3 class="w-100">Hours of Operation
-                <span class="float-right"><button type="reset" class="btn">Cancel</button><button type="submit" class="btn btn-warning">Save</button></span>
-            </h3>
-            <form id="geninfo" action="/admin/settings" method="post">
-                <div class="form-group">
-                {{#each settings.restaurant_hour.list}}
-                    <div class="form-row m-3">
-                        <div class="form-check col input-group">
-                          <input class="form-check-input" type="checkbox" value="{{this.id}}" id="day_name" name="day_name">
-                          <label class="form-check-label" for="defaultCheck1">
-                            {{this.day_name}}
-                          </label>
-                        </div>
-                        <div class="form-check col input-group">
-                          <input type="text" class="form-control" name="daystart_{{this.id}}" id="daystart_{{this.id}}"
-                               value="{{#if this.start_time}}{{this.start_time}}{{/if}}"
-                           />
-                        </div>
-                        -
-                        <div class="form-check col input-group">
-                          <input type="text" class="form-control" name="dayend_{{this.id}}" id="dayend_{{this.id}}"
-                               value="{{#if this.end_time}}{{this.end_time}}{{/if}}"
-                           />
-                        </div>
-                    </div>
-                {{/each}}
-                </div>
-            </form>
-        </fieldset>
-    {{else}}
-        <div class="card card-body inform-form view-mode">
-            <h3>Hours of Operation <i class="fa fa-edit">edit</i></h3>
-            <div id="geninfo">
-            {{#each settings.restaurant_hour.list}}
-                <div class="row">
-                    <div class="col">
-                        <label>{{this.day_name}}: </label>
-                        {{#if this.isActive}}
-                            {{#if this.start_time}}{{this.start_time}}{{else}}???{{/if}} -
-                            {{#if this.end_time}}{{this.end_time}}{{else}}???{{/if}}
-                        {{else}}
-                            Closed
-                        {{/if}}
-                    </div>
-                </div>
-            {{/each}}
-            </div>
-        </div>
-    {{/if}}
-{{!--/if--}}
+ <div class="row my-4 mx-0 grid" id="category-items">
+     <form id="editcategory-" action="/api/newcategory" method="post">
+         <div class="col">
+             <div class="table-responsive row">
+                 <table class="table table-striped">
+                     <thead class="thead-inverse">
+                         <tr>
+                             <th>#ID</th>
+                             <th>Name</th>
+                             <th>Description</th>
+                             <th>Status</th>
+                             <th>Created</th>
+                             <th>Modified</th>
+                             <th>Action</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr class="edit-mode">
+                             <td class="id">
+                                 <p>1</p>
+                             </td>
+                             <td class="name">
+                                 <input type="text" class="form-control" name="category_name-" id="category_name-" value="Noodles"/>
+                             </td>
+                             <td class="description">
+                                <textarea class="form-control" name="category_description-" id="category_description-">
+                                    Category Description
+                                </textarea>
+                             </td>
+                             <td class="form-check input-group status">
+                                 <input class="form-check-input" type="checkbox" value="" id="status-" name="status-">
+                                 <label class="form-check-label">
+                                     Enabled
+                                 </label>
+                             </td>
+                             <td class="created">
+                                 <p>01/01/2018</p>
+                             </td>
+                             <td class="modified">
+                                 <p>01/01/2018</p>
+                             </td>
+                             <td class="action">
+                                 <button type="submit" class="btn btn-warning">Save Changes</button>
+                             </td>
+                         </tr>
+                        <tr>
+                             <td class="id">2</td>
+                             <td class="name">Rices</td>
+                             <td class="description">You can add shrimp on any rice</td>
+                             <td class="status">Enabled</td>
+                             <td class="created">01/01/2018</td>
+                             <td class="modified">01/01/2018</td>
+                             <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
+                        </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+     </form>
+  </div>

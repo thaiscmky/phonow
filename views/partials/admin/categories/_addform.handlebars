@@ -1,6 +1,6 @@
 <div class="edit-mode">
     <fieldset class="card card-body">
-    <h3>Add a category</h3>
+    <h2>Add a category</h2>
         <form id="newcategory" action="/api/newcategory" method="post">
             <div class="form-group">
                 <div class="form-row">
@@ -10,12 +10,12 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col">
+                    <div class="col input-group">
                         <label for="category_description">Category Description</label>
-                        <textarea class="form-control" name="category_description" id="category_description" rows="10"></textarea>
+                        <textarea class="form-control" name="category_description" id="category_description"></textarea>
                     </div>
                 </div>
-                <div class="form-row clearfix">
+                <div class="form-row">
                     <div class="col">
                          <button type="submit" class="btn btn-warning">Add Category</button>
                     </div>
