@@ -31,7 +31,8 @@ router.get('/settings', (req,res) => {
                 "restaurant_state": "Texas",
                 "restaurant_city": "Houston",
                 "restaurant_zip": "77077"
-            }
+            },
+            "editMode":true
         },
         "restaurant_hour":
         {
