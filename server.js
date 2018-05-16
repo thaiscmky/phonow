@@ -92,10 +92,10 @@ app.use('/', html);
 app.use('/admin', admin);
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync().then(function () {
+db.sequelize.sync({focus:true}).then(function () {
     app.listen(PORT, function () {
         console.log("App listening on PORT " + PORT);
     });

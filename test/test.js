@@ -1,7 +1,11 @@
 const Nightmare = require('nightmare');
 const assert = require('assert');
+const db = require('../models');
+// const Sequelize = require('sequelize');
+const mocha = require('mocha');
 const domain = process.env.HEROKU_APP_SERVER || 'http://localhost:' + (process.env.PORT || 3000)
 
+// db.Sequelize = Sequelize;
 describe('Load a Page', function () {
     // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
     this.timeout('5s');
@@ -131,5 +135,8 @@ describe('Load a Page', function () {
                 .catch(done);
         });
     });
-});
+   
 
+
+
+});

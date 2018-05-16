@@ -1,14 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-    var contact= sequelize.define('contact', {
-          contact_name:{
+    var contact= sequelize.define('restaurant_contact', {
+          social_contact:{
         type:DataTypes.STRING,
       },
       contact_email:{
        type:DataTypes.STRING
       },
-      contact_phone:{
+      contact_phone1:{
         type:DataTypes.STRING
        },
+       
        comments:{
         type:DataTypes.STRING
        },
@@ -25,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     contact.associate = function(models) {
       //TODO  
+      contact.belongsTo(models.restaurant);
+      
     };
     return contact;
   };
