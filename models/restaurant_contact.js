@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var contact= sequelize.define('contact', {
+    var contact= sequelize.define('restaurant_contact', {
           social_contact:{
         type:DataTypes.STRING,
       },
