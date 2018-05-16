@@ -68,14 +68,14 @@ router.get('/settings', (req,res) => {
     res.render('./admin/settings', {layout:'main-admin', title: title, settings: settingsObj});
 });
 
-// -------- Add category
-router.get('/addcategories', (req,res) => {
-    res.render('./admin/add-categ', {layout:'main-admin'});
+// -------- Menu Categories route
+router.get('/categories', (req,res) => {
+    res.render('./admin/categories', {layout:'main-admin'});
 });
 
-// -------- Add item
-router.get('/additem', (req,res) => {
-    res.render('./admin/add-item', {layout:'main-admin'});
+// -------- Menu Items route
+router.get('/menuitems', (req,res) => {
+    res.render('./admin/menuitems', {layout:'main-admin'});
 });
 
 // -------- fail route

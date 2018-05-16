@@ -7,7 +7,7 @@ router.get('/google', passport.authenticate(
     'google', { scope: ['profile', 'email'] })
 );
 
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/admin/error-pages/403' }),
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/admin/403' }),
     (req, res) => {
         // Successful authentication, redirect to dashboard.
         res.redirect('/dashboard');
