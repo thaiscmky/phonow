@@ -15,7 +15,8 @@
                          </tr>
                      </thead>
                      <tbody>
-                         <tr class="edit-mode">
+                    {{#each settings.restaurant_hour.list}}
+                         <tr class="edit-mode" id="edit-category-">
                              <td class="id">
                                  <p>1</p>
                              </td>
@@ -43,7 +44,7 @@
                                  <button type="submit" class="btn btn-warning">Save Changes</button>
                              </td>
                          </tr>
-                        <tr>
+                         <tr id="category-">
                              <td class="id">2</td>
                              <td class="name">Rices</td>
                              <td class="description">You can add shrimp on any rice</td>
@@ -51,7 +52,8 @@
                              <td class="created">01/01/2018</td>
                              <td class="modified">01/01/2018</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
-                        </tr>
+                         </tr>
+                    {{/each}}
                      </tbody>
                  </table>
              </div>

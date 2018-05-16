@@ -19,7 +19,7 @@ router.get('/settings', (req,res) => {
     const title='Pho Now\'s settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
-    var settingsObj = {
+    let settingsObj = {
         "general_info": {
             "restaurant_name": "Pho Now",
             "contact_name": "Uyen Tran",
@@ -71,12 +71,33 @@ router.get('/settings', (req,res) => {
 
 // -------- Menu Categories route
 router.get('/categories', (req,res) => {
-    res.render('./admin/categories', {layout:'main-admin'});
+    const title='Pho Now\'s menu categories';
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    let settingsObj = {
+        "categories": {
+            "list": [
+                {
+                    "id": 1,
+                    "category_name": "Noodles",
+                    "category_description": "Glutten free options available",
+                    "isActive": true
+                },
+                {
+                    "id": 2,
+                    "category_name": "Rices",
+                    "category_description": "You can add shrimp on any rice",
+                    "isActive": true
+                }
+            ]
+        }
+    };
+    res.render('./admin/categories', {layout:'main-admin', title: title, settings: settingsObj});
 });
 
 // -------- Menu Items route
 router.get('/menuitems', (req,res) => {
-    res.render('./admin/menuitems', {layout:'main-admin'});
+    res.render('./admin/menuitems', {layout:'main-admin', });
 });
 
 // -------- fail route
