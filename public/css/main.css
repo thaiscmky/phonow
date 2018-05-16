@@ -55,13 +55,13 @@ section.contact {
     background-color: #999;
 }
 
-.section .title {
+.section > .title {
     font-size: 2.618em;
     color: #fff;    
     margin-bottom: 1rem;
 }
 
-.section .subtitle {    
+.section > .subtitle {    
     font-size: 1rem;
     color: #fff;
     margin: 1rem 0;    
@@ -95,13 +95,39 @@ section.contact {
     padding: 0;
 }
 
-.item {
+.nav-category {
     margin: 0 auto;
     margin-bottom: .618em;    
 }
 
-.item > a {
+.nav-category > a {
     cursor: pointer !important;    
+}
+
+.category > .title {
+    font-size: 2.618rem;
+}
+
+#menu-content {
+    padding: 1.618em;
+}
+
+.items {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.item {
+    border-bottom: 1px solid #333;
+}
+
+.item-name {
+    font-size: 1.618em;
+}
+
+.item-price {
+    font-size: 1.618em;
 }
 
 /* End Menu Page CSS */
