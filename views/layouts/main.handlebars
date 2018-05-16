@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 {{> main/_header-block }}
+
 <body>
-<div class="container-fluid" id="main">
-    <div class="row row-offcanvas row-offcanvas-left">
-        {{> _navbar }}
-        {{> _sidebar}}
-        <div class="container">
-            {{> _main-top }}
-            {{{body}}}
-            {{> _main-bottom }}
-        </div>
-    </div>
-<!--/col-->
-{{> main/_footer-block }}
-</div>
+    {{{body}}} {{> main/_footer-block }}
 </body>
+
 </html>
