@@ -15,42 +15,44 @@
                          </tr>
                      </thead>
                      <tbody>
-                    {{#each settings.restaurant_hour.list}}
+                    {{!-- TODO add form field visibility to manipulated via on-click events --}}
+                    {{#each settings.category.list}}
                          <tr class="edit-mode" id="edit-category-">
                              <td class="id">
-                                 <p>1</p>
+                                 <p>{{this.id}}</p>
+                                 <input id="category_id" name="category_id" type="hidden" value="{{this.id}}">
                              </td>
                              <td class="name">
-                                 <input type="text" class="form-control" name="category_name-" id="category_name-" value="Noodles"/>
+                                 <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}"/>
                              </td>
                              <td class="description">
                                 <textarea class="form-control" name="category_description-" id="category_description-">
-                                    Category Description
+                                    {{this.category_description}}
                                 </textarea>
                              </td>
                              <td class="form-check input-group status">
-                                 <input class="form-check-input" type="checkbox" value="" id="status-" name="status-">
+                                 <input class="form-check-input" type="checkbox" value="" id="status-" name="status-" {{#if this.isActive}}checked{{/if}}>
                                  <label class="form-check-label">
                                      Enabled
                                  </label>
                              </td>
                              <td class="created">
-                                 <p>01/01/2018</p>
+                                 <p>{{this.createdAt}}</p>
                              </td>
                              <td class="modified">
-                                 <p>01/01/2018</p>
+                                 <p>{{this.updatedAt}}</p>
                              </td>
                              <td class="action">
                                  <button type="submit" class="btn btn-warning">Save Changes</button>
                              </td>
                          </tr>
                          <tr id="category-">
-                             <td class="id">2</td>
-                             <td class="name">Rices</td>
-                             <td class="description">You can add shrimp on any rice</td>
-                             <td class="status">Enabled</td>
-                             <td class="created">01/01/2018</td>
-                             <td class="modified">01/01/2018</td>
+                             <td class="id">{{this.id}}</td>
+                             <td class="name">{{this.category_name}}</td>
+                             <td class="description">{{this.category_description}}</td>
+                             <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
+                             <td class="created">{{this.createdAt}}</td>
+                             <td class="modified">{{this.createdAt}}</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
                          </tr>
                     {{/each}}

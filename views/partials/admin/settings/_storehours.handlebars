@@ -9,7 +9,7 @@
                 {{#each settings.restaurant_hour.list}}
                     <div class="form-row m-3">
                         <div class="form-check col input-group">
-                          <input class="form-check-input" type="checkbox" value="{{this.id}}" id="day_name" name="day_name">
+                          <input class="form-check-input" type="checkbox" value="{{this.id}}" id="day_name" name="day_name" {{#if this.isActive}}checked{{/if}}>
                           <label class="form-check-label">
                             {{this.day_name}}
                           </label>

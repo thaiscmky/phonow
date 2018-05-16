@@ -75,19 +75,23 @@ router.get('/categories', (req,res) => {
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
-        "categories": {
+        "category": {
             "list": [
                 {
                     "id": 1,
                     "category_name": "Noodles",
                     "category_description": "Glutten free options available",
-                    "isActive": true
+                    "isActive": true,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
                 },
                 {
                     "id": 2,
                     "category_name": "Rices",
                     "category_description": "You can add shrimp on any rice",
-                    "isActive": true
+                    "isActive": false,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
                 }
             ]
         }
