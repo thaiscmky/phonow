@@ -2,17 +2,19 @@
 html {font-size: 1rem;}
 body {font-size: 1em;}
 
-/****************/
-/*   Main CSS   */
-/****************/
+/*********************/
+/*   Main-Page CSS   */
+/*********************/
 
 /* Main Hero CSS */
 section.hero {
     height: 100vh;    
     background: url("http://via.placeholder.com/1920x1080");
     background-size: cover;
+    background-position: center;
     resize: both;
 }
+
 .hero-island .title {
     font-size: 2.618em;
     color: #333;
@@ -37,7 +39,8 @@ section.hero {
 
 /* Main Section CSS */
 section.section {    
-    padding: 1.618em;        
+    padding: 1.618em 0;
+    background-color: #333;
 }
 
 section.menu {
@@ -52,29 +55,202 @@ section.contact {
     background-color: #999;
 }
 
-.section .title {
+.section > .title {
     font-size: 2.618em;
-    color: #fff;
+    color: #fff;    
     margin-bottom: 1rem;
 }
 
-.section .subtitle {    
+.section > .subtitle {    
     font-size: 1rem;
     color: #fff;
-    margin-bottom: 1rem;    
+    margin: 1rem 0;    
 }
 
 /* End Main Section CSS */
 
-/****************/
-/* End Main Css */
-/****************/
+/*********************/
+/* End Main-Page CSS */
+/*********************/
+
+/*********************/
+/*   Sub-Pages CSS   */
+/*********************/
+
+/*   Menu Page CSS   */
+
+#menu-nav {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#menu-nav > ul {
+    list-style-type: none;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.nav-category {
+    margin: 0 auto;
+    margin-bottom: .618em;    
+}
+
+.nav-category > a {
+    cursor: pointer !important;    
+}
+
+.category > .title {
+    font-size: 2.618rem;
+}
+
+#menu-content {
+    background: #fff;
+    padding: 1.618em;
+}
+
+.items {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.item {
+    border-bottom: 1px solid #333;
+}
+
+.item-name {
+    font-size: 1.618em;
+}
+
+.item-price {
+    font-size: 1.618em;
+}
+
+/* End Menu Page CSS */
+
+/*   About Page CSS   */
+
+#info {
+    color: #fff;  
+}
+
+#info > div {
+    margin-bottom: 1rem;
+}
+
+.small-title {
+    margin-bottom: .618em;
+}
+
+.small-title > span {
+    font-weight: bold;
+    border-bottom: 3px solid #fff;
+    margin-bottom: .618em;
+}
+
+#contact > div,
+#contact > a {
+    margin-bottom: .618em;
+}
+
+/* End About Page CSS */
+
+/*   Contact Page CSS   */
+
+#contact {
+    color: #fff;
+}
+
+.name {
+    font-size: 1.618rem;    
+}
+
+.nameplate {
+    margin-bottom: 2.618rem;
+}
+
+#owner-img {
+    margin-bottom: 2.618rem;
+}
+
+.message {
+    margin-bottom: 1.618rem;
+}
+
+.thanks {
+    padding-bottom: 1.618rem;
+    margin-bottom: 1.168rem;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* End Contact Page CSs */
+
+.about-hero {    
+    background: url("http://via.placeholder.com/2000x300");
+}
+
+.menu-hero {    
+    background: url("http://via.placeholder.com/2000x300");
+}
+
+.contact-hero {    
+    background: url("http://via.placeholder.com/2000x300");
+}
+
+.mini-hero-img {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+/*********************/
+/* End Sub-Pages CSS */
+/*********************/
 
 /***********************/
 /*   General classes   */
 /***********************/
 
+.vcenter-img {
+    background: #333;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 /***********************/
 /* End General classes */
 /***********************/
+
+/***************************/
+/*   Bootstrap Overrides   */
+/***************************/
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+  
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+/***************************/
+/* End Bootstrap Overrides */
+/***************************/
+
+/*********************/
+/*   Media Queries   */
+/*********************/
+
+/*********************/
+/* End Media Queries */
+/*********************/

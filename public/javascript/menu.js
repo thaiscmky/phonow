@@ -1,0 +1,1 @@
+console.log('LOADED: javascript/menu.js');

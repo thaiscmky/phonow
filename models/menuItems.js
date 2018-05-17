@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     var MenuItems= sequelize.define('menu_items', {
-          tem_name_english:{
+          item_name_english:{
         type:DataTypes.STRING,
       },
       item_name_vietnamese:{
