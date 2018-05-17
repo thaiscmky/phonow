@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
+const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
+var db = require("../models");
+
 
 // -------- Homepage route
-router.get('/', (req,res) => {
-    const title='Pho Now Administrator Dashboard';
-    res.render('./admin/index', {layout:'main-admin',title: title });
+router.get('/', (req, res) => {
+    const title = 'Pho Now Administrator Dashboard';
+    res.render('./admin/index', { layout: 'main-admin', title: title });
 });
 
 // -------- sample dashboard route
-router.get('/dash', (req,res) => {
-    const title='Welcome to Pho Now!';
-    const javascript='dash';
-    res.render('./admin/dash-sample', {layout:'main-admin',title: title, javascript: javascript });
+router.get('/dash', (req, res) => {
+    const title = 'Welcome to Pho Now!';
+    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
 
 // -------- Set settings
-router.get('/settings', (req,res) => {
-    const title='Pho Now\'s settings';
-    const javascript='settings';
+router.get('/settings', (req, res) => {
+    const title = 'Pho Now\'s settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
@@ -34,47 +34,47 @@ router.get('/settings', (req,res) => {
                 "restaurant_city": "Houston",
                 "restaurant_zip": "77077"
             },
-            "editMode":false
+            "editMode": true
+
         },
         "restaurant_hour":
-        {
-            "list": [
-                {
-                    "id": 1,
-                    "day_name": "Monday",
-                    "start_time": "1:00",
-                    "end_time": "1:00",
-                    "isActive": true
-                },
-                {
-                    "id": 2,
-                    "day_name": "Tuesday",
-                    "start_time": "1:00",
-                    "end_time": "1:00",
-                    "isActive": false
-                },
-                {
-                    "id": 3,
-                    "day_name": "Wednesday",
-                    "start_time": "1:00",
-                    "end_time": "",
-                    "isActive": true
-                }
-            ]
-        },
+            {
+                "list": [
+                    {
+                        "id": 1,
+                        "day_name": "Monday",
+                        "start_time": "1:00",
+                        "end_time": "1:00",
+                        "isActive": true
+                    },
+                    {
+                        "id": 2,
+                        "day_name": "Tuesday",
+                        "start_time": "1:00",
+                        "end_time": "1:00",
+                        "isActive": false
+                    },
+                    {
+                        "id": 3,
+                        "day_name": "Wednesday",
+                        "start_time": "1:00",
+                        "end_time": "",
+                        "isActive": true
+                    }
+                ]
+            },
         "additional": [
-            {"google_maps": {"on": true, "label": "Google Maps"} },
-            {"contact_form": {"on": false, "label": "Contact Us Form"} },
-            {"hours_ops": {"on": true, "label": "Hours of Operation"} },
+            { "google_maps": { "on": true, "label": "Google Maps" } },
+            { "contact_form": { "on": false, "label": "Contact Us Form" } },
+            { "hours_ops": { "on": true, "label": "Hours of Operation" } },
         ]
     };
-    res.render('./admin/settings', {layout:'main-admin', title: title, javascript: javascript, settings: settingsObj});
+    res.render('./admin/settings', { layout: 'main-admin', title: title, settings: settingsObj });
 });
 
 // -------- Menu Categories route
-router.get('/categories', (req,res) => {
-    const title='Pho Now\'s menu categories';
-    const javascript='categories';
+router.get('/categories', (req, res) => {
+    const title = 'Pho Now\'s menu categories';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
@@ -99,13 +99,16 @@ router.get('/categories', (req,res) => {
             ]
         }
     };
-    res.render('./admin/categories', {layout:'main-admin', title: title, javascript: javascript, settings: settingsObj});
+
+    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: settingsObj });
 });
 
 // -------- Menu Items route
-router.get('/menuitems', (req,res) => {
-    const title='Pho Now\'s menu items';
-    const javascript='menuitems';
+router.get('/menuitems', (req, res) => {
+
+
+
+    const title = 'Pho Now\'s menu items';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
@@ -135,22 +138,41 @@ router.get('/menuitems', (req,res) => {
                 }
             ],
             "categories": [
-                {"id": 1, "name": "Noodles"},
-                {"id": 2, "name": "Rice"}
+                { "id": 1, "name": "Noodles" },
+                { "id": 2, "name": "Rice" }
             ]
         }
     };
-    res.render('./admin/menuitems', {layout:'main-admin', title: title, javascript: javascript, settings: settingsObj});
+
+    
+    var menuTypes = {};
+    db.menu_type.findAll({
+    }).then(function (menuTypes) {
+        menuTypes = menuTypes;
+        db.menu_category.findAll({
+        }).then(function (categories) {
+            res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
+        });
+    });
+
+});
+
+router.post('/menuitems', (req, res) => {
+    console.log(req.body);
+    db.menu_items.create(req.body).then(function (data) {
+        res.json(data);
+    });
+
 });
 
 // -------- fail route
-router.get('/403', (req,res) => {
-    res.render('./admin/403', {layout:'main-admin'});
+router.get('/403', (req, res) => {
+    res.render('./admin/403', { layout: 'main-admin' });
 });
 
 // -------- Authorized route - dashboard
-router.get('/dashboard',ensureAuthenticated, (req,res) => {
-    res.render('./admin/index', {layout:'main-admin'});
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    res.render('./admin/index', { layout: 'main-admin' });
 });
 
 module.exports = router;
