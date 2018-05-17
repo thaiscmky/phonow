@@ -92,7 +92,7 @@ app.use('/', html);
 app.use('/admin', admin);
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({focus:true}).then(function () {
