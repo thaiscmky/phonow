@@ -179,7 +179,13 @@ section.contact {
 }
 
 .message {
-    margin-bottom: 1.61rem;
+    margin-bottom: 1.618rem;
+}
+
+.thanks {
+    padding-bottom: 1.618rem;
+    margin-bottom: 1.168rem;
+    border-bottom: 1px solid #fff;
 }
 
 
