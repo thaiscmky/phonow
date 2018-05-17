@@ -9,8 +9,6 @@
                          <th>Name</th>
                          <th>Description</th>
                          <th>Status</th>
-                         <th>Created</th>
-                         <th>Modified</th>
                          <th>Action</th>
                      </tr>
                  </thead>
@@ -37,12 +35,6 @@
                                      </label>
                                  </div>
                              </td>
-                             <td class="created">
-                                 <p>{{this.createdAt}}</p>
-                             </td>
-                             <td class="modified">
-                                 <p>{{this.updatedAt}}</p>
-                             </td>
                              <td class="action">
                                  <button type="reset" class="btn">Cancel</button> <button type="submit" class="btn btn-warning">Update</button>
                              </td>
@@ -52,8 +44,6 @@
                              <td class="name">{{this.category_name}}</td>
                              <td class="description">{{this.category_description}}</td>
                              <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                             <td class="created">{{this.createdAt}}</td>
-                             <td class="modified">{{this.createdAt}}</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
                          </tr>
                     {{/each}}
