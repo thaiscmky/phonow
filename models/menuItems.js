@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     var MenuItems= sequelize.define('menu_items', {
-          tem_name_english:{
+          item_name_english:{
         type:DataTypes.STRING,
       },
       item_name_vietnamese:{
@@ -29,9 +29,10 @@ module.exports = (sequelize, DataTypes) => {
        },
     }, {});
     MenuItems.associate = function(models) {
-      //TODO  
+      MenuItems.belongsTo(models.menu_category);
+      MenuItems.belongsTo(models.menu_type);
       
-      MenuItems.hasMany(models.restaurant);
+      
     };
     return MenuItems;
   };

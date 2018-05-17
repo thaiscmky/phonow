@@ -1,18 +1,28 @@
+'use strict';
+
 //var routes = require("./controllers/burgers_controller");
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const express = require("express");
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const bodyParser = require("body-parser");
+const passport = require('passport');
 const path = require("path");
 const app = express();
 const db=require("./models");
 
-//handlebars helpers
-const {capitalize} = require('./helpers/hbs.js');
 
+//pasport config
+require('./config/passport')(passport);
+
+//handlebars helpers
+const hbshelpers = require('./helpers/hbs.js');
+const capitalize = hbshelpers.capitalize;
+const debug = hbshelpers.debug;
 // Routes
+const auth = require('./routes/auth');
 const html = require('./routes/html-routes');
 const admin = require('./routes/admin-routes');
 app.use(express.static(path.join(__dirname,'./public')));
@@ -20,7 +30,6 @@ app.use(express.static(path.join(__dirname,'./public')));
 //bodyparser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -32,11 +41,27 @@ app.use(bodyParser.json());
 // --------------------------------------------Handle-bars middleware
 app.engine('handlebars', exphbs({
     helpers: {
-        capitalize: capitalize
+        capitalize: capitalize,
+        debug: debug
     },
-    defaultLayout: 'main'
+    defaultLayout: 'main',
 }));
 app.set('view engine', 'handlebars');
+
+//***************  PASSPORT MIDDLEWARE *********/
+app.use(passport.initialize());
+app.use(passport.session());
+
+//***************  cookieParser MIDDLEWARE *********/
+app.use(cookieParser());
+//***************  session MIDDLEWARE *********/
+app.use(session(
+    {
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: false
+    })
+);
 
 // -------------------------------------------- flash middleware
 app.use(flash());
@@ -62,14 +87,15 @@ app.use(function (req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Use route
+app.use('/auth', auth);
 app.use('/', html);
 app.use('/admin', admin);
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync().then(function () {
+db.sequelize.sync({focus:true}).then(function () {
     app.listen(PORT, function () {
         console.log("App listening on PORT " + PORT);
     });

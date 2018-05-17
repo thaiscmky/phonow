@@ -1,8 +1,13 @@
 const Nightmare = require('nightmare');
 const assert = require('assert');
+const db = require('../models');
+// const Sequelize = require('sequelize');
+const mocha = require('mocha');
+const domain = process.env.HEROKU_APP_SERVER || 'http://localhost:' + (process.env.PORT || 3000)
 
+// db.Sequelize = Sequelize;
 describe('Load a Page', function () {
-     // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
+    // Recommended: 5s locally, 10s to remote server, 30s from airplane ¯\_(ツ)_/¯
     this.timeout('5s');
 
     let nightmare = null;
@@ -12,7 +17,7 @@ describe('Load a Page', function () {
 
     describe('/ (Home Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/')
+            nightmare.goto(domain + '/')
                 .end()
                 .then(function (result) {
                     done();
@@ -23,7 +28,7 @@ describe('Load a Page', function () {
 
     describe('/ (Menu Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/menu')
+            nightmare.goto( domain + '/menu')
                 .end()
                 .then(function (result) {
                     done();
@@ -34,7 +39,7 @@ describe('Load a Page', function () {
 
     describe('/ (Store Info Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/about')
+            nightmare.goto( domain + '/about')
                 .end()
                 .then(function (result) {
                     done();
@@ -45,7 +50,7 @@ describe('Load a Page', function () {
 
     describe('/ (Contact Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/contact')
+            nightmare.goto( domain + '/contact')
                 .end()
                 .then(function (result) {
                     done();
@@ -56,7 +61,7 @@ describe('Load a Page', function () {
 
     describe('/ (Admin Home Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/admin')
+            nightmare.goto( domain + '/admin')
                 .end()
                 .then(function (result) {
                     done();
@@ -67,7 +72,7 @@ describe('Load a Page', function () {
 
     describe('/ (ADMIN: Add categories Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/admin/addcategories')
+            nightmare.goto( domain + '/admin/addcategories')
                 .end()
                 .then(function (result) {
                     done();
@@ -78,7 +83,7 @@ describe('Load a Page', function () {
 
     describe('/ (ADMIN: Add item Page)', () => {
         it('should load without error', done => {
-            nightmare.goto('http://localhost:3000/admin/additem')
+            nightmare.goto( domain + '/admin/additem')
                 .end()
                 .then(function (result) {
                     done();
@@ -86,4 +91,52 @@ describe('Load a Page', function () {
                 .catch(done);
         });
     });
+
+    describe('/ (ADMIN: Dashboard)', () => {
+        it('should load without error', done => {
+            nightmare.goto( domain + '/admin/dashboard')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: site page to edit content)', () => {
+        it('should load without error', done => {
+            nightmare.goto( domain + '/admin/editcontent')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: site page home page)', () => {
+        it('should load without error', done => {
+            nightmare.goto( domain + '/admin/sitehomepage')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+
+    describe('/ (ADMIN: Landing page for adding items)', () => {
+        it('should load without error', done => {
+            nightmare.goto( domain + '/admin/addingitems')
+                .end()
+                .then(function (result) {
+                    done();
+                })
+                .catch(done);
+        });
+    });
+   
+
+
+
 });
