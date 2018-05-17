@@ -25,7 +25,7 @@ module.exports = function(passport) {
             // Check for existing user
             db.user.findOne({
                 where: {
-                    user_unique_id: profile.id
+                    user_email: profile.emails[0].value
                 }
             }).then((user) => {
                     if(user) {
