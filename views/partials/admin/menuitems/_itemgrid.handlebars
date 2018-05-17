@@ -17,7 +17,6 @@
                 {{!-- TODO add form field visibility to manipulated via on-click events --}}
                 {{#if settings.menuitem.list}}
                     {{#each settings.menuitem.list}}
-                        {{debug this}}
                          <tr class="edit-mode" id="edit-mitem-{{this.id}}">
                              <td colspan="8">
                                  <div class="form-row">
@@ -54,12 +53,17 @@
                                          </div>
                                      </div>
                                      <div class="col-3 input-group category">
+                                         {{assignJSON 'categories' @root.settings.menuitem.categories}}
+                                         {{assignJSON 'currentcat' this.item_category}}
                                          <select class="form-control" id="item_category">
                                              {{#unless this.isActive}}<option value="">Select..</option>{{/unless}}
-                                             <option value="">{{this.item_category}}</option>
-                                             <option>3</option>
-                                             <option>4</option>
-                                             <option>5</option>
+                                             {{#each this.categories}}
+                                                 <option value="{{this.id}}"
+                                                     {{#if (equals this.name ../this.currentcat)}}selected="selected"{{/if}}
+                                                 >
+                                                     {{this.name}}
+                                                 </option>
+                                             {{/each}}
                                          </select>
                                      </div>
                                  </div>
