@@ -12,5 +12,11 @@ module.exports = {
     debug: function(value, context){
         console.log('Passed in handlebars:');
         console.log(value);
+    },
+    assignJSON: function(varname, enumerableValue, context){
+        this[varname] = enumerableValue;
+    },
+    equals: function(arg1, arg2){
+        return arg1 === arg2
     }
 };
