@@ -1,0 +1,20 @@
+    <fieldset class="card card-body edit-mode">
+        <h2 class="w-100">Additional Settings</h2>
+        <form id="geninfo" action="/admin/settings" method="post">
+            <div class="form-group">
+            {{#each settings.additional}}
+                {{#each this}}
+                    <div class="form-row my-3">
+                        <div class="form-check col input-group">
+                            <label class="form-check-label switch">
+                                <input class="form-check-input" type="checkbox" value="{{this.id}}" id="day_name" name="day_name" {{#if this.isActive}}checked{{/if}}>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="caption ml-2">{{this.label}}</span>
+                        </div>
+                    </div>
+                {{/each}}
+            {{/each}}
+            </div>
+        </form>
+    </fieldset>
