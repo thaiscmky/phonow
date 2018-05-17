@@ -56,7 +56,7 @@
                                          {{assignJSON 'categories' @root.settings.menuitem.categories}}
                                          {{assignJSON 'currentcat' this.item_category}}
                                          <select class="form-control" id="item_category">
-                                             {{#unless this.isActive}}<option value="">Select..</option>{{/unless}}
+                                             {{#unless this.currentcat}}<option value="">Select..</option>{{/unless}}
                                              {{#each this.categories}}
                                                  <option value="{{this.id}}"
                                                      {{#if (equals this.name ../this.currentcat)}}selected="selected"{{/if}}
