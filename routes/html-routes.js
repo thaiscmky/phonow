@@ -73,5 +73,30 @@ router.put('/user/:id/:fName/:lName/:email',(req,res)=>{
          done();
      })
  });
+ 
+//update categories
+router.put('/categories/:id/:categName/:categDescription',(req,res)=>{
+    db.sequelize.sync().then(() => {
+          db.user.update({
+            category_name:req.params.categName,
+            category_description:req.params.categDescription,
+            
+         }, { where: { id:req.params.id } });
+         done();
+     })
+ 
+ });
 
+ //delete categories 
+
+ router.put('/categories/:id',(req,res)=>{
+    db.sequelize.sync().then(() => {
+          db.menu_category.update({
+             isActive: false
+         }, { where: { id:req.params.id } });
+         done();
+     })
+ });
+
+ 
 module.exports = router;
