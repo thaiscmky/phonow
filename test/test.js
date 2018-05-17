@@ -242,7 +242,7 @@ describe('Load a Page', function () {
     });
 
 
-    // update test 
+    // update test
 
     describe('/ (SEQUELIZE : CRUD - update and restaurant )', () => {
         it('It should update restaurant   ', function () {
