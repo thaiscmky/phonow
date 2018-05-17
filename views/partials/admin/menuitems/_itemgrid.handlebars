@@ -10,8 +10,6 @@
                     <th>Price</th>
                     <th>Category</th>
                     <th>Status</th>
-                    <th>Created</th>
-                    <th>Modified</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -88,8 +86,6 @@
                              <td class="price">{{this.item_price}}</td>
                              <td class="category">{{this.item_category}}</td>
                              <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                             <td class="created">{{this.createdAt}}</td>
-                             <td class="modified">{{this.createdAt}}</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
                          </tr>
                     {{/each}}
