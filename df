@@ -1,0 +1,22 @@
+[33mbcd380e[m[33m ([m[1;36mHEAD -> [m[1;32mbasic-about[m[33m)[m HEAD@{0}: checkout: moving from basic-about to basic-about
+[33mbcd380e[m[33m ([m[1;36mHEAD -> [m[1;32mbasic-about[m[33m)[m HEAD@{1}: reset: moving to HEAD
+[33mbcd380e[m[33m ([m[1;36mHEAD -> [m[1;32mbasic-about[m[33m)[m HEAD@{2}: reset: moving to HEAD
+[33mbcd380e[m[33m ([m[1;36mHEAD -> [m[1;32mbasic-about[m[33m)[m HEAD@{3}: pull origin staging: Merge made by the 'recursive' strategy.
+[33me583ab8[m[33m ([m[1;31morigin/basic-menu[m[33m, [m[1;32mbasic-menu[m[33m)[m HEAD@{4}: checkout: moving from basic-menu to basic-about
+[33me583ab8[m[33m ([m[1;31morigin/basic-menu[m[33m, [m[1;32mbasic-menu[m[33m)[m HEAD@{5}: commit: #91 finish basic-menu
+[33m0c411df[m HEAD@{6}: commit: finished menu-nav
+[33me13e3fc[m HEAD@{7}: commit: Begin #91 #92
+[33mefff322[m HEAD@{8}: checkout: moving from live-wireframe to basic-menu
+[33mbded3cf[m[33m ([m[1;32mlive-wireframe[m[33m)[m HEAD@{9}: commit: Closes #90
+[33m5a10d67[m HEAD@{10}: commit: finish basic wireframe for index
+[33m8058e63[m HEAD@{11}: commit (merge): merging with current master
+[33m45e5df6[m HEAD@{12}: reset: moving to HEAD
+[33m45e5df6[m HEAD@{13}: commit: change config.json to live-test
+[33m3885b82[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{14}: checkout: moving from master to live-wireframe
+[33m3885b82[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{15}: pull origin master: Fast-forward
+[33m571b6b3[m HEAD@{16}: checkout: moving from wireframe to master
+[33mbaa4bbc[m[33m ([m[1;32mwireframe[m[33m)[m HEAD@{17}: commit: cropping
+[33mff21ded[m HEAD@{18}: commit: fixed some cropping
+[33mdec2d5f[m HEAD@{19}: commit: initial wireframes for frontend
+[33m571b6b3[m HEAD@{20}: checkout: moving from master to wireframe
+[33m571b6b3[m HEAD@{21}: clone: from https://github.com/thaiscmky/phonow.git
