@@ -1,1 +1,1 @@
-console.log('LOADED: javascript/about.js');
+console.log('LOADED: admin/about.js');

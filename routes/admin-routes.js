@@ -11,12 +11,14 @@ router.get('/', (req,res) => {
 // -------- sample dashboard route
 router.get('/dash', (req,res) => {
     const title='Welcome to Pho Now!';
-    res.render('./admin/dash-sample', {layout:'main-admin',title: title });
+    const javascript='dash';
+    res.render('./admin/dash-sample', {layout:'main-admin',title: title, javascript: javascript });
 });
 
 // -------- Set settings
 router.get('/settings', (req,res) => {
     const title='Pho Now\'s settings';
+    const javascript='settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
@@ -66,12 +68,13 @@ router.get('/settings', (req,res) => {
             {"hours_ops": {"on": true, "label": "Hours of Operation"} },
         ]
     };
-    res.render('./admin/settings', {layout:'main-admin', title: title, settings: settingsObj});
+    res.render('./admin/settings', {layout:'main-admin', title: title, javascript: javascript, settings: settingsObj});
 });
 
 // -------- Menu Categories route
 router.get('/categories', (req,res) => {
     const title='Pho Now\'s menu categories';
+    const javascript='categories';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
@@ -96,13 +99,13 @@ router.get('/categories', (req,res) => {
             ]
         }
     };
-    res.render('./admin/categories', {layout:'main-admin', title: title, settings: settingsObj});
+    res.render('./admin/categories', {layout:'main-admin', title: title, javascript: javascript, settings: settingsObj});
 });
 
 // -------- Menu Items route
 router.get('/menuitems', (req,res) => {
-
     const title='Pho Now\'s menu items';
+    const javascript='menuitems';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
     let settingsObj = {
@@ -137,7 +140,7 @@ router.get('/menuitems', (req,res) => {
             ]
         }
     };
-    res.render('./admin/menuitems', {layout:'main-admin', title: title, settings: settingsObj});
+    res.render('./admin/menuitems', {layout:'main-admin', title: title, javascript: javascript, settings: settingsObj});
 });
 
 // -------- fail route
