@@ -21,6 +21,8 @@ require('./config/passport')(passport);
 const hbshelpers = require('./helpers/hbs.js');
 const capitalize = hbshelpers.capitalize;
 const debug = hbshelpers.debug;
+const assignJSON = hbshelpers.assignJSON;
+const equals = hbshelpers.equals;
 // Routes
 const auth = require('./routes/auth');
 const html = require('./routes/html-routes');
@@ -42,7 +44,9 @@ app.use(bodyParser.json());
 app.engine('handlebars', exphbs({
     helpers: {
         capitalize: capitalize,
-        debug: debug
+        debug: debug,
+        assignJSON: assignJSON,
+        equals: equals
     },
     defaultLayout: 'main',
 }));
@@ -92,7 +96,7 @@ app.use('/', html);
 app.use('/admin', admin);
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({focus:true}).then(function () {

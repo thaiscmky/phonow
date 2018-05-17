@@ -10,8 +10,6 @@
                     <th>Price</th>
                     <th>Category</th>
                     <th>Status</th>
-                    <th>Created</th>
-                    <th>Modified</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -19,7 +17,6 @@
                 {{!-- TODO add form field visibility to manipulated via on-click events --}}
                 {{#if settings.menuitem.list}}
                     {{#each settings.menuitem.list}}
-                        {{debug this}}
                          <tr class="edit-mode" id="edit-mitem-{{this.id}}">
                              <td colspan="8">
                                  <div class="form-row">
@@ -56,12 +53,17 @@
                                          </div>
                                      </div>
                                      <div class="col-3 input-group category">
+                                         {{assignJSON 'categories' @root.settings.menuitem.categories}}
+                                         {{assignJSON 'currentcat' this.item_category}}
                                          <select class="form-control" id="item_category">
-                                             {{#unless this.isActive}}<option value="">Select..</option>{{/unless}}
-                                             <option value="">{{this.item_category}}</option>
-                                             <option>3</option>
-                                             <option>4</option>
-                                             <option>5</option>
+                                             {{#unless this.currentcat}}<option value="">Select..</option>{{/unless}}
+                                             {{#each this.categories}}
+                                                 <option value="{{this.id}}"
+                                                     {{#if (equals this.name ../this.currentcat)}}selected="selected"{{/if}}
+                                                 >
+                                                     {{this.name}}
+                                                 </option>
+                                             {{/each}}
                                          </select>
                                      </div>
                                  </div>
@@ -88,8 +90,6 @@
                              <td class="price">{{this.item_price}}</td>
                              <td class="category">{{this.item_category}}</td>
                              <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                             <td class="created">{{this.createdAt}}</td>
-                             <td class="modified">{{this.createdAt}}</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
                          </tr>
                     {{/each}}

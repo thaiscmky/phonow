@@ -84,6 +84,11 @@ input:checked + .slider:before {
 .table-responsive {
     display: table;
 }
+
+.edit-modal > .modal-dialog {    
+    max-width: 960px;
+}
+
 /***************************/
 /* End Bootstrap Overrides */
 /***************************/

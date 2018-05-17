@@ -35,6 +35,7 @@ router.get('/settings', (req, res) => {
                 "restaurant_zip": "77077"
             },
             "editMode": true
+
         },
         "restaurant_hour":
             {
@@ -89,7 +90,7 @@ router.get('/categories', (req, res) => {
                 },
                 {
                     "id": 2,
-                    "category_name": "Rices",
+                    "category_name": "Rice",
                     "category_description": "You can add shrimp on any rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
@@ -98,6 +99,7 @@ router.get('/categories', (req, res) => {
             ]
         }
     };
+
     res.render('./admin/categories', { layout: 'main-admin', title: title, settings: settingsObj });
 });
 
@@ -141,6 +143,7 @@ router.get('/menuitems', (req, res) => {
             ]
         }
     };
+
     
     var menuTypes = {};
     db.menu_type.findAll({
