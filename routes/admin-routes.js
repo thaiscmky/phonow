@@ -32,7 +32,7 @@ router.get('/settings', (req,res) => {
                 "restaurant_city": "Houston",
                 "restaurant_zip": "77077"
             },
-            "editMode":true
+            "editMode":false
         },
         "restaurant_hour":
         {

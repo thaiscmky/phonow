@@ -1,164 +1,142 @@
 {{#if settings.general_info.editMode}}
-    <div class="edit-mode">
-        <h2>General Information</h2>
-        <form id="geninfo" action="/admin/settings" method="post">
-            <fieldset class="card card-body">
-                <div class="form-group">
-                    <div class="form-row">
-                        <div class="col input-group">
-                            <label for="restaurant_name">Restaurant Name</label>
-                            <input type="text" class="form-control" name="restaurant_name" id="restaurant_name"
-                                {{#if settings.general_info.restaurant_name}} value="{{settings.general_info.restaurant_name}}" {{/if}}
-                            />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col input-group">
-                            <label for="contact_name">Restaurant Owner</label>
-                            <input type="text" class="form-control" name="contact_name" id="contact_name"
-                                {{#if settings.general_info.contact_name}} value="{{settings.general_info.contact_name}}" {{/if}}
-                            />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col input-group">
-                            <label for="contact_phone">Restaurant Phone Number</label>
-                            <input type="email" class="form-control" name="contact_phone" id="contact_phone"
-                                {{#if settings.general_info.contact_phone}} value="{{settings.general_info.contact_phone}}" {{/if}}
-                            />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col input-group">
-                            <label for="contact_email">Contact Email</label>
-                            <input type="tel" class="form-control" name="contact_email" id="contact_email"
-                                {{#if settings.general_info.contact_email}} value="{{settings.general_info.contact_email}}" {{/if}}
-                            />
-                        </div>
-                    </div>
-                    <h2>Address</h2>
-                    <div class="form-row">
-                        <div class="col input-group">
-                             <label for="address_line1">Street 1</label>
-                             <input type="text" class="form-control" name="address_line1" id="address_line1"
-                                 {{#if settings.general_info.address.line1}} value="{{settings.general_info.address.line1}}" {{/if}}
-                             />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col input-group">
-                             <label for="address_line2">Street 2</label>
-                             <input type="text" class="form-control" name="address_line2" id="address_line2"
-                                 {{#if settings.general_info.address.line2}} value="{{settings.general_info.address.line2}}" {{/if}}
-                             />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-6 input-group">
-                             <label for="restaurant_city">City</label>
-                             <input type="text" class="form-control" name="restaurant_city" id="restaurant_city"
-                                 {{#if settings.general_info.address.restaurant_city}} value="{{settings.general_info.address.restaurant_city}}" {{/if}}
-                             />
-                        </div>
-                        <div class="col-3 input-group">
-                             <label for="restaurant_state">State</label>
-                             <input type="text" class="form-control" name="restaurant_state" id="restaurant_state"
-                                 {{#if settings.general_info.address.restaurant_state}} value="{{settings.general_info.address.restaurant_state}}" {{/if}}
-                             />
-                        </div>
-                        <div class="col input-group">
-                             <label for="restaurant_zip">Zip Code</label>
-                             <input type="text" class="form-control" name="address_line2" id="address_line2"
-                                 {{#if settings.general_info.address.restaurant_zip}} value="{{settings.general_info.address.restaurant_zip}}" {{/if}}
-                             />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                             <button type="submit" class="btn btn-warning">Submit Item</button>
-                        </div>
+<div class="edit-mode">
+    <h2>General Information</h2>
+    <form id="geninfo" action="/admin/settings" method="post">
+        <fieldset class="card card-body">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="restaurant_name">Restaurant Name</label>
+                        <input type="text" class="form-control" name="restaurant_name" id="restaurant_name" {{#if settings.general_info.restaurant_name}}
+                            value="{{settings.general_info.restaurant_name}}" {{/if}} />
                     </div>
                 </div>
-            </fieldset>
-        </form>
-    </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="contact_name">Restaurant Owner</label>
+                        <input type="text" class="form-control" name="contact_name" id="contact_name" {{#if settings.general_info.contact_name}}
+                            value="{{settings.general_info.contact_name}}" {{/if}} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="contact_phone">Restaurant Phone Number</label>
+                        <input type="email" class="form-control" name="contact_phone" id="contact_phone" {{#if settings.general_info.contact_phone}}
+                            value="{{settings.general_info.contact_phone}}" {{/if}} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="contact_email">Contact Email</label>
+                        <input type="tel" class="form-control" name="contact_email" id="contact_email" {{#if settings.general_info.contact_email}}
+                            value="{{settings.general_info.contact_email}}" {{/if}} />
+                    </div>
+                </div>
+                <h2>Address</h2>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="address_line1">Street 1</label>
+                        <input type="text" class="form-control" name="address_line1" id="address_line1" {{#if settings.general_info.address.line1}}
+                            value="{{settings.general_info.address.line1}}" {{/if}} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="address_line2">Street 2</label>
+                        <input type="text" class="form-control" name="address_line2" id="address_line2" {{#if settings.general_info.address.line2}}
+                            value="{{settings.general_info.address.line2}}" {{/if}} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-6 input-group">
+                        <label for="restaurant_city">City</label>
+                        <input type="text" class="form-control" name="restaurant_city" id="restaurant_city" {{#if settings.general_info.address.restaurant_city}}
+                            value="{{settings.general_info.address.restaurant_city}}" {{/if}} />
+                    </div>
+                    <div class="col-3 input-group">
+                        <label for="restaurant_state">State</label>
+                        <input type="text" class="form-control" name="restaurant_state" id="restaurant_state" {{#if settings.general_info.address.restaurant_state}}
+                            value="{{settings.general_info.address.restaurant_state}}" {{/if}} />
+                    </div>
+                    <div class="col input-group">
+                        <label for="restaurant_zip">Zip Code</label>
+                        <input type="text" class="form-control" name="address_line2" id="address_line2" {{#if settings.general_info.address.restaurant_zip}}
+                            value="{{settings.general_info.address.restaurant_zip}}" {{/if}} />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-warning">Submit Item</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
 {{else}}
-    <div class="card card-body inform-form view-mode">
-        <h2>General Information <i class="fa fa-edit">edit</i></h2>
-        <div id="geninfo">
-            <div class="row">
-                <div class="col">
-                    <label>Restaurant Name: </label>
-                    <span id="restaurant_name">
-                        {{#if settings.general_info.restaurant_name}}
-                            {{settings.general_info.restaurant_name}}
-                        {{else}}
-                            <span class="missing-data">No name listed</span>
-                        {{/if}}
-                    </span>
-                </div>
+<div class="card card-body inform-form view-mode">
+    <h2>General Information
+        <button type="button" class="btn btn-primary">
+            <i class="fa fa-edit"></i>
+            EDIT
+        </button>
+    </h2>
+    <div id="geninfo">
+        <div class="row">
+            <div class="col">
+                <label>Restaurant Name: </label>
+                <span id="restaurant_name">
+                    {{#if settings.general_info.restaurant_name}} {{settings.general_info.restaurant_name}} {{else}}
+                    <span class="missing-data">No name listed</span>
+                    {{/if}}
+                </span>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label>Restaurant Owner: </label>
-                    <span id="contact_name">
-                        {{#if settings.general_info.contact_name}}
-                            {{settings.general_info.contact_name}}
-                        {{else}}
-                            <span class="missing-data">No name listed</span>
-                        {{/if}}
-                    </span>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Restaurant Owner: </label>
+                <span id="contact_name">
+                    {{#if settings.general_info.contact_name}} {{settings.general_info.contact_name}} {{else}}
+                    <span class="missing-data">No name listed</span>
+                    {{/if}}
+                </span>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label>Restaurant Phone Number: </label>
-                    <span id="contact_phone">
-                        {{#if settings.general_info.contact_phone}}
-                            {{settings.general_info.contact_phone}}
-                        {{else}}
-                            <span class="missing-data">No phone number specified</span>
-                        {{/if}}
-                    </span>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Restaurant Phone Number: </label>
+                <span id="contact_phone">
+                    {{#if settings.general_info.contact_phone}} {{settings.general_info.contact_phone}} {{else}}
+                    <span class="missing-data">No phone number specified</span>
+                    {{/if}}
+                </span>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label>Contact Email: </label>
-                    <span id="contact_email">
-                        {{#if settings.general_info.contact_email}}
-                            {{settings.general_info.contact_email}}
-                        {{else}}
-                            <span class="missing-data">No email specified</span>
-                        {{/if}}
-                    </span>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Contact Email: </label>
+                <span id="contact_email">
+                    {{#if settings.general_info.contact_email}} {{settings.general_info.contact_email}} {{else}}
+                    <span class="missing-data">No email specified</span>
+                    {{/if}}
+                </span>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label>Restaurant Address: </label>
-                    <span class="address">
-                        {{#if settings.general_info.address.line1}}
-                            {{settings.general_info.address.line1}},
-                            {{#if settings.general_info.address.line2}}
-                                {{settings.general_info.address.line2}},
-                            {{/if}}
-                        {{else}}
-                            <span class="missing-data">No street specified</span>,
-                        {{/if}}
-                        {{#if settings.general_info.address.restaurant_state}}
-                            {{settings.general_info.address.restaurant_state}},
-                        {{else}}
-                            <span class="missing-data">No State</span>,
-                        {{/if}}
-                        {{#if settings.general_info.address.restaurant_zip}}
-                            {{settings.general_info.address.restaurant_zip}},
-                        {{else}}
-                            <span class="missing-data">No Zipcode</span>
-                        {{/if}}
-                    </span>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Restaurant Address: </label>
+                <span class="address">
+                    {{#if settings.general_info.address.line1}} {{settings.general_info.address.line1}}, {{#if settings.general_info.address.line2}}
+                    {{settings.general_info.address.line2}}, {{/if}} {{else}}
+                    <span class="missing-data">No street specified</span>, {{/if}} {{#if settings.general_info.address.restaurant_state}} {{settings.general_info.address.restaurant_state}},
+                    {{else}}
+                    <span class="missing-data">No State</span>, {{/if}} {{#if settings.general_info.address.restaurant_zip}} {{settings.general_info.address.restaurant_zip}},
+                    {{else}}
+                    <span class="missing-data">No Zipcode</span>
+                    {{/if}}
+                </span>
             </div>
         </div>
     </div>
+</div>
 {{/if}}
