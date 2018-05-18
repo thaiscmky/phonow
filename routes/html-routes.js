@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-
+const menuList = require('../public/javascript/main/dummyobjects/menuList.js');
 
 // -------- Homepage route
 router.get('', (req, res) => {
@@ -12,39 +12,9 @@ router.get('', (req, res) => {
 // --------------- Menu
 router.get('/menu', (req, res) => {
     const title = 'menu';
-    var menu = [
-        {
-            categoryID: 1,
-            categoryName: 'category1',
-            categoryDescription: 'Lorem Ipsum lalala 1',
-            items: [
-                { itemName: 'name1-1', itemViet: 'viet1-1', itemDescription: 'description1-1', itemPrice: '10.99' },
-                { itemName: 'name1-2', itemViet: 'viet1-2', itemDescription: 'description1-2', itemPrice: '10.99' },
-                { itemName: 'name1-2', itemViet: 'viet1-2', itemDescription: 'description1-2', itemPrice: '10.99' },
-            ]
-        },
-        {
-            categoryID: 2,
-            categoryName: 'category2',
-            categoryDescription: 'Lorem Ipsum lalala 2',
-            items: [
-                { itemName: 'name2-1', itemViet: 'viet2-1', itemDescription: 'description2-1', itemPrice: '10.99' },
-                { itemName: 'name2-2', itemViet: 'viet2-2', itemDescription: 'description2-2', itemPrice: '10.99' },
-                { itemName: 'name2-2', itemViet: 'viet2-2', itemDescription: 'description2-2', itemPrice: '10.99' },
-            ]
-        },
-        {
-            categoryID: 3,
-            categoryName: 'category3',
-            categoryDescription: 'Lorem Ipsum lalala 3',
-            items: [
-                { itemName: 'name3-1', itemViet: 'viet3-1', itemDescription: 'description3-1', itemPrice: '10.99' },
-                { itemName: 'name3-2', itemViet: 'viet3-2', itemDescription: 'description3-2', itemPrice: '10.99' },
-                { itemName: 'name3-2', itemViet: 'viet3-2', itemDescription: 'description3-2', itemPrice: '10.99' },
-            ]
-        }
-    ]
-    res.render('./main/menu', { title: title, menu: menu });
+    // menuList needs to eventually do this through a DB call
+    var menuList = require('../public/javascript/main/dummyobjects/menuList.js');
+    res.render('./main/menu', { title: title, menu: menuList });
 });
 
 // --------------- Store Info

@@ -1,20 +1,20 @@
 console.log('LOADED: javascript/menu.js');
+$('#menu-content').ready(function () {
+    $('#menu-content-loader').hide();
+});
 $(document).ready(function () {
     $('.nav-category').on('click', function () {
-        let category = $(this).data('category');
-        loadMenu(category);
+        let categoryStr = $(this).data('categoryarr') + '';
+        let categoryArr = categoryStr.split(',');
+        loadMenu(categoryArr);
     });
+    $('#menu-content')
 
-    var loadMenu = function (categoryID) {
-        switch (categoryID) {
-            case '1': break;
-            case '2': break;
-            case '3': break;
-            case '4': break;
-            case '5': break;
-            case '6': break;
-            case '7': break;
-            case '8': break;
-        }
+    var loadMenu = function (categoryArr) {
+        $('.category').hide();
+        categoryArr.forEach(element => {
+            $(`[data-categoryid=${element}]`).show();
+        });
     }
+    loadMenu(['1']);
 });
