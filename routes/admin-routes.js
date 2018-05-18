@@ -82,7 +82,8 @@ router.get('/categories', (req, res) => {
             "list": [
                 {
                     "id": 1,
-                    "category_name": "Noodles",
+                    "menutype_name": "Noodles",
+                    "category_name": "Beef Noodles",
                     "category_description": "Glutten free options available",
                     "isActive": true,
                     "createdAt": '01/01/2018 13:00:12PM',
@@ -90,12 +91,17 @@ router.get('/categories', (req, res) => {
                 },
                 {
                     "id": 2,
+                    "menutype_name": "Rice",
                     "category_name": "Rice",
                     "category_description": "You can add shrimp on any rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
                 }
+            ],
+            "menu_types": [
+                { "id": 1, "name": "Noodles", "description": "foo bar" },
+                { "id": 2, "name": "Rice", "description": "hello world" }
             ]
         }
     };
@@ -120,7 +126,8 @@ router.get('/menuitems', (req, res) => {
                     "item_name_vietnamese": "Mì tôm với trứng",
                     "item_description": "Glutten free options available. We serve with fresh eggs",
                     "item_price": 5.00,
-                    "item_category": "Noodles",
+                    "item_category": "Beef Noodle",
+                    "menu_type": "Noodles",
                     "isActive": true,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
@@ -131,15 +138,19 @@ router.get('/menuitems', (req, res) => {
                     "item_name_vietnamese": "Cơm với Lo Mein",
                     "item_description": "Special and seasonal fried rice and lo mein mix",
                     "item_price": 5.00,
-                    "item_category": "Rice",
+                    "item_category": "Shrimp Rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
                 }
             ],
             "categories": [
-                { "id": 1, "name": "Noodles" },
-                { "id": 2, "name": "Rice" }
+                { "id": 1, "name": "Beef Noodles" },
+                { "id": 2, "name": "Shrimp Rice" }
+            ],
+            "menu_types": [
+                { "id": 1, "name": "Noodles", "description": "foo bar" },
+                { "id": 2, "name": "Rice", "description": "hello world" }
             ]
         }
     };
