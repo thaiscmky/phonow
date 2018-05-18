@@ -34,7 +34,8 @@ app.engine('handlebars', exphbs({
         capitalize: capitalize,
         debug: debug,
         assignJSON: assignJSON,
-        equals: equals
+        equals: equals,
+        returnSelf: returnSelf
     },
     defaultLayout: 'main',
 }));
