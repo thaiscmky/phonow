@@ -1,23 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
-var db = require("../models");
+const { ensureAuthenticated } = require('../helpers/auth');
+let db = require("../models");
+
+
 
 
 // -------- Homepage route
-router.get('/', (req,res) => {
+router.get('/', ensureAuthenticated, (req,res) => {
     const title='Pho Now Administrator Dashboard';
     res.render('./admin/index', {layout:'login'});
 });
 
-// -------- sample dashboard route
-router.get('/dash', (req, res) => {
-    const title = 'Welcome to Pho Now!';
-    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
-});
-
 // -------- Set settings
-router.get('/settings', (req, res) => {
+router.get('/settings', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
@@ -73,11 +69,14 @@ router.get('/settings', (req, res) => {
 });
 
 // -------- Menu Categories route
-router.get('/categories', (req, res) => {
+
+router.get('/categories', ensureAuthenticated, (req, res) => {
+
     const title = 'Pho Now\'s menu categories';
+
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
-    let settingsObj = {
+    let data = {
         "category": {
             "list": [
                 {
@@ -106,18 +105,25 @@ router.get('/categories', (req, res) => {
         }
     };
 
-    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: settingsObj });
+    //TODO uncomment after UI changes are completed, delete dummy object
+/*    db.menu_category.findAll({}).then((data)=>{
+       //res.json(data);
+       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+
+    }).catch((err)=>{
+               throw err
+    });*/
+
+    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
 });
 
 // -------- Menu Items route
-router.get('/menuitems', (req, res) => {
-
-
+router.get('/menuitems', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu items';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
-    let settingsObj = {
+    let data = {
         "menuitem": {
             "list": [
                 {
@@ -155,8 +161,10 @@ router.get('/menuitems', (req, res) => {
         }
     };
 
-    
-    var menuTypes = {};
+    //TODO uncomment after UI changes
+    // - verify automerge didn't mess anything...verify there are assertion tests for this request so it's easier to catch when things break
+
+    /*let menuTypes = {};
     db.menu_type.findAll({
     }).then(function (menuTypes) {
         menuTypes = menuTypes;
@@ -164,27 +172,92 @@ router.get('/menuitems', (req, res) => {
         }).then(function (categories) {
             res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
         });
-    });
-
+    });*/
+    res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: data });
 });
 
-router.post('/menuitems', (req, res) => {
+router.post('/menuitems', ensureAuthenticated, (req, res) => {
     console.log(req.body);
     db.menu_items.create(req.body).then(function (data) {
         res.json(data);
     });
-
 });
 
 // -------- fail route
 router.get('/403', (req, res) => {
-    res.render('./admin/403', { layout: 'main-admin' });
+    res.render('./admin/403');
 });
 
 // -------- Authorized route - dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('./admin/index', { layout: 'main-admin' });
+    res.render('./admin/settings', { layout: 'main-admin' });
 });
+
+
+// -------- sample dashboard route ---------
+router.get('/dash', (req, res) => {
+    const title = 'Welcome to Pho Now!';
+    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
+});
+
+//add category
+router.post('/addcategory', ensureAuthenticated, (req,res)=>{
+    console.log(req.body);
+    db.menu_category.create(
+        {category_name:req.body.category_name,
+        category_description:req.body.category_description,
+        isActive:true}
+   ).catch((err)=>{
+       throw err
+       
+   }).then((data)=>{
+      console.log(data);
+   })
+});
+
+//update categories
+router.put('/editcategories', ensureAuthenticated, (req,res)=>{
+          db.menu_category.update({
+            category_name:req.body.category_name,
+            category_description:req.body.discription,
+            isActive:req.body.isActive            
+         }, { where: { id:req.body.id } }).then((result)=>{
+             res.json(result);
+         }).catch((err)=>{
+            throw err; 
+         });
+ });
+
+/*** TODO Review the following routes (may no longer be needed)
+ *     - should most likely be in an api call with _ensureAuthorized_ headers
+ ***/
+
+// -------- Add item
+router.get('/additem', ensureAuthenticated, (req, res) => {
+    let categories = [{
+        id: 1,
+        category_name: "Kids"
+    },
+        {
+            id: 2,
+            category_name: "Drinks"
+        }];
+
+    let menuTypes = [{
+        id: 1,
+        menu_type_name: "Breakfast"
+    },
+        {
+            id: 2,
+            menu_type_name: "Lunch"
+        }];
+
+    res.render('./admin/add-item', { layout: 'main-admin', categories: categories ,menuTypes:menuTypes });
+
+});
+
+/*** END OF TODO ***/
+
 
 module.exports = router;
 
