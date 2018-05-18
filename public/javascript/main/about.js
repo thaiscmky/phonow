@@ -3,7 +3,7 @@ $(document).ready(function () {
     initMap();
 });
 
-// Function to initilize google maps API thing
+// Function to initilize google maps API
 function initMap() {
     var myLatLng = { lat: 29.845319, lng: -95.391193 };
 
@@ -15,6 +15,6 @@ function initMap() {
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: 'Pho Now!'
+        title: 'Pho Now'
     });
 }

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-const menuList = require('../public/javascript/main/dummyobjects/menuList.js');
 
 // -------- Homepage route
 router.get('', (req, res) => {
@@ -13,8 +12,8 @@ router.get('', (req, res) => {
 router.get('/menu', (req, res) => {
     const title = 'menu';
     // menuList needs to eventually do this through a DB call
-    var menuList = require('../public/javascript/main/dummyobjects/menuList.js');
-    res.render('./main/menu', { title: title, menu: menuList });
+    var menuJson = require('../public/javascript/main/dummyobjects/menuJson.js');
+    res.render('./main/menu', { title: title, menu: menuJson });
 });
 
 // --------------- Store Info
