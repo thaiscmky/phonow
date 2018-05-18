@@ -4,8 +4,10 @@ const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
 
 
+
+
 // -------- Homepage route
-router.get('/', (req,res) => {
+router.get('/', ensureAuthenticated, (req,res) => {
     const title='Pho Now Administrator Dashboard';
     res.render('./admin/index', {layout:'login'});
 });
@@ -67,40 +69,22 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
 });
 
 // -------- Menu Categories route
-router.get('/categories', ensureAuthenticated, (req, res) => {
-    const title = 'Pho Now\'s menu categories';
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let settingsObj = {
-        "category": {
-            "list": [
-                {
-                    "id": 1,
-                    "category_name": "Noodles",
-                    "category_description": "Glutten free options available",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "category_name": "Rice",
-                    "category_description": "You can add shrimp on any rice",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ]
-        }
-    };
 
-    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: settingsObj });
+router.get('/categories', ensureAuthenticated, (req, res) => {
+
+    const title = 'Pho Now\'s menu categories';
+        
+        db.menu_category.findAll({}).then((data)=>{
+           //res.json(data);
+           res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+
+        }).catch((err)=>{
+           throw err
+});
 });
 
 // -------- Menu Items route
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
-
-
 
     const title = 'Pho Now\'s menu items';
     //this is a temporary solution, should go in a controller or helper
@@ -175,17 +159,40 @@ router.get('/dash', (req, res) => {
     res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
 
+//add category
+router.post('/addcategory', ensureAuthenticated, (req,res)=>{
+    console.log(req.body);
+    db.menu_category.create(
+        {category_name:req.body.category_name,
+        category_description:req.body.category_description,
+        isActive:true}
+   ).catch((err)=>{
+       throw err
+       
+   }).then((data)=>{
+      console.log(data);
+   })
+});
+
+//update categories
+router.put('/editcategories', ensureAuthenticated, (req,res)=>{
+          db.menu_category.update({
+            category_name:req.body.category_name,
+            category_description:req.body.discription,
+            isActive:req.body.isActive            
+         }, { where: { id:req.body.id } }).then((result)=>{
+             res.json(result);
+         }).catch((err)=>{
+            throw err; 
+         });
+ });
+
 /*** TODO Review the following routes (may no longer be needed)
  *     - should most likely be in an api call with _ensureAuthorized_ headers
  ***/
 
-// -------- Add category
-router.get('/addcategories', (req, res) => {
-    res.render('./admin/add-categ', { layout: 'main-admin' });
-});
-
 // -------- Add item
-router.get('/additem', (req, res) => {
+router.get('/additem', ensureAuthenticated, (req, res) => {
     let categories = [{
         id: 1,
         category_name: "Kids"
@@ -209,6 +216,7 @@ router.get('/additem', (req, res) => {
 });
 
 /*** END OF TODO ***/
+
 
 module.exports = router;
 
