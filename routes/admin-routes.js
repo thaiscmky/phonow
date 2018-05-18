@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
+const { ensureAuthenticated } = require('../helpers/auth');
 var db = require("../models");
 
 
@@ -10,14 +10,8 @@ router.get('/', (req,res) => {
     res.render('./admin/index', {layout:'login'});
 });
 
-// -------- sample dashboard route
-router.get('/dash', (req, res) => {
-    const title = 'Welcome to Pho Now!';
-    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
-});
-
 // -------- Set settings
-router.get('/settings', (req, res) => {
+router.get('/settings', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
@@ -73,7 +67,7 @@ router.get('/settings', (req, res) => {
 });
 
 // -------- Menu Categories route
-router.get('/categories', (req, res) => {
+router.get('/categories', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s menu categories';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
@@ -104,7 +98,7 @@ router.get('/categories', (req, res) => {
 });
 
 // -------- Menu Items route
-router.get('/menuitems', (req, res) => {
+router.get('/menuitems', ensureAuthenticated, (req, res) => {
 
 
 
@@ -144,7 +138,7 @@ router.get('/menuitems', (req, res) => {
         }
     };
 
-    
+
     var menuTypes = {};
     db.menu_type.findAll({
     }).then(function (menuTypes) {
@@ -157,22 +151,28 @@ router.get('/menuitems', (req, res) => {
 
 });
 
-router.post('/menuitems', (req, res) => {
+router.post('/menuitems', ensureAuthenticated, (req, res) => {
     console.log(req.body);
     db.menu_items.create(req.body).then(function (data) {
         res.json(data);
     });
-
 });
 
 // -------- fail route
 router.get('/403', (req, res) => {
-    res.render('./admin/403', { layout: 'main-admin' });
+    res.render('./admin/403');
 });
 
 // -------- Authorized route - dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('./admin/index', { layout: 'main-admin' });
+    res.render('./admin/settings', { layout: 'main-admin' });
+});
+
+
+// -------- sample dashboard route ---------
+router.get('/dash', (req, res) => {
+    const title = 'Welcome to Pho Now!';
+    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
 
 module.exports = router;
