@@ -18,9 +18,9 @@ router.get('/menu', (req, res) => {
             categoryName: 'category1',
             categoryDescription: 'Lorem Ipsum lalala 1',
             items: [
-                { itemName: 'name1-1', itemViet: 'viet1-1', itemDescription: 'description1-1' },
-                { itemName: 'name1-2', itemViet: 'viet1-2', itemDescription: 'description1-2' },
-                { itemName: 'name1-2', itemViet: 'viet1-2', itemDescription: 'description1-2' },
+                { itemName: 'name1-1', itemViet: 'viet1-1', itemDescription: 'description1-1', itemPrice: '10.99' },
+                { itemName: 'name1-2', itemViet: 'viet1-2', itemDescription: 'description1-2', itemPrice: '10.99' },
+                { itemName: 'name1-2', itemViet: 'viet1-2', itemDescription: 'description1-2', itemPrice: '10.99' },
             ]
         },
         {
@@ -28,9 +28,9 @@ router.get('/menu', (req, res) => {
             categoryName: 'category2',
             categoryDescription: 'Lorem Ipsum lalala 2',
             items: [
-                { itemName: 'name2-1', itemViet: 'viet2-1', itemDescription: 'description2-1' },
-                { itemName: 'name2-2', itemViet: 'viet2-2', itemDescription: 'description2-2' },
-                { itemName: 'name2-2', itemViet: 'viet2-2', itemDescription: 'description2-2' },
+                { itemName: 'name2-1', itemViet: 'viet2-1', itemDescription: 'description2-1', itemPrice: '10.99' },
+                { itemName: 'name2-2', itemViet: 'viet2-2', itemDescription: 'description2-2', itemPrice: '10.99' },
+                { itemName: 'name2-2', itemViet: 'viet2-2', itemDescription: 'description2-2', itemPrice: '10.99' },
             ]
         },
         {
@@ -38,9 +38,9 @@ router.get('/menu', (req, res) => {
             categoryName: 'category3',
             categoryDescription: 'Lorem Ipsum lalala 3',
             items: [
-                { itemName: 'name3-1', itemViet: 'viet3-1', itemDescription: 'description3-1' },
-                { itemName: 'name3-2', itemViet: 'viet3-2', itemDescription: 'description3-2' },
-                { itemName: 'name3-2', itemViet: 'viet3-2', itemDescription: 'description3-2' },
+                { itemName: 'name3-1', itemViet: 'viet3-1', itemDescription: 'description3-1', itemPrice: '10.99' },
+                { itemName: 'name3-2', itemViet: 'viet3-2', itemDescription: 'description3-2', itemPrice: '10.99' },
+                { itemName: 'name3-2', itemViet: 'viet3-2', itemDescription: 'description3-2', itemPrice: '10.99' },
             ]
         }
     ]
