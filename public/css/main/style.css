@@ -163,6 +163,10 @@ section.contact {
     margin-bottom: .618em;
 }
 
+#map {
+    height: 400px;
+}
+
 /* End About Page CSS */
 
 /*   Contact Page CSS   */
