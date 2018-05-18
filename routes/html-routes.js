@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 
+
 // -------- Homepage route
 router.get('', (req, res) => {
     const title = 'index';
@@ -121,6 +122,5 @@ router.put('/categories/:id', (req, res) => {
         done();
     })
 });
-
 
 module.exports = router;
