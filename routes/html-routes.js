@@ -15,7 +15,7 @@ router.get('/menu', (req, res) => {
     const menu = {
 
     }
-    res.render('./main/menu', { title: title });
+    res.render('./main/menu', { title: title, menu: menu });
 });
 
 // --------------- Store Info
