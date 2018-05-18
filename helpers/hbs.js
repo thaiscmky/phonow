@@ -10,9 +10,8 @@ module.exports = {
         return string.charAt(0).toUpperCase() + string.slice(1);
     },
     debug: function(value, context){
-        console.log('Passed in handlebars:');
-        console.log(`typeof: ${typeof value}`);
-        console.log(`value: ${JSON.stringify(value, null, 2)}`);
+        console.log(`TYPEOF ${typeof value}`);
+        console.log(`VALUE ${JSON.stringify(value, null, 2)}`);
     },
     assignJSON: function (varname, enumerableValue, context) {
         this[varname] = enumerableValue;
