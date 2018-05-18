@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../helpers/auth');
-var db = require("../models");
+let db = require("../models");
 
 
 // -------- Homepage route
@@ -139,7 +139,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
     };
 
 
-    var menuTypes = {};
+    let menuTypes = {};
     db.menu_type.findAll({
     }).then(function (menuTypes) {
         menuTypes = menuTypes;
@@ -174,6 +174,41 @@ router.get('/dash', (req, res) => {
     const title = 'Welcome to Pho Now!';
     res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
+
+/*** TODO Review the following routes (may no longer be needed)
+ *     - should most likely be in an api call with _ensureAuthorized_ headers
+ ***/
+
+// -------- Add category
+router.get('/addcategories', (req, res) => {
+    res.render('./admin/add-categ', { layout: 'main-admin' });
+});
+
+// -------- Add item
+router.get('/additem', (req, res) => {
+    let categories = [{
+        id: 1,
+        category_name: "Kids"
+    },
+        {
+            id: 2,
+            category_name: "Drinks"
+        }];
+
+    let menuTypes = [{
+        id: 1,
+        menu_type_name: "Breakfast"
+    },
+        {
+            id: 2,
+            menu_type_name: "Lunch"
+        }];
+
+    res.render('./admin/add-item', { layout: 'main-admin', categories: categories ,menuTypes:menuTypes });
+
+});
+
+/*** END OF TODO ***/
 
 module.exports = router;
 
