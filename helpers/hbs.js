@@ -27,7 +27,7 @@ module.exports = {
         return arg1 === arg2;
     },
     /**
-     * If two elements are identical, return the elements
+     * If two elements are identical, return the elements, else return nothing
      * @param mix
      * @param mix
      * @param options
