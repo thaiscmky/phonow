@@ -17,10 +17,24 @@ router.get('/menu', (req, res) => {
 // --------------- Store Info
 router.get('/about', (req, res) => {
     const title = 'about';
+    // These are a bunch of dummy objects to be replace with real stuff later please THANKS!
     const hours = {
-
+        monday: { open: '11:00am', close: '10:00pm' },
+        tuesday: { open: '11:00am', close: '10:00pm' },
+        wednesday: { open: '11:00am', close: '10:00pm' },
+        thursday: { open: '11:00am', close: '10:00pm' },
+        friday: { open: '11:00am', close: '11:00pm' },
+        saturday: { open: '11:00am', close: '11:00pm' },
+        sunday: { open: '11:00am', close: '10:00pm' }
     }
-    res.render('./main/about', { title: title });
+    const address = {
+        fulladdress: '536 East Tidwell RD Houston, TX 77022'
+    }
+    const contact = {
+        phone: '(713) 699-4444',
+        email: 'PhoNowTexas@gmail.com'
+    }
+    res.render('./main/about', { title: title, hours: hours, address: address, contact: contact });
 });
 
 // --------------- Contact Us
