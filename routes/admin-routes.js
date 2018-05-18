@@ -4,6 +4,8 @@ const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
 var db = require("../models");
 
 
+
+
 // -------- Homepage route
 router.get('/', (req,res) => {
     const title='Pho Now Administrator Dashboard';
@@ -73,41 +75,21 @@ router.get('/settings', (req, res) => {
 });
 
 // -------- Menu Categories route
+//get categories
 router.get('/categories', (req, res) => {
     const title = 'Pho Now\'s menu categories';
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let settingsObj = {
-        "category": {
-            "list": [
-                {
-                    "id": 1,
-                    "category_name": "Noodles",
-                    "category_description": "Glutten free options available",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "category_name": "Rice",
-                    "category_description": "You can add shrimp on any rice",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ]
-        }
-    };
+        
+        db.menu_category.findAll({}).then((data)=>{
+           //res.json(data);
+           res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
 
-    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: settingsObj });
+        }).catch((err)=>{
+           throw err
+});
 });
 
 // -------- Menu Items route
 router.get('/menuitems', (req, res) => {
-
-
-
     const title = 'Pho Now\'s menu items';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
@@ -175,5 +157,35 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.render('./admin/index', { layout: 'main-admin' });
 });
 
+
+
+
+//add categore
+router.post('/addcategory',(req,res)=>{
+    console.log(req.body);
+    db.menu_category.create(
+        {category_name:req.body.category_name,
+        category_description:req.body.category_description,
+        isActive:true}
+   ).catch((err)=>{
+       throw err
+       
+   }).then((data)=>{
+      console.log(data);
+   })
+});
+
+//update categories
+router.put('/editcategories',(req,res)=>{
+          db.menu_category.update({
+            category_name:req.body.category_name,
+            category_description:req.body.discription,
+            isActive:req.body.isActive            
+         }, { where: { id:req.body.id } }).then((result)=>{
+             res.json(result);
+         }).catch((err)=>{
+            throw err; 
+         });
+ });
 module.exports = router;
 
