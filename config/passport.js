@@ -14,7 +14,6 @@ module.exports = function(passport) {
         }, (accessToken, refreshToken, profile, done) => {
             // console.log(accessToken);
             // console.log(profile);
-            const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
 
             const authUser =  {
                 user_unique_id: profile.id,
@@ -29,25 +28,33 @@ module.exports = function(passport) {
                 }
             }).then((user) => {
                     if(user) {
+                        console.log(user);
                         //return user
                         done(null, user);
+                    } else {
+                        done(null,user);
                     }
-                    done(null);
+
                 });
         })
     );
 
     //Passport serializing and de-serializing
-    passport.serializeUser( (user, done) =>{
+    passport.serializeUser( (user, done) => {
         //null for the error, and the id from the user
-        done(null,user.id);
+        done(null,user.user_email); //user_email is the column name in our DB
     });
 
-    passport.deserializeUser( (id, done) => {
+    passport.deserializeUser( (email, done) => {
         // Find the id inside our database
-        db.user.findById(id).then(
+        db.user.findOne({
+            where: {
+                user_email: email
+            }
+        }).then(
             //Once we get the user, we send NO error and pass the user.
-            (user) => done(null, user))
-            .catch( err => console.log(err));
+            user => done(null, user)
+        )
+        .catch( err => console.log(err));
     });
 };
