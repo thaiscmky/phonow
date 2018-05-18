@@ -40,7 +40,14 @@ router.get('/about', (req, res) => {
 // --------------- Contact Us
 router.get('/contact', (req, res) => {
     const title = 'contact';
-    res.render('./main/contact', { title: title });
+    const address = {
+        fulladdress: '536 East Tidwell RD Houston, TX 77022'
+    }
+    const contact = {
+        phone: '(713) 699-4444',
+        email: 'PhoNowTexas@gmail.com'
+    }
+    res.render('./main/contact', { title: title, address: address, contact: contact });
 });
 
 
