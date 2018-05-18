@@ -5,9 +5,9 @@ var db = require("../models");
 
 
 // -------- Homepage route
-router.get('/', (req, res) => {
-    const title = 'Pho Now Administrator Dashboard';
-    res.render('./admin/index', { layout: 'main-admin', title: title });
+router.get('/', (req,res) => {
+    const title='Pho Now Administrator Dashboard';
+    res.render('./admin/index', {layout:'login'});
 });
 
 // -------- sample dashboard route
