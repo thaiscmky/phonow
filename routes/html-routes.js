@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-
+const menuList = require('../public/javascript/main/dummyobjects/menuList.js');
 
 // -------- Homepage route
 router.get('', (req, res) => {
@@ -12,7 +12,9 @@ router.get('', (req, res) => {
 // --------------- Menu
 router.get('/menu', (req, res) => {
     const title = 'menu';
-    res.render('./main/menu', { title: title });
+    // menuList needs to eventually do this through a DB call
+    var menuList = require('../public/javascript/main/dummyobjects/menuList.js');
+    res.render('./main/menu', { title: title, menu: menuList });
 });
 
 // --------------- Store Info
@@ -41,7 +43,14 @@ router.get('/about', (req, res) => {
 // --------------- Contact Us
 router.get('/contact', (req, res) => {
     const title = 'contact';
-    res.render('./main/contact', { title: title });
+    const address = {
+        fulladdress: '536 East Tidwell RD Houston, TX 77022'
+    }
+    const contact = {
+        phone: '(713) 699-4444',
+        email: 'PhoNowTexas@gmail.com'
+    }
+    res.render('./main/contact', { title: title, address: address, contact: contact });
 });
 
 

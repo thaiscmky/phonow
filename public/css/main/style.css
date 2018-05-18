@@ -110,7 +110,7 @@ section.contact {
 
 #menu-content {
     background: #fff;
-    padding: 1.618em;
+    padding: 1.618em;    
 }
 
 .items {
@@ -120,15 +120,20 @@ section.contact {
 }
 
 .item {
-    border-bottom: 1px solid #333;
+    border-top: 1px solid #333;
 }
 
 .item-name {
     font-size: 1.618em;
+    float: left;
 }
 
 .item-price {
     font-size: 1.618em;
+}
+
+.item-viet {
+    font-size: 1rem;        
 }
 
 /* End Menu Page CSS */
