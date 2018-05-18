@@ -5,7 +5,7 @@ const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
 // -------- Homepage route
 router.get('/', (req,res) => {
     const title='Pho Now Administrator Dashboard';
-    res.render('./admin/index', {layout:'main-admin',title: title });
+    res.render('./admin/index', {layout:'login'});
 });
 
 // -------- sample dashboard route
