@@ -12,6 +12,9 @@ router.get('', (req, res) => {
 // --------------- Menu
 router.get('/menu', (req, res) => {
     const title = 'menu';
+    const menu = {
+
+    }
     res.render('./main/menu', { title: title });
 });
 
