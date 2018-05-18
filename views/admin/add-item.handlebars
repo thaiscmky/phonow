@@ -1,0 +1,57 @@
+<div class="col main pt-5 mt-3">
+    <h1>Add item</h1>
+    <div class="card card-body">
+        <h3>Menu Item Details</h3>
+        <form action="/admin" method="post">
+
+         <div class="form-group">
+                 <label for="item">Menu Type</label>
+                <select>
+                    {{#each menuTypes}}
+                    <option value='{{Id}}'>{{menu_type_name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                 <label for="item">Category</label>
+                <select>
+                    {{#each categories}}
+                    <option value='{{Id}}'>{{category_name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="item">Name</label>
+                <input type="text" class="form-control" name="item_name_english">
+
+            </div>
+            <div class="form-group">
+                <label for="item">Name(vietnamese)</label>
+                <input type="text" class="form-control" name="item_name_vietnamese">
+
+            </div>
+
+            <div class="form-group">
+                <label for="item-desc">Description</label>
+                <input type="text" class="form-control" name="item-description">
+
+            </div>
+
+            <div class="form-group">
+                <label for="item-price">Price</label>
+                <input type="text" class="form-control" name="item-price">
+
+            </div>
+            <div class="form-group">
+                <label for="item-price">Rating</label>
+                <input type="text" class="form-control" name="item-rating">
+
+            </div>
+
+
+            <button type="submit" class="btn btn-warning">Submit Item</button>
+        </form>
+    </div>
+</div>
