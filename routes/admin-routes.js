@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+
 const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
-var db = require("../models");
+let db = require("../models");
 // -------- Homepage route
 router.get('/', (req, res) => {
     const title = 'Pho Now Administrator Dashboard';
@@ -16,10 +17,11 @@ router.get('/dash', (req, res) => {
 
 // -------- Set settings
 router.get('/settings', (req, res) => {
+
     const title = 'Pho Now\'s settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
-    var settingsObj = {
+    let settingsObj = {
         "general_info": {
             "restaurant_name": "Pho Now",
             "contact_name": "Uyen Tran",
@@ -31,7 +33,9 @@ router.get('/settings', (req, res) => {
                 "restaurant_state": "Texas",
                 "restaurant_city": "Houston",
                 "restaurant_zip": "77077"
-            }
+            },
+            "editMode": true
+
         },
         "restaurant_hour":
             {
@@ -75,7 +79,7 @@ router.get('/addcategories', (req, res) => {
 
 // -------- Add item
 router.get('/additem', (req, res) => {
-    var categories = [{
+    let categories = [{
         id: 1,
         category_name: "Kids"
     },
@@ -84,27 +88,72 @@ router.get('/additem', (req, res) => {
         category_name: "Drinks"
     }];
 
-    var menuTypes = [{
+    let menuTypes = [{
         id: 1,
         menu_type_name: "Breakfast"
     },
     {
         id: 2,
         menu_type_name: "Lunch"
-    }]
+    }];
+
+    /*const title = 'Pho Now\'s menu items';
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    let settingsObj = {
+        "menuitem": {
+            "list": [
+                {
+                    "id": 1,
+                    "item_name_english": "Shrimp Noodles with eggs",
+                    "item_name_vietnamese": "Mì tôm với trứng",
+                    "item_description": "Glutten free options available. We serve with fresh eggs",
+                    "item_price": 5.00,
+                    "item_category": "Noodles",
+                    "isActive": true,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                },
+                {
+                    "id": 2,
+                    "item_name_english": "Rice with Lo Mein",
+                    "item_name_vietnamese": "Cơm với Lo Mein",
+                    "item_description": "Special and seasonal fried rice and lo mein mix",
+                    "item_price": 5.00,
+                    "item_category": "Rice",
+                    "isActive": false,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                }
+            ],
+            "categories": [
+                { "id": 1, "name": "Noodles" },
+                { "id": 2, "name": "Rice" }
+            ]
+        }
+    };*/
 
 
     res.render('./admin/add-item', { layout: 'main-admin', categories: categories ,menuTypes:menuTypes });
+
 });
 
 // -------- fail route
 router.get('/403', (req, res) => {
     res.render('./admin/403', { layout: 'main-admin' });
+    //res.render('./admin/403');
 });
 
 // -------- Authorized route - dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.render('./admin/index', { layout: 'main-admin' });
+});
+
+
+// -------- sample dashboard route ---------
+router.get('/dash', (req, res) => {
+    const title = 'Welcome to Pho Now!';
+    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
 
 module.exports = router;

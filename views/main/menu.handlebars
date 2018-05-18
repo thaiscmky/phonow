@@ -1,2 +1,52 @@
-{{> main/_navbar}}
-<h1>Menu</h1>
+<section class="mini-hero">
+    <div class="container">
+        {{> main/_navbar}}
+    </div>
+    <div class="menu-hero mini-hero-img">
+        <div>
+</section>
+<section id="menu" class="section">
+    <div class="title text-center">Menu</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav id="menu-nav">
+                    <ul class="row no-gutters text-center" style="width:100%">
+                        <li class="nav-category col-lg col-md-3" style="order:1" data-categoryarr="1">
+                            <a>Appetizers</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:2" data-categoryarr="2,3,4,5">
+                            <a>Noodle Soup</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:3" data-categoryarr="6,7,8">
+                            <a>Rice/Vermicelli</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:4" data-categoryarr="9">
+                            <a>House Special</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:5" data-categoryarr="10">
+                            <a>Sandwiches</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:6" data-categoryarr="11">
+                            <a>Kid's Meal</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:7" data-categoryarr="12">
+                            <a>Drinks</a>
+                        </li>
+                        <li class="nav-category col-lg col-md-3" style="order:8" data-categoryarr="13">
+                            <a>Lunch Special</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row content no-gutters">
+            <div class="col-12">
+                <div id="menu-content">
+                    <div id="menu-content-loader" class="text-center" style="font-size: 4rem;">Loading</div>
+                    {{>main/_menuitems}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

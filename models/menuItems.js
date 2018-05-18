@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     item_name_vietnamese: {
       type: DataTypes.STRING
     },
-
     item_description: {
       type: DataTypes.STRING
     },
@@ -31,8 +30,6 @@ module.exports = (sequelize, DataTypes) => {
   MenuItems.associate = function (models) {
     MenuItems.belongsTo(models.menu_category);
     MenuItems.belongsTo(models.menu_type);
-
-
   };
   return MenuItems;
 };
