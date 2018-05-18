@@ -4,17 +4,15 @@ $('#menu-content').ready(function () {
 });
 $(document).ready(function () {
     $('.nav-category').on('click', function () {
-        let categoryStr = $(this).data('categoryarr') + '';
-        let categoryArr = categoryStr.split(',');
-        loadMenu(categoryArr);
+        let categoryID = $(this).data('categoryname') + '';
+        console.log(categoryID);
+        loadMenu(categoryID);
     });
     $('#menu-content')
 
-    var loadMenu = function (categoryArr) {
+    var loadMenu = function (id) {
         $('.category').hide();
-        categoryArr.forEach(element => {
-            $(`[data-categoryid=${element}]`).show();
-        });
+        $(`[data-categorytype=${id}]`).show();
     }
-    loadMenu(['1']);
+    // loadMenu(['1']);
 });
