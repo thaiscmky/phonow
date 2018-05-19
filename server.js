@@ -19,7 +19,7 @@ const db=require("./models");
 require('./config/passport')(passport);
 
 //handlebars helpers
-const {truncate,capitalize,debug,assignJSON,equals,ifcond} = require('./helpers/hbs.js');
+const {truncate,capitalize,debug,assignJSON,equals,returnSelf} = require('./helpers/hbs.js');
 
 // Routes
 const auth = require('./routes/auth');
