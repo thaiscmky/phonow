@@ -70,9 +70,9 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
 
 // -------- Menu Categories route
 
-router.get('/categories', ensureAuthenticated, (req, res) => {
+router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
-    const title = 'Pho Now\'s menu categories';
+    const title = 'Pho Now\'s menu subcategories';
 
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
@@ -98,7 +98,7 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
                     "updatedAt": '01/01/2018 13:00:12PM',
                 }
             ],
-            "menu_types": [
+            "menutypes": [
                 { "id": 1, "name": "Noodles", "description": "foo bar" },
                 { "id": 2, "name": "Rice", "description": "hello world" }
             ]
@@ -113,6 +113,50 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
     }).catch((err)=>{
                throw err
     });*/
+
+    res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
+});
+
+// -------- Menu types route
+// TODO data still refers to subcategories, correct it
+
+router.get('/categories', ensureAuthenticated, (req, res) => {
+
+    const title = 'Pho Now\'s menu Categories';
+
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    let data = {
+        "menutype": {
+            "list": [
+                {
+                    "id": 1,
+                    "menutype_name": "Noodles",
+                    "menutype_description": "Glutten free options available",
+                    "isActive": true,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                },
+                {
+                    "id": 2,
+                    "menutype_name": "Rice",
+                    "menutype_description": "Our rice comes with two sides of whatevers",
+                    "isActive": false,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                }
+            ]
+        }
+    };
+
+    //TODO uncomment after UI changes are completed, delete dummy object
+    /*    db.menu_category.findAll({}).then((data)=>{
+     //res.json(data);
+     res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+
+     }).catch((err)=>{
+     throw err
+     });*/
 
     res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
 });
@@ -154,7 +198,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
                 { "id": 1, "name": "Beef Noodles" },
                 { "id": 2, "name": "Shrimp Rice" }
             ],
-            "menu_types": [
+            "menutypes": [
                 { "id": 1, "name": "Noodles", "description": "foo bar" },
                 { "id": 2, "name": "Rice", "description": "hello world" }
             ]
