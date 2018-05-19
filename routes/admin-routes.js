@@ -4,9 +4,9 @@ const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
 
 // -------- Homepage route
-router.get('/', (req, res) => {
-    const title = 'Pho Now Administrator Dashboard';
-    res.render('./admin/index', { layout: 'login' });
+router.get('/', (req,res) => {
+    const title='Pho Now Administrator Dashboard';
+    res.render('./admin/index', {layout:'login'});
 });
 
 // -------- Set settings
@@ -114,6 +114,49 @@ router.get('/dash', (req, res) => {
 router.post('/addcategory', (req, res) => {
     console.log(req.body);
     db.menu_category.create(
+        {category_name:req.body.category_name,
+        category_description:req.body.category_description,
+        isActive:true}
+   ).catch((err)=>{
+       throw err
+
+   }).then((data)=>{
+      console.log(data);
+   })
+});
+
+//update categories
+router.put('/editcategories', ensureAuthenticated, (req,res)=>{
+          db.menu_category.update({
+            category_name:req.body.category_name,
+            category_description:req.body.discription,
+            isActive:req.body.isActive
+         }, { where: { id:req.body.id } }).then((result)=>{
+             res.json(result);
+         }).catch((err)=>{
+            throw err;
+         });
+ });
+
+/*** TODO Review the following routes (may no longer be needed)
+ *     - should most likely be in an api call with _ensureAuthorized_ headers
+ ***/
+
+// -------- Add item
+router.get('/additem', ensureAuthenticated, (req, res) => {
+    let categories = [{
+        id: 1,
+        category_name: "Kids"
+    },
+        {
+            id: 2,
+            category_name: "Drinks"
+        }];
+
+    let menuTypes = [{
+        id: 1,
+        menu_type_name: "Breakfast"
+    },
         {
             category_name: req.body.category_name,
             category_description: req.body.category_description,
@@ -142,7 +185,6 @@ router.put('/editcategories', (req, res) => {
 router.get('/settings', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu categories';
-    
     
     db.restaurant_hour.findAll({
     }).then(function (resHours) {
