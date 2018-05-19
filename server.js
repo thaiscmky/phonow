@@ -4,6 +4,7 @@ const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const express = require('express');
 const router = express.Router();
+const nodemailer = require('nodemailer');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');

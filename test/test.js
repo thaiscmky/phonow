@@ -15,6 +15,8 @@ describe('Load a Page', function () {
         nightmare = new Nightmare();
     });
 
+
+  
     describe('/ (Home Page)', () => {
         it('should load without error', done => {
             nightmare.goto(domain + '/')
@@ -25,6 +27,8 @@ describe('Load a Page', function () {
                 .catch(done);
         });
     });
+
+
 
     describe('/ (Menu Page)', () => {
         it('should load without error', done => {
