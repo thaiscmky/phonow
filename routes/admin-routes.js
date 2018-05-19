@@ -4,9 +4,9 @@ const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
 
 // -------- Homepage route
-router.get('/', (req,res) => {
-    const title='Pho Now Administrator Dashboard';
-    res.render('./admin/index', {layout:'login'});
+router.get('/', (req, res) => {
+    const title = 'Pho Now Administrator Dashboard';
+    res.render('./admin/index', { layout: 'login' });
 });
 
 // -------- Set settings
@@ -14,55 +14,15 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s settings';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
-    let settingsObj = {
-        "general_info": {
-            "restaurant_name": "Pho Now",
-            "contact_name": "Uyen Tran",
-            "contact_email": "phonow@example.com",
-            "contact_phone": "",
-            "address": {
-                "line1": "phonow restaurants address",
-                "line2": "",
-                "restaurant_state": "Texas",
-                "restaurant_city": "Houston",
-                "restaurant_zip": "77077"
-            },
-            "editMode": true
 
-        },
-        "restaurant_hour":
-            {
-                "list": [
-                    {
-                        "id": 1,
-                        "day_name": "Monday",
-                        "start_time": "1:00",
-                        "end_time": "1:00",
-                        "isActive": true
-                    },
-                    {
-                        "id": 2,
-                        "day_name": "Tuesday",
-                        "start_time": "1:00",
-                        "end_time": "1:00",
-                        "isActive": false
-                    },
-                    {
-                        "id": 3,
-                        "day_name": "Wednesday",
-                        "start_time": "1:00",
-                        "end_time": "",
-                        "isActive": true
-                    }
-                ]
-            },
-        "additional": [
-            { "google_maps": { "on": true, "label": "Google Maps" } },
-            { "contact_form": { "on": false, "label": "Contact Us Form" } },
-            { "hours_ops": { "on": true, "label": "Hours of Operation" } },
-        ]
-    };
-    res.render('./admin/settings', { layout: 'main-admin', title: title, settings: settingsObj });
+    db.restaurant_hour.findAll({}).then((data) => {
+        res.json(data);
+        res.render('./admin/settings', { layout: 'main-admin', title: title, settings: data });
+
+    }).catch((err) => {
+        throw err
+    });
+
 });
 
 // -------- Menu Categories route
@@ -71,15 +31,22 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu subcategories';
 
-    db.menu_type.findAll({
-    }).then(function (menuTypes) {
-        menuTypes = menuTypes;
-        db.menu_category.findAll({
-        }).then(function (data) {
-          res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
-        });
-    }).catch((err)=>{
-               throw err
+    // db.menu_type.findAll({
+    // }).then(function (menuTypes) {
+    //     menuTypes = menuTypes;
+    //     db.menu_category.findAll({
+    //     }).then(function (data) {
+    //       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
+    //     });
+    // }).catch((err)=>{
+    //            throw err
+    // });
+    db.menu_category.findAll({}).then((data) => {
+        res.json(data);
+         res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+
+    }).catch((err) => {
+        throw err
     });
 });
 
@@ -95,7 +62,6 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
   }).then(function (menuTypes) {
       res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes});
   });
-  
 });
 
 // -------- Menu Items route
@@ -103,7 +69,8 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu items';
 
-    let menuTypes = {};
+
+    var menuTypes = {};
     db.menu_type.findAll({
     }).then(function (menuTypes) {
         menuTypes = menuTypes;
@@ -142,64 +109,74 @@ router.get('/dash', (req, res) => {
     res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
 
-//add category
-router.post('/addcategory', ensureAuthenticated, (req,res)=>{
+
+//add categore
+router.post('/addcategory', (req, res) => {
     console.log(req.body);
     db.menu_category.create(
-        {category_name:req.body.category_name,
-        category_description:req.body.category_description,
-        isActive:true}
-   ).catch((err)=>{
-       throw err
+        {
+            category_name: req.body.category_name,
+            category_description: req.body.category_description,
+            isActive: true
+        }
+    ).catch((err) => {
+        throw err
 
-   }).then((data)=>{
-      console.log(data);
-   })
+    }).then((data) => {
+        console.log(data);
+    })
 });
 
 //update categories
-router.put('/editcategories', ensureAuthenticated, (req,res)=>{
-          db.menu_category.update({
-            category_name:req.body.category_name,
-            category_description:req.body.discription,
-            isActive:req.body.isActive
-         }, { where: { id:req.body.id } }).then((result)=>{
-             res.json(result);
-         }).catch((err)=>{
-            throw err;
-         });
- });
+router.put('/editcategories', (req, res) => {
+    db.menu_category.update({
+        category_name: req.body.category_name,
+        category_description: req.body.discription,
+        isActive: req.body.isActive
+    }, { where: { id: req.body.id } }).then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        throw err;
+    });
+});
+router.get('/settings', ensureAuthenticated, (req, res) => {
 
-/*** TODO Review the following routes (may no longer be needed)
- *     - should most likely be in an api call with _ensureAuthorized_ headers
- ***/
+    const title = 'Pho Now\'s menu categories';
+    
+    
+    db.restaurant_hour.findAll({
+    }).then(function (resHours) {
+        res.render('./admin/settings', { layout: 'main-admin', title: title, settings: resHours});
+    });
+  });
 
-// -------- Add item
-router.get('/additem', ensureAuthenticated, (req, res) => {
-    let categories = [{
-        id: 1,
-        category_name: "Kids"
-    },
-        {
-            id: 2,
-            category_name: "Drinks"
-        }];
-
-    let menuTypes = [{
-        id: 1,
-        menu_type_name: "Breakfast"
-    },
-        {
-            id: 2,
-            menu_type_name: "Lunch"
-        }];
-
-    res.render('./admin/add-item', { layout: 'main-admin', categories: categories ,menuTypes:menuTypes });
-
+//add resturant_hours 
+router.post('/addresturanthours', (req, res) => {
+    db.restaurant_hour.create({
+        day_name: req.body.day_name,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time,
+        isActive: true
+    }).then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        throw err;
+    });
 });
 
-/*** END OF TODO ***/
-
+//update resturant_hours 
+router.put('/editresturanthours', (req, res) => {
+    db.restaurant_hour.update({
+        day_name: req.body.day_name,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time,
+        isActive: req.body.isActive
+    }, { where: { id: req.body.id } }).then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        throw err;
+    });
+});
 
 module.exports = router;
 
