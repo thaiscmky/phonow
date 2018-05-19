@@ -7,6 +7,7 @@
 </section>
 <section id="contact" class="section">
     <div class="title text-center">CONTACT</div>
+
     <div class="container">
         <div class="row content">
             <div class="col-md-6 col-sm-12">
@@ -34,22 +35,22 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
-                <form>
+                <form action="send" method="POST" id="contact">
                     <div class="form-group">
                         <label for="inputName">Name</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="John Doe">
+                        <input name="inputName" type="text" class="form-control" id="inputName" placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
-                        <input type="text" class="form-control" id="inputEmail" placeholder="John Doe">
+                        <input  name="inputEmail" type="text" class="form-control" id="inputEmail" placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="inputPhone">Phone</label>
-                        <input type="text" class="form-control" id="inputPhone" placeholder="John Doe">
+                        <input  name="inputPhone" type="text" class="form-control" id="inputPhone" placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="inputMessage">Message or Comment</label>
-                        <textarea class="form-control" id="inputMessage" rows="10"></textarea>
+                        <textarea  name="inputMessage" class="form-control" id="inputMessage" rows="10"></textarea>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn">Submit</button>
