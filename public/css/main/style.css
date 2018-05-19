@@ -1,6 +1,7 @@
 /* Root Stuff for media query stuff */
 html {font-size: 1rem;}
-body {font-size: 1em;}
+body {font-size: 1em; font-family: '', sans-serif;     overflow-x: hidden;
+}
 
 /*********************/
 /*   Main-Page CSS   */
@@ -8,11 +9,13 @@ body {font-size: 1em;}
 
 /* Main Hero CSS */
 section.hero {
+    position: relative;
     height: 100vh;    
-    background: url("http://via.placeholder.com/1920x1080");
+    background: url("../../img/main/main-hero.jpg");
     background-size: cover;
     background-position: center;
-    resize: both;
+    resize: both;    
+    z-index: 1;
 }
 
 .hero-island .title {
@@ -24,7 +27,7 @@ section.hero {
 
 .hero-island .subtitle {
     font-size: 1.618rem;
-    color: #333;
+    color: #000;
     margin-bottom: 1rem;
 }
 
@@ -39,32 +42,57 @@ section.hero {
 
 /* Main Section CSS */
 section.section {    
+    position: relative;
     padding: 1.618em 0;
-    background-color: #333;
+    background-color: #333;    
+    z-index: 2;
 }
 
 section.menu {
-    background-color: #333;
+    background-color: #111;
 }
 
 section.info {
-    background-color: #666;
+    background-color: #500;
 }
 
 section.contact {
-    background-color: #999;
+    background-color: #555;
 }
 
-.section > .title {
+.title {
+    font-family: 'Raleway', sans-serif;
     font-size: 2.618em;
     color: #fff;    
-    margin-bottom: 1rem;
+    margin-bottom: 1rem;        
 }
 
-.section > .subtitle {    
+.subtitle {    
     font-size: 1rem;
     color: #fff;
     margin: 1rem 0;    
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+}
+
+.navbar-custom {
+    font-family: 'Economica', sans-serif;
+    font-size: 1.618em;
+    color: #000 !important;
+    font-weight: bold;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.main-brand {
+    position: relative;
+    top: -10px;
+}
+
+.section-img {
+    height: 300px;
+    width: 300px;
+    border: #fff solid 5px;
 }
 
 /* End Main Section CSS */
@@ -105,6 +133,7 @@ section.contact {
 }
 
 .category > .title {
+    color: #333;
     font-size: 2.618rem;
 }
 
@@ -231,6 +260,11 @@ section.contact {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.btn-black {
+    background: #000;
+    color: #fff;    
 }
 
 /***********************/
