@@ -1,11 +1,11 @@
-console.log('LOADED: admin/menu.js');
+console.log('LOADED: admin/menuitem.js');
 
 
 
 $(document).ready(function () {
-    $(document).on("click", "#submit_newitem", handleAddMenuFormSubmit);
-    $("#edititems").on("click","submit",handleUpdateMenuFormSubmit)
-})
+    $("#newitem #submit_newitem").on("click", "#submit_newitem", handleAddMenuFormSubmit);
+    $("#edititems [id^='update-item-']").on("click","submit",handleUpdateMenuFormSubmit)
+});
 
 function handleUpdateMenuFormSubmit(event)
 {

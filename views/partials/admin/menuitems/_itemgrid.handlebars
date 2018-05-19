@@ -1,6 +1,6 @@
 <div class="row my-4 mx-0 grid" id="menu_items">
     <div class="col">
-        <form id="edititems" action="" method="post">
+        <!--<form id="edititems" action="" method="post">-->
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead class="thead-inverse">
@@ -15,9 +15,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{!-- TODO add form field visibility to manipulated via on-click events --}} {{#if args.menuItems}} {{#each args.menuItems}}
+                        {{!-- TODO add form field visibility to manipulated via on-click events --}}
+                        {{#if args.menuItems}} {{#each args.menuItems}}
                         <tr class="edit-mode" id="edit-mitem-{{this.id}}">
                             <td colspan="8">
+                            <!-- PUT FORM HERE-->
+                            <form id="edititems" action="" method="post">
                                 <div class="form-row">
                                     <div class="id">
                                         <p>{{this.id}}</p>
@@ -93,6 +96,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
+                                <!--End Form Here-->
                             </td>
                         </tr>
                         <tr id="mitem-{{this.id}}">
@@ -120,6 +125,6 @@
                     </tbody>
                 </table>
             </div>
-        </form>
+        <!--</form>-->
     </div>
 </div>
