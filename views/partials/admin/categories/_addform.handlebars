@@ -1,23 +1,23 @@
 <div class="edit-mode">
     <fieldset class="card card-body">
     <h2>Add a category</h2>
-        <form id="newcategory" action="/api/addcategory" method="post">
+        <form id="newmenutype" action="/api/addmenutype" method="post">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col input-group">
-                        <label for="category_name">Category Name</label>
-                        <input type="text" class="form-control" name="category_name" id="category_name"/>
+                        <label for="add_name">Category Name</label>
+                        <input type="text" class="form-control" name="add_name" id="add_name"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col input-group">
-                        <label for="category_description">Category Description</label>
-                        <textarea class="form-control" name="category_description" id="category_description"></textarea>
+                        <label for="add_description">Category Description</label>
+                        <textarea class="form-control" name="add_description" id="add_description"></textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col">
-                         <button type="submit" class="btn btn-warning">Add Category</button>
+                         <button type="submit" class="btn btn-warning" id="submit_newmenutype">Add Category</button>
                     </div>
                 </div>
             </div>

@@ -3,9 +3,6 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
 
-
-
-
 // -------- Homepage route
 router.get('/', (req,res) => {
     const title='Pho Now Administrator Dashboard';
@@ -74,47 +71,16 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu subcategories';
 
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let data = {
-        "category": {
-            "list": [
-                {
-                    "id": 1,
-                    "category_menutype": "Noodles",
-                    "category_name": "Beef Noodles",
-                    "category_description": "Glutten free options available",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "category_menutype": "Rice",
-                    "category_name": "Shrimp Rice",
-                    "category_description": "You can add shrimp on any rice",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ],
-            "menutypes": [
-                { "id": 1, "name": "Noodles", "description": "foo bar" },
-                { "id": 2, "name": "Rice", "description": "hello world" }
-            ]
-        }
-    };
-
-    //TODO uncomment after UI changes are completed, delete dummy object
-/*    db.menu_category.findAll({}).then((data)=>{
-       //res.json(data);
-       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
-
+    db.menu_type.findAll({
+    }).then(function (menuTypes) {
+        menuTypes = menuTypes;
+        db.menu_category.findAll({
+        }).then(function (data) {
+          res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
+        });
     }).catch((err)=>{
                throw err
-    });*/
-
-    res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
+    });
 });
 
 // -------- Menu types route
@@ -122,87 +88,20 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
 
-    const title = 'Pho Now\'s menu Categories';
-
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let data = {
-        "menutype": {
-            "list": [
-                {
-                    "id": 1,
-                    "menutype_name": "Noodles",
-                    "menutype_description": "Glutten free options available",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "menutype_name": "Rice",
-                    "menutype_description": "Our rice comes with two sides of whatevers",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ]
-        }
-    };
-
-        db.menu_category.findAll({}).then((data)=>{
-     //res.json(data);
-     res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
-
-     }).catch((err)=>{
-     throw err
-     });
-
+  const title = 'Pho Now\'s menu categories';
+  
+  let menuTypes = {};
+  db.menu_type.findAll({
+  }).then(function (menuTypes) {
+      res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes});
+  });
+  
 });
 
 // -------- Menu Items route
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu items';
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let data = {
-        "menuitem": {
-            "list": [
-                {
-                    "id": 1,
-                    "item_name_english": "Shrimp Noodles with eggs",
-                    "item_name_vietnamese": "Mì tôm với trứng",
-                    "item_description": "Glutten free options available. We serve with fresh eggs",
-                    "item_price": 5.00,
-                    "item_category": "Beef Noodle",
-                    "item_menutype": "Noodles",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "item_name_english": "Rice with Lo Mein",
-                    "item_name_vietnamese": "Cơm với Lo Mein",
-                    "item_description": "Special and seasonal fried rice and lo mein mix",
-                    "item_price": 5.00,
-                    "item_category": "Shrimp Rice",
-                    "item_menutype": "Rice",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ],
-            "categories": [
-                { "id": 1, "name": "Beef Noodles" },
-                { "id": 2, "name": "Shrimp Rice" }
-            ],
-            "menutypes": [
-                { "id": 1, "name": "Noodles", "description": "foo bar" },
-                { "id": 2, "name": "Rice", "description": "hello world" }
-            ]
-        }
-    };
 
     let menuTypes = {};
     db.menu_type.findAll({
@@ -210,7 +109,11 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
         menuTypes = menuTypes;
         db.menu_category.findAll({
         }).then(function (categories) {
-            res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
+          categories = categories;
+           db.menu_items.findAll({
+            }).then(function (menuitems) {
+                res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuitems, categories: categories, menuTypes: menuTypes });
+            });
         });
     });
 });
