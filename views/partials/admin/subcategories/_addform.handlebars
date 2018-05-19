@@ -1,0 +1,40 @@
+<div class="edit-mode">
+    <fieldset class="card card-body">
+    <h2>Add a Subcategory</h2>
+        <form id="newcategory" action="/api/addcategory" method="post">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="add_category">Name</label>
+                        <input type="text" class="form-control" name="add_category" id="add_category"/>
+                    </div>
+                    <div class="col input-group">
+                        <label for="add_menutype">Add to category</label>
+                        {{assignJSON 'typelist' @root.settings.category.menutypes}}
+                        <select class="form-control" id="add_menutype" name="add_menutype">
+                            <option value="">Select..</option>
+                            {{#each this.typelist}}
+                                <option value="{{this.id}}">
+                                    {{this.name}}
+                                </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="add_description">Description</label>
+                        <textarea class="form-control" name="add_description" id="add_description"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                         <button type="submit_newcategory" class="btn btn-warning">Add Subcategory</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>

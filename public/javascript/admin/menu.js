@@ -1,4 +1,4 @@
-
+console.log('LOADED: admin/menu.js');
 
 
 

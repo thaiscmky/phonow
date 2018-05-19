@@ -70,17 +70,93 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
 
 // -------- Menu Categories route
 
+router.get('/subcategories', ensureAuthenticated, (req, res) => {
+
+    const title = 'Pho Now\'s menu subcategories';
+
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    let data = {
+        "category": {
+            "list": [
+                {
+                    "id": 1,
+                    "menutype_name": "Noodles",
+                    "category_name": "Beef Noodles",
+                    "category_description": "Glutten free options available",
+                    "isActive": true,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                },
+                {
+                    "id": 2,
+                    "menutype_name": "Rice",
+                    "category_name": "Rice",
+                    "category_description": "You can add shrimp on any rice",
+                    "isActive": false,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                }
+            ],
+            "menutypes": [
+                { "id": 1, "name": "Noodles", "description": "foo bar" },
+                { "id": 2, "name": "Rice", "description": "hello world" }
+            ]
+        }
+    };
+
+    //TODO uncomment after UI changes are completed, delete dummy object
+/*    db.menu_category.findAll({}).then((data)=>{
+       //res.json(data);
+       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+
+    }).catch((err)=>{
+               throw err
+    });*/
+
+    res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
+});
+
+// -------- Menu types route
+// TODO data still refers to subcategories, correct it
+
 router.get('/categories', ensureAuthenticated, (req, res) => {
 
-    const title = 'Pho Now\'s menu categories';
-        
-        db.menu_category.findAll({}).then((data)=>{
-           //res.json(data);
-           res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+    const title = 'Pho Now\'s menu Categories';
 
-        }).catch((err)=>{
-           throw err
-});
+    //this is a temporary solution, should go in a controller or helper
+    //TODO obtain information from database/model
+    let data = {
+        "menutype": {
+            "list": [
+                {
+                    "id": 1,
+                    "menutype_name": "Noodles",
+                    "menutype_description": "Glutten free options available",
+                    "isActive": true,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                },
+                {
+                    "id": 2,
+                    "menutype_name": "Rice",
+                    "menutype_description": "Our rice comes with two sides of whatevers",
+                    "isActive": false,
+                    "createdAt": '01/01/2018 13:00:12PM',
+                    "updatedAt": '01/01/2018 13:00:12PM',
+                }
+            ]
+        }
+    };
+
+        db.menu_category.findAll({}).then((data)=>{
+     //res.json(data);
+     res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+
+     }).catch((err)=>{
+     throw err
+     });
+
 });
 
 // -------- Menu Items route
@@ -89,7 +165,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s menu items';
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
-    let settingsObj = {
+    let data = {
         "menuitem": {
             "list": [
                 {
@@ -98,7 +174,8 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
                     "item_name_vietnamese": "Mì tôm với trứng",
                     "item_description": "Glutten free options available. We serve with fresh eggs",
                     "item_price": 5.00,
-                    "item_category": "Noodles",
+                    "item_category": "Beef Noodle",
+                    "menu_type": "Noodles",
                     "isActive": true,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
@@ -109,19 +186,22 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
                     "item_name_vietnamese": "Cơm với Lo Mein",
                     "item_description": "Special and seasonal fried rice and lo mein mix",
                     "item_price": 5.00,
-                    "item_category": "Rice",
+                    "item_category": "Shrimp Rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
                 }
             ],
             "categories": [
-                { "id": 1, "name": "Noodles" },
-                { "id": 2, "name": "Rice" }
+                { "id": 1, "name": "Beef Noodles" },
+                { "id": 2, "name": "Shrimp Rice" }
+            ],
+            "menutypes": [
+                { "id": 1, "name": "Noodles", "description": "foo bar" },
+                { "id": 2, "name": "Rice", "description": "hello world" }
             ]
         }
     };
-
 
     let menuTypes = {};
     db.menu_type.findAll({
@@ -132,7 +212,6 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
             res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
         });
     });
-
 });
 
 router.post('/menuitems', ensureAuthenticated, (req, res) => {

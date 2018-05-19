@@ -1,56 +1,65 @@
-<div class="edit-mode">
+<div class="edit-mode add-form">
     <fieldset class="card card-body">
         <h2>Add new menu item</h2>
         {{!-- <form id="newitem" action="/api/addmenuitem" method="post"> --}}
-        <form id="newitem" >
+        <form id="newitem">
             <div class="form-group">
-                 <label for="item">Menu Type</label>
-                <select id="optionMenuType">
-                    {{#each menuTypes}}
-                    <option value='{{id}}'>{{menu_type_name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-
-            <div class="form-group">
-                 <label for="item">Category</label>
-                <select id="optionMenuCategory">
-                    {{#each categories}}
-                    <option value='{{id}}'>{{category_name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="item">Name</label>
-                <input type="text" class="form-control" id="item_name_english">
-
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="add_name_english">Name</label>
+                        <input type="text" class="form-control" name="add_name_english" id="add_name_english"/>
+                    </div>
+                    <div class="col input-group">
+                        <label for="add_name_vietnamese">Name(vietnamese)</label>
+                        <input type="text" class="form-control" id="add_name_vietnamese">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="item">Name(vietnamese)</label>
-                <input type="text" class="form-control" id="item_name_vietnamese">
-
+                <div class="form-row">
+                    <div class="col input-group">
+                        <label for="add_menutype">Category</label>
+                        {{assignJSON 'typelist' @root.settings.menuitem.menutypes}}
+                        <select class="form-control" id="add_menutype" name="add_menutype">
+                            <option value="">Select..</option>
+                            {{#each this.typelist}}
+                                <option value="{{this.id}}">
+                                    {{this.name}}
+                                </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col input-group">
+                        <label for="add_category">Sub category</label>
+                        {{assignJSON 'catlist' @root.settings.menuitem.categories}}
+                        {{assignJSON 'currentcat' this.item_category}}
+                        <select class="form-control" id="add_category" name="add_category">
+                            <option value="">Select..</option>
+                            {{#each this.catlist}}
+                                <option value="{{this.id}}">
+                                    {{this.name}}
+                                </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col input-group">
+                        <label for="add_price">Price</label>
+                        <input type="text" class="form-control" id="add_price">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-row">
+                <div class="col input-group">
+                    <label for="add_description">Description</label>
+                    <textarea class="form-control" name="add_description" id="add_description"></textarea>
+                </div>
+            </div>
+            <div class="form-group form-row">
+                <div class="col input-group">
+                    <button id="submit_newitem" type="submit" class="btn btn-warning">Add Item</button>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="item-desc">Description</label>
-                <input type="text" class="form-control" id="item_description">
-
-            </div>
-
-            <div class="form-group">
-                <label for="item-price">Price</label>
-                <input type="text" class="form-control" id="item_price">
-
-            </div>
-            <div class="form-group">
-                <label for="item-price">Rating</label>
-                <input type="text" class="form-control" id="item_rating">
-
-            </div>
-
-
-            <button id="menuItem-form" type="submit" class="btn btn-warning">Add Item</button>
         </form>
     </fieldset>
 </div>
