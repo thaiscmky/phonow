@@ -4,9 +4,9 @@ const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
 
 // -------- Homepage route
-router.get('/', (req,res) => {
-    const title='Pho Now Administrator Dashboard';
-    res.render('./admin/index', {layout:'login'});
+router.get('/', (req, res) => {
+    const title = 'Pho Now Administrator Dashboard';
+    res.render('./admin/index', { layout: 'login' });
 });
 
 // -------- Set settings
@@ -31,19 +31,13 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu subcategories';
 
-    // db.menu_type.findAll({
-    // }).then(function (menuTypes) {
-    //     menuTypes = menuTypes;
-    //     db.menu_category.findAll({
-    //     }).then(function (data) {
-    //       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
-    //     });
-    // }).catch((err)=>{
-    //            throw err
-    // });
-    db.menu_category.findAll({}).then((data) => {
-        res.json(data);
-         res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+    db.menu_type.findAll({
+    }).then(function (menuTypes) {
+        menuTypes = menuTypes;
+        db.menu_category.findAll({
+        }).then(function (data) {
+            res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
+        });
 
     }).catch((err) => {
         throw err
@@ -54,6 +48,12 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 // TODO data still refers to subcategories, correct it
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
+    const title = 'Pho Now\'s menu categories';
+    let menuTypes = {};
+    db.menu_type.findAll({
+    }).then(function (menuTypes) {
+        res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes });
+    });
 
   const title = 'Pho Now\'s menu categories';
   
@@ -66,31 +66,63 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
 
 // -------- Menu Items route
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
-
     const title = 'Pho Now\'s menu items';
+    let args = {};
+    let menuTypes = {};
+    let menuItems = {};
+    let categories = {};
 
-
-    var menuTypes = {};
     db.menu_type.findAll({
-    }).then(function (menuTypes) {
-        menuTypes = menuTypes;
+    }).then(function (menuData) {
+        menuTypes = menuData;
         db.menu_category.findAll({
-        }).then(function (categories) {
-          categories = categories;
-           db.menu_items.findAll({
-            }).then(function (menuitems) {
-                res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuitems, categories: categories, menuTypes: menuTypes });
+        }).then(function (categoriesData) {
+            categories = categoriesData;
+            db.menu_items.findAll({
+                where: { isActive: true },
+                include: [{
+                    model: db.menu_category,
+                    as: 'menu_category',
+                },
+                {
+                    model: db.menu_type,
+                    as: 'menu_type',
+                }
+                ]
+
+            }).then(function (menuData) {
+                menuItems = menuData;
+                args.categories = categories;
+                args.menuTypes = menuTypes;
+                args.menuItems = menuItems;
+                res.render('./admin/menuitems', { layout: 'main-admin', title: title, args: args });
             });
         });
     });
 });
 
-/*router.post('/menuitems', ensureAuthenticated, (req, res) => {
+router.post('/menuitems', ensureAuthenticated, (req, res) => {
     console.log(req.body);
     db.menu_items.create(req.body).then(function (data) {
         res.json(data);
     });
-});*/
+});
+
+// update user 
+router.put('/menuitems/:id', (req, res) => {
+    db.sequelize.sync().then(() => {
+        db.menu_items.update({
+            // item_name_english: req.body.item_name_english,
+            // item_name_vietnamese : req.body.item_name_vietnamese,
+            // item_price = req.body.item_price,
+            // menuCategoryId = req.body.menuCategoryId
+           
+        }, { where: { id: req.params.id } });
+        done();
+    })
+
+});
+
 
 // -------- fail route
 router.get('/403', (req, res) => {
@@ -103,46 +135,22 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 });
 
 
-// -------- sample dashboard route ---------
-router.get('/dash', (req, res) => {
-    const title = 'Welcome to Pho Now!';
-    res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
-});
-
-
-//add categore
-router.post('/addcategory', (req, res) => {
+//add category
+router.post('/addcategory',(req,res)=>{
     console.log(req.body);
     db.menu_category.create(
         {category_name:req.body.category_name,
-        category_description:req.body.category_description,
-        isActive:true}
-   ).catch((err)=>{
-       throw err
+            category_description:req.body.category_description,
+            isActive:true}
+    ).catch((err)=>{
+        throw err
 
-   }).then((data)=>{
-      console.log(data);
-   })
+    }).then((data)=>{
+        console.log(data);
+    })
 });
 
-//update categories
-router.put('/editcategories', ensureAuthenticated, (req,res)=>{
-          db.menu_category.update({
-            category_name:req.body.category_name,
-            category_description:req.body.discription,
-            isActive:req.body.isActive
-         }, { where: { id:req.body.id } }).then((result)=>{
-             res.json(result);
-         }).catch((err)=>{
-            throw err;
-         });
- });
-
-/*** TODO Review the following routes (may no longer be needed)
- *     - should most likely be in an api call with _ensureAuthorized_ headers
- ***/
-
-/*// -------- Add item
+// -------- Add item
 router.get('/additem', ensureAuthenticated, (req, res) => {
     let categories = [{
         id: 1,
@@ -153,23 +161,17 @@ router.get('/additem', ensureAuthenticated, (req, res) => {
             category_name: "Drinks"
         }];
 
-    let menuTypes = [
+    let menuTypes = [{
+        id: 1,
+        menu_type_name: "Breakfast"
+    },
         {
-            id: 1,
-            menu_type_name: "Breakfast"
-        },
-        {
-            category_name: req.body.category_name,
-            category_description: req.body.category_description,
-            isActive: true
-        }
-    ).catch((err) => {
-        throw err
+            id: 2,
+            menu_type_name: "Lunch"
+        }];
 
-    }).then((data) => {
-        console.log(data);
-    })
-});*/
+    res.render('./admin/add-item', {layout: 'main-admin', categories: categories, menuTypes: menuTypes});
+});
 
 //update categories
 router.put('/editcategories', (req, res) => {
