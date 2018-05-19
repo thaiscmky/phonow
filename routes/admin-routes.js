@@ -3,11 +3,8 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
 
-
-
-
 // -------- Homepage route
-router.get('/', ensureAuthenticated, (req,res) => {
+router.get('/', (req,res) => {
     const title='Pho Now Administrator Dashboard';
     res.render('./admin/index', {layout:'login'});
 });
@@ -122,7 +119,7 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
 
-    const title = 'Pho Now\'s menu Categories';
+    const title = 'Pho Now\'s menu categories';
 
     //this is a temporary solution, should go in a controller or helper
     //TODO obtain information from database/model
@@ -149,7 +146,7 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
         }
     };
 
-    //TODO uncomment after UI changes are completed, delete dummy object
+    //TODO change query to get menutypes instead of categories
     /*    db.menu_category.findAll({}).then((data)=>{
      //res.json(data);
      res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
@@ -165,51 +162,8 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu items';
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let data = {
-        "menuitem": {
-            "list": [
-                {
-                    "id": 1,
-                    "item_name_english": "Shrimp Noodles with eggs",
-                    "item_name_vietnamese": "Mì tôm với trứng",
-                    "item_description": "Glutten free options available. We serve with fresh eggs",
-                    "item_price": 5.00,
-                    "item_category": "Beef Noodle",
-                    "item_menutype": "Noodles",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "item_name_english": "Rice with Lo Mein",
-                    "item_name_vietnamese": "Cơm với Lo Mein",
-                    "item_description": "Special and seasonal fried rice and lo mein mix",
-                    "item_price": 5.00,
-                    "item_category": "Shrimp Rice",
-                    "item_menutype": "Rice",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ],
-            "categories": [
-                { "id": 1, "name": "Beef Noodles" },
-                { "id": 2, "name": "Shrimp Rice" }
-            ],
-            "menutypes": [
-                { "id": 1, "name": "Noodles", "description": "foo bar" },
-                { "id": 2, "name": "Rice", "description": "hello world" }
-            ]
-        }
-    };
 
-    //TODO uncomment after UI changes
-    // - verify automerge didn't mess anything...verify there are assertion tests for this request so it's easier to catch when things break
-
-    /*let menuTypes = {};
+    let menuTypes = {};
     db.menu_type.findAll({
     }).then(function (menuTypes) {
         menuTypes = menuTypes;
@@ -217,7 +171,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
         }).then(function (categories) {
             res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
         });
-    });*/
+    });
     res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: data });
 });
 
