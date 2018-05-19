@@ -81,7 +81,7 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
             "list": [
                 {
                     "id": 1,
-                    "menutype_name": "Noodles",
+                    "category_menutype": "Noodles",
                     "category_name": "Beef Noodles",
                     "category_description": "Glutten free options available",
                     "isActive": true,
@@ -90,8 +90,8 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
                 },
                 {
                     "id": 2,
-                    "menutype_name": "Rice",
-                    "category_name": "Rice",
+                    "category_menutype": "Rice",
+                    "category_name": "Shrimp Rice",
                     "category_description": "You can add shrimp on any rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
@@ -175,7 +175,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
                     "item_description": "Glutten free options available. We serve with fresh eggs",
                     "item_price": 5.00,
                     "item_category": "Beef Noodle",
-                    "menu_type": "Noodles",
+                    "item_menutype": "Noodles",
                     "isActive": true,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
@@ -187,6 +187,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
                     "item_description": "Special and seasonal fried rice and lo mein mix",
                     "item_price": 5.00,
                     "item_category": "Shrimp Rice",
+                    "item_menutype": "Rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',
                     "updatedAt": '01/01/2018 13:00:12PM',
@@ -214,12 +215,12 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
     });
 });
 
-router.post('/menuitems', ensureAuthenticated, (req, res) => {
+/*router.post('/menuitems', ensureAuthenticated, (req, res) => {
     console.log(req.body);
     db.menu_items.create(req.body).then(function (data) {
         res.json(data);
     });
-});
+});*/
 
 // -------- fail route
 router.get('/403', (req, res) => {
