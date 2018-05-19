@@ -13,9 +13,10 @@
                      </tr>
                  </thead>
                  <tbody>
-                 {{#if settings.menutype.list}}
+                     {{debug settings}}
+                 {{#if settings}}
                 {{!-- TODO add form field visibility to manipulated via on-click events --}}
-                    {{#each settings.menutype.list}}
+                    {{#each settings}}
                          <tr class="edit-mode" id="edit-menutype-{{this.id}}">
                              <td class="id">
                                  <p>{{this.id}}</p>

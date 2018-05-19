@@ -42,7 +42,7 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
     //            throw err
     // });
     db.menu_category.findAll({}).then((data) => {
-        res.json(data);
+        // res.json(data);
          res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
 
     }).catch((err) => {
@@ -104,14 +104,14 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 
 
 // -------- sample dashboard route ---------
-router.get('/dash', (req, res) => {
+router.get('/dash', ensureAuthenticated,(req, res) => {
     const title = 'Welcome to Pho Now!';
     res.render('./admin/dash-sample', { layout: 'main-admin', title: title });
 });
 
 
 //add categore
-router.post('/addcategory', (req, res) => {
+router.post('/addcategory', ensureAuthenticated,(req, res) => {
     console.log(req.body);
     db.menu_category.create(
         {
@@ -128,7 +128,7 @@ router.post('/addcategory', (req, res) => {
 });
 
 //update categories
-router.put('/editcategories', (req, res) => {
+router.put('/editcategories', ensureAuthenticated,(req, res) => {
     db.menu_category.update({
         category_name: req.body.category_name,
         category_description: req.body.discription,
@@ -151,28 +151,28 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
   });
 
 //add resturant_hours 
-router.post('/addresturanthours', (req, res) => {
+router.post('/addresturanthours',ensureAuthenticated, (req, res) => {
     db.restaurant_hour.create({
         day_name: req.body.day_name,
         start_time: req.body.start_time,
         end_time: req.body.end_time,
         isActive: true
     }).then((result) => {
-        res.json(result);
+        //res.json(result);
     }).catch((err) => {
         throw err;
     });
 });
 
 //update resturant_hours 
-router.put('/editresturanthours', (req, res) => {
+router.put('/editresturanthours', ensureAuthenticated,(req, res) => {
     db.restaurant_hour.update({
         day_name: req.body.day_name,
         start_time: req.body.start_time,
         end_time: req.body.end_time,
         isActive: req.body.isActive
     }, { where: { id: req.body.id } }).then((result) => {
-        res.json(result);
+        //res.json(result);
     }).catch((err) => {
         throw err;
     });
