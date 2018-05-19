@@ -19,7 +19,7 @@ module.exports = function(passport) {
                 user_unique_id: profile.id,
                 email: profile.emails[0].value,
             };
-
+            console.log('AUTHORIZED');
             console.log(authUser);
             // Check for existing user
             db.user.findOne({
@@ -55,6 +55,6 @@ module.exports = function(passport) {
             //Once we get the user, we send NO error and pass the user.
             user => done(null, user)
         )
-        .catch( err => console.log(err));
+        .catch( err => console.log('ERROR',err));
     });
 };
