@@ -81,7 +81,7 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
             "list": [
                 {
                     "id": 1,
-                    "menutype_name": "Noodles",
+                    "category_menutype": "Noodles",
                     "category_name": "Beef Noodles",
                     "category_description": "Glutten free options available",
                     "isActive": true,
@@ -90,8 +90,8 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
                 },
                 {
                     "id": 2,
-                    "menutype_name": "Rice",
-                    "category_name": "Rice",
+                    "category_menutype": "Rice",
+                    "category_name": "Shrimp Rice",
                     "category_description": "You can add shrimp on any rice",
                     "isActive": false,
                     "createdAt": '01/01/2018 13:00:12PM',

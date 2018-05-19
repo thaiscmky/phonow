@@ -1,4 +1,3 @@
-//TODO fix 'google is not defined'
 console.log('LOADED: admin/about.js');
 $(document).ready(function () {
     initMap();
