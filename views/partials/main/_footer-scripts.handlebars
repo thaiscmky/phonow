@@ -27,10 +27,12 @@
 {{!-- Loads relevant page's public js --}}
 <script type="text/javascript" src="./javascript/main/{{title}}.js"></script>
 
-{{!-- Loads Google Maps API --}}
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT7J5oNfhHmhnhO_mEsYbkXcNwCRJauTE&callback=initMap">
-</script>
+{{#equals title 'about'}}
+    {{!-- Loads Google Maps API --}}
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT7J5oNfhHmhnhO_mEsYbkXcNwCRJauTE&callback=initMap">
+    </script>
+{{/equals}}
 
 {{!-- Delete me later --}}
 <script type="text/javascript">
