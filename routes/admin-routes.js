@@ -142,7 +142,7 @@ router.put('/editcategories', ensureAuthenticated, (req,res)=>{
  *     - should most likely be in an api call with _ensureAuthorized_ headers
  ***/
 
-// -------- Add item
+/*// -------- Add item
 router.get('/additem', ensureAuthenticated, (req, res) => {
     let categories = [{
         id: 1,
@@ -153,10 +153,11 @@ router.get('/additem', ensureAuthenticated, (req, res) => {
             category_name: "Drinks"
         }];
 
-    let menuTypes = [{
-        id: 1,
-        menu_type_name: "Breakfast"
-    },
+    let menuTypes = [
+        {
+            id: 1,
+            menu_type_name: "Breakfast"
+        },
         {
             category_name: req.body.category_name,
             category_description: req.body.category_description,
@@ -168,7 +169,7 @@ router.get('/additem', ensureAuthenticated, (req, res) => {
     }).then((data) => {
         console.log(data);
     })
-});
+});*/
 
 //update categories
 router.put('/editcategories', (req, res) => {
