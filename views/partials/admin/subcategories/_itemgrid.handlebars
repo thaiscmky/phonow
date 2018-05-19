@@ -1,12 +1,13 @@
  <div class="row my-4 mx-0 grid" id="category-items">
      <div class="col">
-     <form id="editcategories" action="/api/newcategory" method="post">
+     <form id="editcategories" action="/api/editcategory" method="post">
          <div class="table-responsive">
              <table class="table table-striped">
                  <thead class="thead-inverse">
                      <tr>
                          <th>#ID</th>
                          <th>Name</th>
+                         <th>In Category</th>
                          <th>Description</th>
                          <th>Status</th>
                          <th>Action</th>
@@ -14,7 +15,6 @@
                  </thead>
                  <tbody>
                  {{#if settings.category.list}}
-                {{!-- TODO add form field visibility to manipulated via on-click events --}}
                     {{#each settings.category.list}}
                          <tr class="edit-mode" id="edit-category-{{this.id}}">
                              <td class="id">
@@ -23,6 +23,22 @@
                              </td>
                              <td class="name">
                                  <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}"/>
+                             </td>
+                             <td class="category">
+                                 <div class="col input-group category">
+                                     {{assignJSON 'menutypes' @root.settings.category.menutypes}}
+                                     {{assignJSON 'currenttype' this.category_menutype}}
+                                     <select class="form-control" id="category_menutype-{{this.id}}">
+                                         {{#unless this.currenttype}}<option value="">Select..</option>{{/unless}}
+                                         {{#each this.menutypes}}
+                                             <option value="{{this.id}}"
+                                                     {{#if (equals this.name ../this.currenttype)}}selected="selected"{{/if}}
+                                             >
+                                                 {{this.name}}
+                                             </option>
+                                         {{/each}}
+                                     </select>
+                                 </div>
                              </td>
                              <td class="description">
                                 <textarea class="form-control" name="category_description-" id="category_description-{{this.id}}">{{this.category_description}}</textarea>
@@ -36,12 +52,14 @@
                                  </div>
                              </td>
                              <td class="action">
-                                 <button type="reset" class="btn">Cancel</button> <button type="submit" class="btn btn-warning">Update</button>
+                                 <button type="reset" class="btn" id="cancel-category-{{this.id}}" name="cancel-category-{{this.id}}">Cancel</button>
+                                 <button type="submit" class="btn btn-warning" id="update-category-{{this.id}}" name="update-category-{{this.id}}">Update</button>
                              </td>
                          </tr>
                          <tr id="category-{{this.id}}">
                              <td class="id">{{this.id}}</td>
                              <td class="name">{{this.category_name}}</td>
+                             <td class="category">{{this.category_menutype}}</td>
                              <td class="description">{{this.category_description}}</td>
                              <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
