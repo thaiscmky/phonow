@@ -7,7 +7,7 @@ let db = require("../models");
 
 
 // -------- Homepage route
-router.get('/', ensureAuthenticated, (req,res) => {
+router.get('/', (req,res) => {
     const title='Pho Now Administrator Dashboard';
     res.render('./admin/index', {layout:'login'});
 });
@@ -247,7 +247,7 @@ router.post('/addcategory', ensureAuthenticated, (req,res)=>{
         isActive:true}
    ).catch((err)=>{
        throw err
-       
+
    }).then((data)=>{
       console.log(data);
    })
@@ -258,11 +258,11 @@ router.put('/editcategories', ensureAuthenticated, (req,res)=>{
           db.menu_category.update({
             category_name:req.body.category_name,
             category_description:req.body.discription,
-            isActive:req.body.isActive            
+            isActive:req.body.isActive
          }, { where: { id:req.body.id } }).then((result)=>{
              res.json(result);
          }).catch((err)=>{
-            throw err; 
+            throw err;
          });
  });
 
