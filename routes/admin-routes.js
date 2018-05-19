@@ -71,47 +71,16 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu subcategories';
 
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let data = {
-        "category": {
-            "list": [
-                {
-                    "id": 1,
-                    "category_menutype": "Noodles",
-                    "category_name": "Beef Noodles",
-                    "category_description": "Glutten free options available",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "category_menutype": "Rice",
-                    "category_name": "Shrimp Rice",
-                    "category_description": "You can add shrimp on any rice",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ],
-            "menutypes": [
-                { "id": 1, "name": "Noodles", "description": "foo bar" },
-                { "id": 2, "name": "Rice", "description": "hello world" }
-            ]
-        }
-    };
-
-    //TODO uncomment after UI changes are completed, delete dummy object
-/*    db.menu_category.findAll({}).then((data)=>{
-       //res.json(data);
-       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
-
+    db.menu_type.findAll({
+    }).then(function (menuTypes) {
+        menuTypes = menuTypes;
+        db.menu_category.findAll({
+        }).then(function (data) {
+          res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
+        });
     }).catch((err)=>{
                throw err
-    });*/
-
-    res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
+    });
 });
 
 // -------- Menu types route
@@ -119,43 +88,14 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
 
-    const title = 'Pho Now\'s menu categories';
-
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-    let data = {
-        "menutype": {
-            "list": [
-                {
-                    "id": 1,
-                    "menutype_name": "Noodles",
-                    "menutype_description": "Glutten free options available",
-                    "isActive": true,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                },
-                {
-                    "id": 2,
-                    "menutype_name": "Rice",
-                    "menutype_description": "Our rice comes with two sides of whatevers",
-                    "isActive": false,
-                    "createdAt": '01/01/2018 13:00:12PM',
-                    "updatedAt": '01/01/2018 13:00:12PM',
-                }
-            ]
-        }
-    };
-
-    //TODO change query to get menutypes instead of categories
-    /*    db.menu_category.findAll({}).then((data)=>{
-     //res.json(data);
-     res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
-
-     }).catch((err)=>{
-     throw err
-     });*/
-
-    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+  const title = 'Pho Now\'s menu categories';
+  
+  let menuTypes = {};
+  db.menu_type.findAll({
+  }).then(function (menuTypes) {
+      res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes});
+  });
+  
 });
 
 // -------- Menu Items route
@@ -169,10 +109,13 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
         menuTypes = menuTypes;
         db.menu_category.findAll({
         }).then(function (categories) {
-            res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
+          categories = categories;
+           db.menu_items.findAll({
+            }).then(function (menuitems) {
+                res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuitems, categories: categories, menuTypes: menuTypes });
+            });
         });
     });
-    res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: data });
 });
 
 /*router.post('/menuitems', ensureAuthenticated, (req, res) => {
@@ -208,7 +151,7 @@ router.post('/addcategory', ensureAuthenticated, (req,res)=>{
         isActive:true}
    ).catch((err)=>{
        throw err
-       
+
    }).then((data)=>{
       console.log(data);
    })
@@ -219,11 +162,11 @@ router.put('/editcategories', ensureAuthenticated, (req,res)=>{
           db.menu_category.update({
             category_name:req.body.category_name,
             category_description:req.body.discription,
-            isActive:req.body.isActive            
+            isActive:req.body.isActive
          }, { where: { id:req.body.id } }).then((result)=>{
              res.json(result);
          }).catch((err)=>{
-            throw err; 
+            throw err;
          });
  });
 
