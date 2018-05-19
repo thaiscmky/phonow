@@ -54,14 +54,6 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
     }).then(function (menuTypes) {
         res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes });
     });
-
-  const title = 'Pho Now\'s menu categories';
-  
-  let menuTypes = {};
-  db.menu_type.findAll({
-  }).then(function (menuTypes) {
-      res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes});
-  });
 });
 
 // -------- Menu Items route
