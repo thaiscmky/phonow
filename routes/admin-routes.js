@@ -149,16 +149,14 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
         }
     };
 
-    //TODO uncomment after UI changes are completed, delete dummy object
-    /*    db.menu_category.findAll({}).then((data)=>{
+        db.menu_category.findAll({}).then((data)=>{
      //res.json(data);
      res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
 
      }).catch((err)=>{
      throw err
-     });*/
+     });
 
-    res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
 });
 
 // -------- Menu Items route
@@ -205,10 +203,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
         }
     };
 
-    //TODO uncomment after UI changes
-    // - verify automerge didn't mess anything...verify there are assertion tests for this request so it's easier to catch when things break
-
-    /*let menuTypes = {};
+    let menuTypes = {};
     db.menu_type.findAll({
     }).then(function (menuTypes) {
         menuTypes = menuTypes;
@@ -216,8 +211,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
         }).then(function (categories) {
             res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: settingsObj, categories: categories, menuTypes: menuTypes });
         });
-    });*/
-    res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: data });
+    });
 });
 
 router.post('/menuitems', ensureAuthenticated, (req, res) => {
