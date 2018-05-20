@@ -1,5 +1,6 @@
 'use strict';
-//var routes = require("./controllers/burgers_controller");
+
+global.__basedir = __dirname;
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const express = require('express');
