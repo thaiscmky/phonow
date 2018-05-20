@@ -13,6 +13,7 @@ const bodyParser = require("body-parser");
 const passport = require('passport');
 const path = require("path");
 const app = express();
+
 // require("./models/User");
 
 const db=require("./models");
@@ -26,6 +27,7 @@ const {truncate,capitalize,debug,assignJSON,equals} = require('./helpers/hbs.js'
 // Routes
 const auth = require('./routes/auth');
 const html = require('./routes/html-routes');
+const api = require('./routes/api-routes');
 const admin = require('./routes/admin-routes');
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -79,6 +81,7 @@ app.use(function (req, res, next) {
 app.use('/auth', auth);
 app.use('/', html);
 app.use('/admin', admin);
+app.use('/api', api);
 
 
 const PORT = process.env.PORT || 3000;

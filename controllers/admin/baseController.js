@@ -36,7 +36,7 @@ class Controller {
         });
 
         if(typeof condition === 'undefined' || condition === null)
-            const data = await this.model.findAll({raw: true, include: entities})
+            return this.response = await this.model.findAll({raw: true, include: entities})
                 .then( models => {
                     let data = models;
                     return data;
@@ -44,14 +44,12 @@ class Controller {
                 .catch((err) => err);
 
         else
-            const data = await this.model.findAll({ where: { condition }, raw: true, include: entities})
+            return this.response = await this.model.findAll({ where: { condition }, raw: true, include: entities})
                 .then( models => {
                     let data = models;
                     return data;
                 })
                 .catch((err) => err);
-
-        return this.response = data;
     }
 
     async setData(id, values) {

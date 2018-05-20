@@ -1,41 +1,40 @@
+const path = require('path');
 const express = require('express');
-let path = require('path');
+const router = express.Router();
 const { ensureAuthenticated } = require(path.join(__basedir,'/helpers/auth'));
+const menuController = require(path.join(__basedir,'/controllers/admin/menu.js'));
+const restaurantController = require(path.join(__basedir,'/controllers/admin/restaurant.js'));
+const userController = require(path.join(__basedir,'/controllers/admin/user.js'));
 
-module.exports = router => {
     /**
      * Get routes
      */
-    router.get('/api/settings', (req, res) => {
-        //request store settings via ORM
-        a.then( data => {
+    router.get('/menuitems', (req, res) => {
+        menuController.getItems().then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });
     });
 
-    router.get('/api/subcategories', (req, res) => {
-        //request store settings via ORM
-        a.then( data => {
+    router.get('/subcategories', (req, res) => {
+        menuController.getCategories().then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });
     });
 
-    router.get('/api/categories', (req, res) => {
-        //request store settings via ORM
-        a.then( data => {
+    router.get('/categories', (req, res) => {
+        menuController.getMenuTypes().then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });
     });
 
-    router.get('/api/menuitems', (req, res) => {
-        //request store settings via ORM
-        a.then( data => {
+    router.get('/getresturanthours', (req, res) => {
+        restaurantController.getBusinessHours().then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
@@ -45,7 +44,7 @@ module.exports = router => {
     /**
      * Post routes
      */
-    router.post('/api/addcategory', ensureAuthenticated, (req,res)=>{
+    router.post('/addcategory', ensureAuthenticated, (req,res)=>{
         let insert = {
             category_name: req.body.category_name,
             category_description:req.body.category_description,
@@ -60,7 +59,7 @@ module.exports = router => {
         });
     });
 
-    router.post('/api/addresturanthours', ensureAuthenticated, (req,res)=>{
+    router.post('/addresturanthours', ensureAuthenticated, (req,res)=>{
         let insert = {
             day_name: req.body.day_name,
             start_time: req.body.start_time,
@@ -97,7 +96,7 @@ module.exports = router => {
 
     });
 
-    router.put('/api/editmenuitem', (req, res) => {
+    router.put('/editmenuitem', (req, res) => {
         let update = {
             item_name_english: req.body.item_name_english,
             item_name_vietnamese : req.body.item_name_vietnamese,
@@ -132,5 +131,4 @@ module.exports = router => {
         });
     });
 
-
-};
+module.exports = router;

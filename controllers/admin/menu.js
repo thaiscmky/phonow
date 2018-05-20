@@ -8,7 +8,7 @@ let menu = {
             .catch(err => JSON.stringify(err));
     },
     getItems: async () => {
-        let item = new Controller('menu_item');
+        let item = new Controller('menu_items');
         return item.getData().then(data => data)
             .catch(err => JSON.stringify(err));
     },
