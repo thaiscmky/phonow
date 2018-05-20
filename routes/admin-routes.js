@@ -9,21 +9,6 @@ router.get('/', (req, res) => {
     res.render('./admin/index', { layout: 'login' });
 });
 
-// -------- Set settings
-router.get('/settings', ensureAuthenticated, (req, res) => {
-    const title = 'Pho Now\'s settings';
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-
-    db.restaurant_hour.findAll({}).then((data) => {
-        res.render('./admin/settings', { layout: 'main-admin', title: title, settings: data });
-
-    }).catch((err) => {
-        throw err
-    });
-
-});
-
 // -------- Menu Categories route
 
 router.get('/subcategories', ensureAuthenticated, (req, res) => {
@@ -99,7 +84,7 @@ router.post('/menuitems', ensureAuthenticated, (req, res) => {
     });
 });
 
-// update user 
+// update user
 router.put('/menuitems/:id', (req, res) => {
     db.sequelize.sync().then(() => {
         db.menu_items.update({
@@ -107,7 +92,7 @@ router.put('/menuitems/:id', (req, res) => {
             // item_name_vietnamese : req.body.item_name_vietnamese,
             // item_price = req.body.item_price,
             // menuCategoryId = req.body.menuCategoryId
-           
+
         }, { where: { id: req.params.id } });
         done();
     })
@@ -179,14 +164,14 @@ router.put('/editcategories', (req, res) => {
 router.get('/settings', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu categories';
-    
+
     db.restaurant_hour.findAll({
     }).then(function (resHours) {
         res.render('./admin/settings', { layout: 'main-admin', title: title, settings: resHours});
     });
   });
 
-//add resturant_hours 
+//add resturant_hours
 router.post('/addresturanthours', (req, res) => {
     db.restaurant_hour.create({
         day_name: req.body.day_name,
@@ -200,7 +185,7 @@ router.post('/addresturanthours', (req, res) => {
     });
 });
 
-//update resturant_hours 
+//update resturant_hours
 router.put('/editresturanthours', (req, res) => {
     db.restaurant_hour.update({
         day_name: req.body.day_name,
