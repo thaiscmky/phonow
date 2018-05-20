@@ -1,6 +1,6 @@
 "use strict";
-
-let db = require("../../models");
+let path = require('path');
+let db = require(path.join(__basedir,'/models'));
 
 class Controller {
 
@@ -16,6 +16,41 @@ class Controller {
                 return data;
             })
             .catch((err) => err);
+        return this.response = data;
+    }
+
+    async getById(id) {
+        const data = await this.model.findOne({id: id, raw: true})
+            .then( models => {
+                let data = models;
+                return data;
+            })
+            .catch((err) => err);
+        return this.response = data;
+    }
+
+    async getWithInclude(includes, condition) {
+
+        let entities = includes.forEach(item => {
+            return { "model": db[item], "as" : item}
+        });
+
+        if(typeof condition === 'undefined' || condition === null)
+            const data = await this.model.findAll({raw: true, include: entities})
+                .then( models => {
+                    let data = models;
+                    return data;
+                })
+                .catch((err) => err);
+
+        else
+            const data = await this.model.findAll({ where: { condition }, raw: true, include: entities})
+                .then( models => {
+                    let data = models;
+                    return data;
+                })
+                .catch((err) => err);
+
         return this.response = data;
     }
 
