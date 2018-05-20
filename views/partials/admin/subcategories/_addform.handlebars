@@ -6,12 +6,12 @@
                 <div class="form-row">
                     <div class="col input-group">
                         <label for="add_name">Name</label>
-                        <input type="text" class="form-control" name="add_name" id="add_name"/>
+                        <input type="text" class="form-control" name="add_name" id="add_name" required/>
                     </div>
                     <div class="col input-group">
                         <label for="add_menutype">Add to category</label>
-                        {{assignJSON 'typelist' @root.settings.category.menutypes}}
-                        <select class="form-control" id="add_menutype" name="add_menutype">
+                        {{assignJSON 'typelist' args.menuTypes}}
+                        <select class="form-control" id="add_menutype" name="add_menutype" required>
                             <option value="">Select..</option>
                             {{#each this.typelist}}
                                 <option value="{{this.id}}">
@@ -25,7 +25,7 @@
             <div class="form-group form-row">
                     <div class="col input-group">
                         <label for="add_description">Description</label>
-                        <textarea class="form-control" name="add_description" id="add_description"></textarea>
+                        <textarea class="form-control" name="add_description" id="add_description" ></textarea>
                     </div>
             </div>
             <div class="form-group form-row actions">

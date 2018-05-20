@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request');
+const request = require('request-promise');
 const path = require('path');
 const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
-
 
 // -------- Homepage route
 router.get('/', (req, res) => {
@@ -17,33 +16,38 @@ router.get('/', (req, res) => {
 router.get('/subcategories', ensureAuthenticated, (req, res) => {
     const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu subcategories';
-    const queryUrl = host + '/subcategories';
+    const querySubcats = host + '/api/subcategories';
+    const queryCats = host + '/api/categories';
 
-    request(queryUrl, (error, response, body) => {
-        if (!error) {
-            const menutypes = {}; //TODO review
-            res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: body, menutypes: menuTypes });
-        } else {
-            res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
-        }
+    let options = {"method":"GET", "uri": querySubcats, "json": true};
+    request(options).then(response => {
+        let categories = {
+            list: response
+        };
+        options.uri = queryCats;
+        request(options).then(response => {
+            categories.menuTypes = response;
+            res.render('./admin/subcategories', { layout: 'main-admin', title: title, args: categories });
+        });
+    }).catch(error => {
+        res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
     });
 
 });
 
 // -------- Menu types route
-// TODO review
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
     const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu categories';
     const queryUrl = host + '/categories';
 
-    request(queryUrl, (error, response, body) => {
-        if (!error) {
-            res.render('./admin/categories', { layout: 'main-admin', title: title, settings: body });
-        } else {
-            res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
-        }
+    let options = {"method":"GET", "uri": queryUrl, "json": true};
+    request(options).then(response => {
+        let menuTypes = { list: response };
+        res.render('./admin/categories', { layout: 'main-admin', title: title, args: menuTypes });
+    }).catch(error => {
+        res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
     });
 });
 
@@ -51,16 +55,26 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
     const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu items';
-    const queryUrl = host + '/api/menuitems';
-    request(queryUrl, (error, response, body) => {
-        if (!error) {
-            let menuTypes = {}; //TODO review
-            let categories = {}; //TODO review
-            res.render('./admin/menuitems', { layout: 'main-admin', title: title, args: body });
-        } else {
-            req.session['error'] = JSON.stringify(error);
-            res.redirect('./dashboard');
-        }
+    const queryItems = host + '/api/menuitems';
+    const querySubcats = host + '/api/subcategories';
+    const queryCats = host + '/api/categories';
+
+    let options = {"method":"GET", "uri": queryItems, "json": true};
+    request(options).then(response => {
+        let menuItems = {
+            list: response
+        };
+        options.uri = queryCats;
+        request(options).then(response => {
+            menuItems.menutypes = response;
+            options.uri = querySubcats;
+            request(options).then(response => {
+                menuItems.categories = response;
+                res.render('./admin/menuitems', { layout: 'main-admin', title: title, args: menuItems });
+            });
+        });
+    }).catch(error => {
+        res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
     });
 });
 
@@ -87,107 +101,6 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 //TODO review other routes
 
 
-router.post('/menuitems', ensureAuthenticated, (req, res) => {
-    console.log(req.body);
-    db.menu_items.create(req.body).then(function (data) {
-        res.json(data);
-    });
-});
-
-// update user
-router.put('/menuitems/:id', (req, res) => {
-    db.sequelize.sync().then(() => {
-        db.menu_items.update({
-            // item_name_english: req.body.item_name_english,
-            // item_name_vietnamese : req.body.item_name_vietnamese,
-            // item_price = req.body.item_price,
-            // menuCategoryId = req.body.menuCategoryId
-
-        }, { where: { id: req.params.id } });
-        done();
-    })
-
-});
-
-//add category
-router.post('/addcategory',(req,res)=>{
-    console.log(req.body);
-    db.menu_category.create(
-        {category_name:req.body.category_name,
-            category_description:req.body.category_description,
-            isActive:true}
-    ).catch((err)=>{
-        throw err
-
-    }).then((data)=>{
-        console.log(data);
-    })
-});
-
-// -------- Add item
-router.post('/additem', ensureAuthenticated, (req, res) => {
-    let categories = [{
-        id: 1,
-        category_name: "Kids"
-    },
-        {
-            id: 2,
-            category_name: "Drinks"
-        }];
-
-    let menuTypes = [{
-        id: 1,
-        menu_type_name: "Breakfast"
-    },
-        {
-            id: 2,
-            menu_type_name: "Lunch"
-        }];
-
-    res.render('./admin/add-item', {layout: 'main-admin', categories: categories, menuTypes: menuTypes});
-});
-
-//update categories
-router.put('/editcategories', (req, res) => {
-    db.menu_category.update({
-        category_name: req.body.category_name,
-        category_description: req.body.discription,
-        isActive: req.body.isActive
-    }, { where: { id: req.body.id } }).then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        throw err;
-    });
-});
-
-
-//add resturant_hours
-router.post('/addresturanthours', (req, res) => {
-    db.restaurant_hour.create({
-        day_name: req.body.day_name,
-        start_time: req.body.start_time,
-        end_time: req.body.end_time,
-        isActive: true
-    }).then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        throw err;
-    });
-});
-
-//update resturant_hours
-router.put('/editresturanthours', (req, res) => {
-    db.restaurant_hour.update({
-        day_name: req.body.day_name,
-        start_time: req.body.start_time,
-        end_time: req.body.end_time,
-        isActive: req.body.isActive
-    }, { where: { id: req.body.id } }).then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        throw err;
-    });
-});
 
 module.exports = router;
 

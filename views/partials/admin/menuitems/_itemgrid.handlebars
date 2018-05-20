@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                         {{!-- TODO add form field visibility to manipulated via on-click events --}}
-                        {{#if args.menuItems}} {{#each args.menuItems}}
+                        {{#if args.list.success}} {{#each args.list.success}}
                         <tr class="edit-mode" id="edit-mitem-{{this.id}}">
                             <td colspan="8">
                             <!-- PUT FORM HERE-->
@@ -24,26 +24,26 @@
                                 <div class="form-row">
                                     <div class="id">
                                         <p>{{this.id}}</p>
-                                        <input id="item_id" name="item_id" type="hidden" value="{{this.id}}">
+                                        <input id="item_id" name="item_id" type="hidden" value="{{this.id}}" required>
                                     </div>
                                     <div class="col name">
                                         <div class="row">
                                             <div class="col">
                                                 <input type="text" class="form-control" name="item_name-{{this.id}}" id="item_name-{{this.id}}" value="{{this.item_name_english}}"
-                                                />
+                                                       required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <input type="text" class="form-control" name="item_name_viet-{{this.id}}" id="item_name_viet-{{this.id}}" value="{{this.item_name_vietnamese}}"
-                                                />
+                                                       required />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="row">
                                             <div class="col input-group category">
-                                                {{assignJSON 'categories' @root.args.menuTypes}} {{assignJSON 'currentcat' this.menu_type.menu_type_name}}
+                                                {{assignJSON 'categories' args.menuTypes}} {{assignJSON 'currentcat' this.menu_type.menu_type_name}}
                                                 <select class="form-control" id="item_category-{{this.id}}">
                                                     {{#unless this.currentcat}}
                                                     <option value="">Select..</option>{{/unless}} {{#each this.categories}}
