@@ -9,21 +9,6 @@ router.get('/', (req, res) => {
     res.render('./admin/index', { layout: 'login' });
 });
 
-// -------- Set settings
-router.get('/settings', ensureAuthenticated, (req, res) => {
-    const title = 'Pho Now\'s settings';
-    //this is a temporary solution, should go in a controller or helper
-    //TODO obtain information from database/model
-
-    db.restaurant_hour.findAll({}).then((data) => {
-        res.render('./admin/settings', { layout: 'main-admin', title: title, settings: data });
-
-    }).catch((err) => {
-        throw err
-    });
-
-});
-
 // -------- Menu Categories route
 
 router.get('/subcategories', ensureAuthenticated, (req, res) => {
