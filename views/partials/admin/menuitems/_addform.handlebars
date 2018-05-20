@@ -1,9 +1,7 @@
 <div class="edit-mode add-form">
     <fieldset class="card card-body">
         <h2>Add new menu item</h2>
-        {{!--
-        <form id="newitem" action="/api/addmenuitem" method="post"> --}}
-            <form id="newitem">
+            <form id="newitem" method="post">
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col input-group">
@@ -21,11 +19,9 @@
                         <div class="col input-group">
                             <label for="add_menutype">Category</label>
                             
-                            {{assignJSON 'typelist' @root.args.menuTypes}}
-                            {{debug @root.args}}
+                            {{assignJSON 'typelist' args.menuTypes.success}}
                             <select class="form-control" id="add_menutype" name="add_menutype">
                                 <option value="">Select..</option>
-                                {{debug this.typelist}}
                                 {{#each this.typelist}}
                                 <option value="{{this.id}}">
                                     {{this.menu_type_name}}
@@ -35,7 +31,7 @@
                         </div>
                         <div class="col input-group">
                             <label for="add_category">Sub category</label>
-                            {{assignJSON 'catlist' @root.args.categories}}
+                            {{assignJSON 'catlist' args.categories.success}}
                             <select class="form-control" id="add_category" name="add_category">
                                 <option value="">Select..</option>
                                 {{#each this.catlist}}
@@ -62,7 +58,6 @@
                         <button id="submit_newitem" type="submit" class="btn btn-warning">Add Item</button>
                     </div>
                 </div>
-
             </form>
     </fieldset>
 </div>
