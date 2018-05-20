@@ -1,6 +1,6 @@
  <div class="row my-4 mx-0 grid" id="category-items">
      <div class="col">
-     <form id="editcategories" action="/api/editcategory" method="post">
+     <form id="editcategories" action="/admin/subcategories" method="post">
          <div class="table-responsive">
              <table class="table table-striped">
                  <thead class="thead-inverse">
@@ -14,8 +14,10 @@
                      </tr>
                  </thead>
                  <tbody>
-                 {{#if settings.category.list}}
-                    {{#each settings.category.list}}
+                 {{#if settings.isActive}}
+                 {{debug settings}}
+                    {{#each settings}}
+
                          <tr class="edit-mode" id="edit-category-{{this.id}}">
                              <td class="id">
                                  <p>{{this.id}}</p>
@@ -59,7 +61,7 @@
                          <tr id="category-{{this.id}}">
                              <td class="id">{{this.id}}</td>
                              <td class="name">{{this.category_name}}</td>
-                             <td class="category">{{this.category_menutype}}</td>
+                             {{!-- <td class="category">{{this.category_menutype}}</td> --}}
                              <td class="description">{{this.category_description}}</td>
                              <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
                              <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
