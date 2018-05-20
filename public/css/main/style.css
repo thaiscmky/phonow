@@ -1,5 +1,5 @@
 /* Root Stuff for media query stuff */
-html {font-size: 1rem;}
+html {font-size: 1rem; background: #111}
 body {font-size: 1em; font-family: '', sans-serif;     overflow-x: hidden;
 }
 
@@ -84,9 +84,8 @@ section.contact {
     white-space:nowrap
 }
 
-.navbar-custom {
-    font-family: 'Economica', sans-serif;    font-size: 1.618em;
-    color: #000 !important;
+.navlink-custom {
+    font-family: 'Economica', sans-serif;    font-size: 1.618em;    
     font-weight: bold;
     padding-top: 0;
     padding-bottom: 0;
@@ -252,9 +251,9 @@ section.contact {
 }
 
 .mini-hero-img {
-    height: 300px;
+    height: 400px;
     background-size: cover;
-    background-position: center;
+    background-position: center;    
 }
 
 .sub.title > a {
@@ -264,6 +263,14 @@ section.contact {
 }
 
 /* End General Sub Page CSS */
+
+/* Sug-Pages Nav Bar */
+.navbar-custom {
+    position: absolute;
+    width: 100%;
+}
+
+/* End Sub-Pages Nav Bar */
 
 /*********************/
 /* End Sub-Pages CSS */
@@ -293,6 +300,19 @@ section.contact {
     font-family: 'Economica', sans-serif;    
 }
 
+.bg-bt {
+    background: url("../../img/main/bt.png");
+    position: fixed;
+}
+
+.font-c-b {
+    color: #111 !important;
+}
+
+.font-c-w {
+    color: #fff !important;
+}
+
 /***********************/
 /* End General classes */
 /***********************/
@@ -310,6 +330,10 @@ section.contact {
 .row.no-gutters > [class*=" col-"] {
     padding-right: 0;
     padding-left: 0;
+}
+
+.navbar {
+    padding-bottom: 0;
 }
 
 /***************************/
