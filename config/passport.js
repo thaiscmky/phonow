@@ -28,7 +28,6 @@ module.exports = function(passport) {
                 }
             }).then((user) => {
                     if(user) {
-                        console.log(user);
                         //return user
                         done(null, user);
                     } else {
