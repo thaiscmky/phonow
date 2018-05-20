@@ -44,7 +44,7 @@ section.hero {
 section.section {    
     position: relative;
     padding: 1.618em 0;
-    background-color: #333;    
+    background-color: #111;    
     z-index: 2;
 }
 
@@ -229,16 +229,18 @@ section.contact {
 
 /* End Contact Page CSs */
 
+/* General Sub Page CSS */
+
 .about-hero {    
-    background: url("http://via.placeholder.com/2000x300");
+    background: url("../../img/main/about-hero.png");
 }
 
 .menu-hero {    
-    background: url("http://via.placeholder.com/2000x300");
+    background: url("../../img/main/menu-hero.png");
 }
 
 .contact-hero {    
-    background: url("http://via.placeholder.com/2000x300");
+    background: url("../../img/main/contact-hero.png");
 }
 
 .mini-hero-img {
@@ -246,6 +248,14 @@ section.contact {
     background-size: cover;
     background-position: center;
 }
+
+.sub.title > a {
+    padding: 0 1rem;
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+}
+
+/* End General Sub Page CSS */
 
 /*********************/
 /* End Sub-Pages CSS */
@@ -265,6 +275,10 @@ section.contact {
 .btn-black {
     background: #000;
     color: #fff;    
+}
+
+.fat-font {
+    font-family: 'Raleway', sans-serif;
 }
 
 /***********************/
