@@ -32,7 +32,7 @@ class Controller {
     async getWithInclude(includes, condition) {
 
         let entities = includes.forEach(item => {
-            return { "model": db[item], "as" : item}
+            return { "model": db[item], "as" : item};
         });
 
         if(typeof condition === 'undefined' || condition === null)
@@ -55,7 +55,6 @@ class Controller {
     async setData(id, values) {
 
         values.raw = true;
-        console.log(id);
         const data = await this.model.update(values, { where: {id} })
             .then( models => {
                 let data = models;
