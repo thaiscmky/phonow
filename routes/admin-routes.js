@@ -24,7 +24,7 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
             const menutypes = {}; //TODO review
             res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: body, menutypes: menuTypes });
         } else {
-            res.render('./admin/dash', { layout: 'main-admin', error: JSON.stringify(error)});
+            res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
         }
     });
 
@@ -41,23 +41,26 @@ router.get('/categories', ensureAuthenticated, (req, res) => {
         if (!error && response.statusCode === 200) {
             res.render('./admin/categories', { layout: 'main-admin', title: title, settings: body });
         } else {
-            res.render('./admin/dash', { layout: 'main-admin', error: JSON.stringify(error)});
+            res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
         }
     });
 });
 
 // -------- Menu Items route
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
+    const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu items';
-    const queryUrl = __basedir + '/menuitems';
-
+    const queryUrl = host + '/api/menuitems';
+    console.log(host);
     request(queryUrl, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
+        console.log(error);
+        if (!error) {
             let menuTypes = {}; //TODO review
             let categories = {}; //TODO review
             res.render('./admin/menuitems', { layout: 'main-admin', title: title, args: body });
         } else {
-            res.render('./admin/dash', { layout: 'main-admin', error: JSON.stringify(error)});
+            req.session['error'] = JSON.stringify(error);
+            res.redirect('./dashboard');
         }
     });
 });
