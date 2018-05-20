@@ -71,8 +71,16 @@ section.contact {
     font-size: 1rem;
     color: #fff;
     margin: 1rem 0;    
+}
+
+.sec-sub.subtitle {
     border-left: 3px solid #fff;
     border-right: 3px solid #fff;
+}
+
+.main-sub.subtitle {
+    font-weight: bold;
+    white-space:nowrap
 }
 
 .navbar-custom {
