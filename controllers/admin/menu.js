@@ -34,8 +34,24 @@ let menu = {
 
         }).catch(err => JSON.stringify(err));
     },
+    insertCategory: async (values) => {
+        let category = new Controller('menu_category');
+        return category.createData(values).then(categoryData => {
+            return {"id": categoryData.id};
+        }).catch(err => JSON.stringify(err));
+    },
+    updateCategory: async (id, values) => {
+        let category = new Controller('menu_category');
+        return category.setData(id,values).then(categoryData => categoryData)
+            .catch(err => JSON.stringify(err));
+    },
+    updateMenuItem: async (id, values) => {
+        let item = new Controller('menu_items');
+        return item.setData(id,values).then(data => data)
+            .catch(err => JSON.stringify(err));
+    },
     /**
-     * TODO add/update/delete operations
+     * TODO delete operations
      */
 };
 

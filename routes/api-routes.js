@@ -45,29 +45,32 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
      * Post routes
      */
     router.post('/addcategory', ensureAuthenticated, (req,res)=>{
-        let insert = {
+        let newcat = {
             category_name: req.body.category_name,
             category_description:req.body.category_description,
             isActive:true
         };
 
-        //request store settings via ORM, pass the insert values
-        a.then( data => {
+        menuController.insertCategory(newcat).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });
     });
 
-    router.post('/addresturanthours', ensureAuthenticated, (req,res)=>{
-        let insert = {
-            day_name: req.body.day_name,
-            start_time: req.body.start_time,
-            end_time: req.body.end_time,
-            isActive: true
-        };
-        //request store settings via ORM, pass the update values
-        a.then( data => {
+    router.post('/addresturanthours', ensureAuthenticated, (req,res)=> {
+        let count = req.body.day_name.length;
+        let values = [];
+
+        for(let i = 0; i < count; i++){
+            values[i] = {
+                day_name: req.body.day_name[i],
+                start_time: req.body.start_time[i],
+                end_time: req.body.end_time[i],
+                isActive: true
+            }
+        }
+        restaurantController.udpatetRestaurantHours(values).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
@@ -77,23 +80,17 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     /**
      * Put routes
      */
-
     router.put('/editcategories', (req, res) => {
         let update = {
             category_name: req.body.category_name,
             category_description: req.body.discription,
             isActive: req.body.isActive
         };
-
-        // where: { id: req.body.id }
-
-        //request store settings via ORM, pass the update values
-        a.then( data => {
+        menuController.updateCategory(req.body.id,update).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });
-
     });
 
     router.put('/editmenuitem', (req, res) => {
@@ -104,10 +101,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             menuCategoryId: req.body.menuCategoryId
         };
 
-        // where: { id: req.body.id }
-
-        //request store settings via ORM, pass the update values
-        a.then( data => {
+        menuController.updateMenuItem(req.body.id,update).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
@@ -115,20 +109,24 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     });
 
     router.put('/editresturanthours', (req, res) => {
-        let update = {
-            day_name: req.body.day_name,
-            start_time: req.body.start_time,
-            end_time: req.body.end_time,
-            isActive: req.body.isActive
-        };
-        // where: { id: req.body.id }
 
-        //request store settings via ORM, pass the update values
-        a.then( data => {
+        let count = req.body.day_name.length;
+        let values = [];
+
+        for(let i = 0; i < count; i++){
+            values[i] = {
+                day_name: req.body.day_name[i],
+                start_time: req.body.start_time[i],
+                end_time: req.body.end_time[i],
+                isActive: req.body.isActive //TODO needs review
+            }
+        }
+        restaurantController.udpatetRestaurantHours(values).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });
+
     });
 
 module.exports = router;

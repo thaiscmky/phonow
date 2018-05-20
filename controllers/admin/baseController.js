@@ -77,6 +77,24 @@ class Controller {
         return this.response = data;
     }
 
+    async findOrCreate(values, defaults, args) {
+        values.raw = true;
+        const data = await this.model.findOrCreate({
+            where: values,
+            defaults: defaults
+        }).spread( (record, created) => {
+            if(created){
+                if(typeof args !== 'undefined' && args !== null)
+                record[args[0]] = args[1]
+            }
+        }).then( models => {
+            let data = models;
+            return data;
+        })
+        .catch((err) => err);
+        return this.response = data;
+    }
+
     async deleteById(id) {
         //TODO
     }

@@ -20,6 +20,30 @@ let restaurant = {
     /**
      * TODO add/update/delete operations
      */
+    udpatetRestaurantHours: async (values) => {
+        let hours = values.map(value => {
+            let data = {
+                day_name: value.day_name,
+                start_time: value.start_time,
+                end_time: value.end_time,
+                isActive: true //TODO implement toggle logic
+            };
+            return data;
+        });
+        let restauranthour = new Controller('restaurant_hour');
+
+        async function insertData (hours) {
+            const transaction = hours.map(async hours => {
+                const response = await restauranthour.findOrCreate(hour, hour).then(hour => { return {"id": hour.id}; });
+                return response.json();
+            }).catch(err => JSON.stringify(err));
+
+            const hours = await Promise.all(transaction);
+            return hours;
+        }
+
+        return insertData(hours);
+    }
 };
 
 module.exports = restaurant;
