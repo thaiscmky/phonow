@@ -16,7 +16,6 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
     //TODO obtain information from database/model
 
     db.restaurant_hour.findAll({}).then((data) => {
-        res.json(data);
         res.render('./admin/settings', { layout: 'main-admin', title: title, settings: data });
 
     }).catch((err) => {
