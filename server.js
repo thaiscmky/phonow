@@ -1,6 +1,8 @@
 'use strict';
 
 global.__basedir = __dirname;
+const http = require('http');
+const url = require('url') ;
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const express = require('express');
