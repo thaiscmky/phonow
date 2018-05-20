@@ -1,108 +1,130 @@
 <div class="row my-4 mx-0 grid" id="menu_items">
     <div class="col">
-    <form id="edititems" action="/api/newcategory" method="post">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="thead-inverse">
-                <tr>
-                    <th>#ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{!-- TODO add form field visibility to manipulated via on-click events --}}
-                {{#if settings.menuitem.list}}
-                    {{#each settings.menuitem.list}}
-                         <tr class="edit-mode" id="edit-mitem-{{this.id}}">
-                             <td colspan="8">
-                                 <div class="form-row">
-                                     <div class="id">
-                                         <p>{{this.id}}</p>
-                                         <input id="item_id" name="item_id" type="hidden" value="{{this.id}}">
-                                     </div>
-                                     <div class="col name">
-                                         <div class="row">
-                                             <div class="col">
-                                                 <input type="text" class="form-control" name="item_name-{{this.id}}" id="item_name-{{this.id}}" value="{{this.item_name_english}}"/>
-                                             </div>
-                                         </div>
-                                         <div class="row">
-                                             <div class="col">
-                                                 <input type="text" class="form-control" name="item_name_viet-{{this.id}}" id="item_name_viet-{{this.id}}" value="{{this.item_name_vietnamese}}"/>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="col-2">
-                                         <div class="row">
-                                             <div class="input-group price col">
-                                                 <input type="text" class="form-control" name="item_price-{{this.id}}" id="item_price-{{this.id}}" value="{{this.item_price}}"/>
-                                             </div>
-                                         </div>
-                                         <div class="row">
-                                             <div class="col input-group status my-2">
-                                                 <span class="caption mr-2">Enabled</span>
-                                                 <label class="form-check-label switch">
-                                                     <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
-                                                     <span class="slider"></span>
-                                                 </label>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="col-3 input-group category">
-                                         {{assignJSON 'categories' @root.settings.menuitem.categories}}
-                                         {{assignJSON 'currentcat' this.item_category}}
-                                         <select class="form-control" id="item_category">
-                                             {{#unless this.currentcat}}<option value="">Select..</option>{{/unless}}
-                                             {{#each this.categories}}
-                                                 <option value="{{this.id}}"
-                                                     {{#if (equals this.name ../this.currentcat)}}selected="selected"{{/if}}
-                                                 >
-                                                     {{this.name}}
-                                                 </option>
-                                             {{/each}}
-                                         </select>
-                                     </div>
-                                 </div>
-                                 <div class="form-row">
-                                     <div class="col input-group description">
-                                         <textarea class="form-control" name="item_description-" id="item_description-{{this.id}}">{{this.item_description}}</textarea>
-                                     </div>
-                                     <div class="col-3 pr-0">
-                                         <div class="row">
-                                             <div class="col">
-                                                 <button type="reset" class="btn">Cancel</button> <button type="submit" class="btn btn-warning">Update</button>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </td>
-                         </tr>
-                         <tr id="mitem-{{this.id}}">
-                             <td class="id">{{this.id}}</td>
-                             <td class="name">
-                                 {{this.item_name_english}}
-                                 {{#if this.item_name_vietnamese}}<br>({{this.item_name_vietnamese}}){{/if}}
-                             </td>
-                             <td class="price">{{this.item_price}}</td>
-                             <td class="category">{{this.item_category}}</td>
-                             <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                             <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
-                         </tr>
-                    {{/each}}
-                {{else}}
+        <!--<form id="edititems" action="" method="post">-->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>#ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Subcategory</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{!-- TODO add form field visibility to manipulated via on-click events --}}
+                        {{#if args.menuItems}} {{#each args.menuItems}}
+                        <tr class="edit-mode" id="edit-mitem-{{this.id}}">
+                            <td colspan="8">
+                            <!-- PUT FORM HERE-->
+                            <form id="edititems" action="" method="post">
+                                <div class="form-row">
+                                    <div class="id">
+                                        <p>{{this.id}}</p>
+                                        <input id="item_id" name="item_id" type="hidden" value="{{this.id}}">
+                                    </div>
+                                    <div class="col name">
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="item_name-{{this.id}}" id="item_name-{{this.id}}" value="{{this.item_name_english}}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="text" class="form-control" name="item_name_viet-{{this.id}}" id="item_name_viet-{{this.id}}" value="{{this.item_name_vietnamese}}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col input-group category">
+                                                {{assignJSON 'categories' @root.args.menuTypes}} {{assignJSON 'currentcat' this.menu_type.menu_type_name}}
+                                                <select class="form-control" id="item_category-{{this.id}}">
+                                                    {{#unless this.currentcat}}
+                                                    <option value="">Select..</option>{{/unless}} {{#each this.categories}}
+                                                    <option value="{{this.id}}" {{#if (equals this.menu_type_name ../this.currentcat)}}selected="selected" {{/if}}>
+                                                        {{this.menu_type_name}}
+                                                    </option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                            <div class="col input-group subcategory">
+                                                {{assignJSON 'subcategories' @root.args.categories}} {{assignJSON 'currentsub' this.menu_category.category_name}}
+                                                <select class="form-control" id="item_subcategory-{{this.id}}">
+                                                    {{#unless this.currentsub}}
+                                                    <option value="">Select..</option>{{/unless}} {{#each this.subcategories}}
+                                                    <option value="{{this.id}}" {{#if (equals this.category_name ../this.currentsub)}}selected="selected" {{/if}}>
+                                                        {{this.category_name}}
+                                                    </option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col input-group price">
+                                                <input type="text" class="form-control" name="item_price-{{this.id}}" id="item_price-{{this.id}}" value="{{this.item_price}}"
+                                                />
+                                            </div>
+                                            <div class="col input-group status my-2 d-flex align-items-end">
+                                                <span class="caption mr-2">Enabled</span>
+                                                <label class="form-check-label switch">
+                                                    <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-{{this.id}}" name="status-{{this.id}}"
+                                                        {{#if this.isActive}}checked{{/if}}>
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col input-group description">
+                                        <textarea class="form-control" name="item_description-{{this.id}}" id="item_description-{{this.id}}">{{this.item_description}}</textarea>
+                                    </div>
+                                    <div class="col d-flex align-items-end justify-content-end">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button type="reset" class="btn" id="cancel-item-{{this.id}}" name="cancel-item-{{this.id}}">Cancel</button>
+                                            </div>
+                                            <div class="col">
+                                                <button type="submit" id="update-item-{{this.id}}" name="update-item-{{this.id}}" class="btn btn-warning">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                                <!--End Form Here-->
+                            </td>
+                        </tr>
+                        <tr id="mitem-{{this.id}}">
+                            <td class="id">{{this.id}}</td>
+                            <td class="name">
+                                {{this.item_name_english}} {{#if this.item_name_vietnamese}}
+                                <br>({{this.item_name_vietnamese}}){{/if}}
+                            </td>
+                            <td class="category">{{this.item_menutype}}</td>
+                            <td class="subcategory">{{this.item_category}}</td>
+                            <td class="price">{{this.item_price}}</td>
+                            <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
+                            <td class="action">
+                                <i class="fa fa-edit"></i>
+                                <i class="fa fa-trash"></i>
+                            </td>
+                        </tr>
+                        {{/each}} {{else}}
                         <tr class="no-results">
                             <td colspan="8">
                                 <p>There are no items in your menu</p>
                             </td>
                         </tr>
-                {{/if}}
-                 </tbody>
-             </table>
-         </div>
-     </form>
+                        {{/if}}
+                    </tbody>
+                </table>
+            </div>
+        <!--</form>-->
     </div>
-  </div>
+</div>

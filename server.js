@@ -1,9 +1,11 @@
 'use strict';
-//var routes = require("./controllers/burgers_controller");
+
+global.__basedir = __dirname;
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const express = require('express');
 const router = express.Router();
+const nodemailer = require('nodemailer');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
@@ -11,6 +13,7 @@ const bodyParser = require("body-parser");
 const passport = require('passport');
 const path = require("path");
 const app = express();
+
 // require("./models/User");
 
 const db=require("./models");
@@ -24,6 +27,7 @@ const {truncate,capitalize,debug,assignJSON,equals,returnSelf} = require('./help
 // Routes
 const auth = require('./routes/auth');
 const html = require('./routes/html-routes');
+const api = require('./routes/api-routes');
 const admin = require('./routes/admin-routes');
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -78,6 +82,7 @@ app.use(function (req, res, next) {
 app.use('/auth', auth);
 app.use('/', html);
 app.use('/admin', admin);
+app.use('/api', api);
 
 
 const PORT = process.env.PORT || 3000;

@@ -1,10 +1,8 @@
-
-
-
+console.log('LOADED: admin/menu.js');
 
 $(document).ready(function () {
     $(document).on("click", "#menuItem-form", handleAddMenuFormSubmit);
-})
+});
 
 // A function to handle what happens when the form is submitted to create a new Author
 function handleAddMenuFormSubmit(event) {
