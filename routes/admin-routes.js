@@ -27,23 +27,12 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
 
 // -------- Menu Categories route
 
-router.get('/subcategories', ensureAuthenticated, (req, res) => {
+router.get('/subcategories',ensureAuthenticated,(req, res) => {
 
     const title = 'Pho Now\'s menu subcategories';
-
-    // db.menu_type.findAll({
-    // }).then(function (menuTypes) {
-    //     menuTypes = menuTypes;
-    //     db.menu_category.findAll({
-    //     }).then(function (data) {
-    //       res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
-    //     });
-    // }).catch((err)=>{
-    //            throw err
-    // });
     db.menu_category.findAll({}).then((data) => {
-        // res.json(data);
-         res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data });
+        //res.json(data);
+          res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
 
     }).catch((err) => {
         throw err
@@ -84,14 +73,6 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
         });
     });
 });
-
-/*router.post('/menuitems', ensureAuthenticated, (req, res) => {
-    console.log(req.body);
-    db.menu_items.create(req.body).then(function (data) {
-        res.json(data);
-    });
-});*/
-
 // -------- fail route
 router.get('/403', (req, res) => {
     res.render('./admin/403');
@@ -111,64 +92,21 @@ router.get('/dash', ensureAuthenticated,(req, res) => {
 
 
 //add categore
-router.post('/addcategory', ensureAuthenticated,(req, res) => {
+router.post('/addcategory', (req, res) => {
     console.log(req.body);
     db.menu_category.create(
-        {category_name:req.body.category_name,
-        category_description:req.body.category_description,
+        {category_name:req.body.add_name,
+        category_description:req.body.add_description,
         isActive:true}
-   ).catch((err)=>{
-       throw err
-
-   }).then((data)=>{
-      console.log(data);
-   })
+   ).then((data)=>{
+    console.log(data);
+ }).catch((err)=>{
+    throw err
+});
 });
 
-//update categories
-router.put('/editcategories', ensureAuthenticated, (req,res)=>{
-          db.menu_category.update({
-            category_name:req.body.category_name,
-            category_description:req.body.discription,
-            isActive:req.body.isActive
-         }, { where: { id:req.body.id } }).then((result)=>{
-             res.json(result);
-         }).catch((err)=>{
-            throw err;
-         });
- });
 
-/*** TODO Review the following routes (may no longer be needed)
- *     - should most likely be in an api call with _ensureAuthorized_ headers
- ***/
 
-// -------- Add item
-router.get('/additem', ensureAuthenticated, (req, res) => {
-    let categories = [{
-        id: 1,
-        category_name: "Kids"
-    },
-        {
-            id: 2,
-            category_name: "Drinks"
-        }];
-
-    let menuTypes = [{
-        id: 1,
-        menu_type_name: "Breakfast"
-    },
-        {
-            category_name: req.body.category_name,
-            category_description: req.body.category_description,
-            isActive: true
-        }
-    ).catch((err) => {
-        throw err
-
-    }).then((data) => {
-        console.log(data);
-    })
-});
 
 //update categories
 router.put('/editcategories', ensureAuthenticated,(req, res) => {
