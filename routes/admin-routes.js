@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const request = require('request');
+const path = require('path');
 const { ensureAuthenticated } = require('../helpers/auth');
 let db = require("../models");
+
 
 // -------- Homepage route
 router.get('/', (req, res) => {
@@ -14,68 +17,73 @@ router.get('/', (req, res) => {
 router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
     const title = 'Pho Now\'s menu subcategories';
+    const queryUrl = __basedir + '/subcategories';
 
-    db.menu_type.findAll({
-    }).then(function (menuTypes) {
-        menuTypes = menuTypes;
-        db.menu_category.findAll({
-        }).then(function (data) {
-            res.render('./admin/categories', { layout: 'main-admin', title: title, settings: data, menutypes: menuTypes });
-        });
-
-    }).catch((err) => {
-        throw err
+    request(queryUrl, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            const menutypes = {}; //TODO review
+            res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: body, menutypes: menuTypes });
+        } else {
+            res.render('./admin/dash', { layout: 'main-admin', error: JSON.stringify(error)});
+        }
     });
+
 });
 
 // -------- Menu types route
-// TODO data still refers to subcategories, correct it
+// TODO review
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s menu categories';
-    let menuTypes = {};
-    db.menu_type.findAll({
-    }).then(function (menuTypes) {
-        res.render('./admin/menuitems', { layout: 'main-admin', title: title, settings: menuTypes });
+    const queryUrl = __basedir + '/categories';
+
+    request(queryUrl, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            res.render('./admin/categories', { layout: 'main-admin', title: title, settings: body });
+        } else {
+            res.render('./admin/dash', { layout: 'main-admin', error: JSON.stringify(error)});
+        }
     });
 });
 
 // -------- Menu Items route
 router.get('/menuitems', ensureAuthenticated, (req, res) => {
     const title = 'Pho Now\'s menu items';
-    let args = {};
-    let menuTypes = {};
-    let menuItems = {};
-    let categories = {};
+    const queryUrl = __basedir + '/menuitems';
 
-    db.menu_type.findAll({
-    }).then(function (menuData) {
-        menuTypes = menuData;
-        db.menu_category.findAll({
-        }).then(function (categoriesData) {
-            categories = categoriesData;
-            db.menu_items.findAll({
-                where: { isActive: true },
-                include: [{
-                    model: db.menu_category,
-                    as: 'menu_category',
-                },
-                {
-                    model: db.menu_type,
-                    as: 'menu_type',
-                }
-                ]
-
-            }).then(function (menuData) {
-                menuItems = menuData;
-                args.categories = categories;
-                args.menuTypes = menuTypes;
-                args.menuItems = menuItems;
-                res.render('./admin/menuitems', { layout: 'main-admin', title: title, args: args });
-            });
-        });
+    request(queryUrl, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            let menuTypes = {}; //TODO review
+            let categories = {}; //TODO review
+            res.render('./admin/menuitems', { layout: 'main-admin', title: title, args: body });
+        } else {
+            res.render('./admin/dash', { layout: 'main-admin', error: JSON.stringify(error)});
+        }
     });
 });
+
+router.get('/settings', ensureAuthenticated, (req, res) => {
+
+    const title = 'Pho Now\'s restaurant settings';
+
+    db.restaurant_hour.findAll({
+    }).then(function (resHours) {
+        res.render('./admin/settings', { layout: 'main-admin', title: title, settings: resHours});
+    });
+});
+
+// -------- fail route
+router.get('/403', (req, res) => {
+    res.render('./admin/403');
+});
+
+// -------- Authorized route - dashboard
+router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    res.render('./admin/settings', { layout: 'main-admin' });
+});
+
+//TODO review other routes
+
 
 router.post('/menuitems', ensureAuthenticated, (req, res) => {
     console.log(req.body);
@@ -99,18 +107,6 @@ router.put('/menuitems/:id', (req, res) => {
 
 });
 
-
-// -------- fail route
-router.get('/403', (req, res) => {
-    res.render('./admin/403');
-});
-
-// -------- Authorized route - dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('./admin/settings', { layout: 'main-admin' });
-});
-
-
 //add category
 router.post('/addcategory',(req,res)=>{
     console.log(req.body);
@@ -127,7 +123,7 @@ router.post('/addcategory',(req,res)=>{
 });
 
 // -------- Add item
-router.get('/additem', ensureAuthenticated, (req, res) => {
+router.post('/additem', ensureAuthenticated, (req, res) => {
     let categories = [{
         id: 1,
         category_name: "Kids"
@@ -161,15 +157,7 @@ router.put('/editcategories', (req, res) => {
         throw err;
     });
 });
-router.get('/settings', ensureAuthenticated, (req, res) => {
 
-    const title = 'Pho Now\'s menu categories';
-
-    db.restaurant_hour.findAll({
-    }).then(function (resHours) {
-        res.render('./admin/settings', { layout: 'main-admin', title: title, settings: resHours});
-    });
-  });
 
 //add resturant_hours
 router.post('/addresturanthours', (req, res) => {
