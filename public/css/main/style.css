@@ -36,6 +36,7 @@ section.hero {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);    
+    z-index: 1;
 }
 
 /* End Main Hero CSS */
@@ -84,8 +85,7 @@ section.contact {
 }
 
 .navbar-custom {
-    font-family: 'Economica', sans-serif;
-    font-size: 1.618em;
+    font-family: 'Economica', sans-serif;    font-size: 1.618em;
     color: #000 !important;
     font-weight: bold;
     padding-top: 0;
@@ -287,6 +287,10 @@ section.contact {
 
 .fat-font {
     font-family: 'Raleway', sans-serif;
+}
+
+.skinny-font {
+    font-family: 'Economica', sans-serif;    
 }
 
 /***********************/
