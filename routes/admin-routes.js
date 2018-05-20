@@ -15,12 +15,12 @@ router.get('/', (req, res) => {
 // -------- Menu Categories route
 
 router.get('/subcategories', ensureAuthenticated, (req, res) => {
-
+    const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu subcategories';
-    const queryUrl = __basedir + '/subcategories';
+    const queryUrl = host + '/subcategories';
 
     request(queryUrl, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
+        if (!error) {
             const menutypes = {}; //TODO review
             res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: body, menutypes: menuTypes });
         } else {
@@ -34,11 +34,12 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 // TODO review
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
+    const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu categories';
-    const queryUrl = __basedir + '/categories';
+    const queryUrl = host + '/categories';
 
     request(queryUrl, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
+        if (!error) {
             res.render('./admin/categories', { layout: 'main-admin', title: title, settings: body });
         } else {
             res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
@@ -51,9 +52,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
     const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu items';
     const queryUrl = host + '/api/menuitems';
-    console.log(host);
     request(queryUrl, (error, response, body) => {
-        console.log(error);
         if (!error) {
             let menuTypes = {}; //TODO review
             let categories = {}; //TODO review
