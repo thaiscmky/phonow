@@ -19,8 +19,7 @@ module.exports = function(passport) {
                 user_unique_id: profile.id,
                 email: profile.emails[0].value,
             };
-            console.log('AUTHORIZED');
-            console.log(authUser);
+
             // Check for existing user
             db.user.findOne({
                 where: {
