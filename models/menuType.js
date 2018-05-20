@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     menu_type_description: {
       type: DataTypes.STRING
     },
+    menuCategoryId: {
+      type: DataTypes.INTEGER
+    },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
@@ -19,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   MenuType.associate = function (models) {
-    //TODO  
+    //TODO
   };
   return MenuType;
 };
