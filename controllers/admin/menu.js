@@ -38,6 +38,17 @@ let menu = {
     /**
      * TODO delete operations
      */
+    deleteCategory: async (id) => {
+        let item = new Controller('menu_category');
+        return item.deleteById(id).then(data => data)
+            .catch(err => JSON.stringify(err));
+    },
+
+    deleteMenuItem: async (id) => {
+        let item = new Controller('menu_items');
+        return item.deleteById(id).then(data => data)
+            .catch(err => JSON.stringify(err));
+    },
 };
 
 module.exports = menu;
