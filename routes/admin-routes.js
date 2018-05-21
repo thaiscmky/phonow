@@ -81,8 +81,14 @@ router.get('/403', (req, res) => {
 
 // -------- Authorized route - dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('./admin/settings', { layout: 'main-admin' });
+    res.render('./admin/index', { layout: 'main-admin' });
 });
+
+// -------- Authorized route - dashboard
+router.get('/dash',ensureAuthenticated, (req, res) => {
+    res.render('./admin/dash-sample', { layout: 'main-admin' });
+});
+
 
 //TODO review other routes
 
