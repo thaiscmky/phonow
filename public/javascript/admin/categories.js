@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 function onAddNew(){
-    $(".newmenutype").submit(function( event ) {
+    $("#newmenutype").submit(function( event ) {
             event.preventDefault();
             var formdata = $(this).serializeArray();
             var values = formdata.map(field => field.value);
@@ -18,8 +18,8 @@ function onAddNew(){
         $('.spinner').show();
 
         $.ajax({
-            url: '/api/category',
-            type: 'put',
+            url: '/api/menutype',
+            type: 'post',
             data: JSON.stringify(request),
             headers: {
                 "x-auth-token": localStorage.accessToken,
@@ -50,7 +50,7 @@ function onGridSubmit(){
         $('.loading').show();
         $('.spinner').show();
         $.ajax({
-            url: '/api/category',
+            url: '/api/menutype',
             type: 'put',
             data: JSON.stringify(request),
             headers: {

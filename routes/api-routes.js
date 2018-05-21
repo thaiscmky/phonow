@@ -45,7 +45,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
      * Post routes
      */
 
-    router.post('/subcategory', ensureAuthenticated, (req,res)=>{
+    router.post('/category', ensureAuthenticated, (req,res)=>{
         
         let newcat = {
             category_name: req.body.category_name,
@@ -61,13 +61,13 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
-    router.post('/category', ensureAuthenticated, (req,res)=>{
+    router.post('/menutype', ensureAuthenticated, (req,res)=>{
         let newtype= {
             menu_type_name: req.body.menu_type_name,
             menu_type_description:req.body.menu_type_description,
             isActive:true
         };
-        menuController.insertType(newtype).then( data => {
+        menuController.insertMenuType(newtype).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
@@ -99,11 +99,27 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     router.put('/category', (req, res) => {
         let update = {
             category_name: req.body.category_name,
-            category_description: req.body.description,
+            category_description: req.body.category_description,
             menu_type_id: req.body.menu_type_id,
             isActive: req.body.isActive
         };
         menuController.updateCategory(req.body.id,update).then( data => {
+            res.json({'success': data});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    /**
+     * Put routes
+     */
+    router.put('/menutype', (req, res) => {
+        let update = {
+            category_name: req.body.menu_type_name,
+            category_description: req.body.menu_type_description,
+            isActive: req.body.isActive
+        };
+        menuController.updateMenuType(req.body.id,update).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
