@@ -88,6 +88,42 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
     });
 });
 
+// ---------- Add category route
+router.post('/category', ensureAuthenticated,(req, res) => {
+    /*console.log(req.body);
+    db.menu_category.create(
+        {
+            category_name: req.body.category_name,
+            category_description: req.body.category_description,
+            isActive: true
+        }
+    ).catch((err) => {
+        throw err
+
+    }).then((data) => {
+        console.log(data);
+    })*/
+    values = {
+        "category_name": "chicken pox",
+        "category_description": "it's okay",
+        "isActive": true
+    };
+
+    const host = 'http://'+req.headers.host;
+    const title = 'Pho Now\'s menu categories';
+    const queryUrl = host + '/api/categories';
+
+    let options = {"method":"POST", "uri": queryUrl, "json": true, "body" : values};
+    request(options).then(parsedBody => {
+        /*let menuTypes = { list: response };
+        res.render('./admin/categories', { layout: 'main-admin', title: title, args: menuTypes });*/
+        res.json(parsedBody);
+    }).catch(error => {
+        //res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
+        res.json(error);
+    });
+});
+
 // -------- fail route
 router.get('/403', (req, res) => {
     res.render('./admin/403');

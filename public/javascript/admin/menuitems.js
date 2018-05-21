@@ -1,7 +1,3 @@
-console.log('LOADED: admin/menuitem.js');
-
-
-
 $(document).ready(function () {
     $("#newitem #submit_newitem").on("click", "#submit_newitem", handleAddMenuFormSubmit);
     $("#edititems [id^='update-item-']").on("click","submit",handleUpdateMenuFormSubmit)
@@ -49,6 +45,6 @@ function handleAddMenuFormSubmit(event) {
 
  
   function addMenu(menuItem) {
-    $.post("/admin/menuitems",menuItem);
+    $.post("/api/menuitem",menuItem);
       
   }

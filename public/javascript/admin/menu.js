@@ -42,6 +42,6 @@ function handleAddMenuFormSubmit(event) {
 
  
   function addMenu(menuItem) {
-    $.post("/admin/menuitems",menuItem);
+    $.post("/api/menuitem",menuItem);
       
   }

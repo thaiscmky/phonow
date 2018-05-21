@@ -44,7 +44,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     /**
      * Post routes
      */
-    router.post('/addcategory', ensureAuthenticated, (req,res)=>{
+    router.post('/category', ensureAuthenticated, (req,res)=>{
         let newcat = {
             category_name: req.body.category_name,
             category_description:req.body.category_description,
@@ -58,7 +58,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
-    router.post('/addresturanthours', ensureAuthenticated, (req,res)=> {
+    router.post('/resturanthours', ensureAuthenticated, (req,res)=> {
         let count = req.body.day_name.length;
         let values = [];
 
@@ -80,7 +80,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     /**
      * Put routes
      */
-    router.put('/editcategories', (req, res) => {
+    router.put('/category', (req, res) => {
         let update = {
             category_name: req.body.category_name,
             category_description: req.body.discription,
@@ -93,7 +93,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
-    router.put('/editmenuitem', (req, res) => {
+    router.put('/menuitem', (req, res) => {
         let update = {
             item_name_english: req.body.item_name_english,
             item_name_vietnamese : req.body.item_name_vietnamese,
@@ -108,7 +108,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
-    router.put('/editresturanthours', (req, res) => {
+    router.put('/resturanthours', (req, res) => {
 
         let count = req.body.day_name.length;
         let values = [];
