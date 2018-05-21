@@ -21,6 +21,10 @@ let menu = {
         let category = new Controller('menu_category');
         return category.createData(values).then(categoryData => categoryData).catch(err => JSON.stringify(err));
     },
+    insertType: async (values) => {
+        let type = new Controller('menu_type_id');
+        return type.createData(values).then(typeData => typeData).catch(err => JSON.stringify(err));
+    },
     updateCategory: async (id, values) => {
         let category = new Controller('menu_category');
         return category.setData(id,values).then(categoryData => JSON.stringify(categoryData))
