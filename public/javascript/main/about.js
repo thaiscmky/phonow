@@ -1,4 +1,3 @@
-console.log('LOADED: admin/about.js');
 $(document).ready(function () {
     initMap();
 });

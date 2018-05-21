@@ -1,6 +1,5 @@
  <div class="row my-4 mx-0 grid" id="category-items">
      <div class="col">
-     <form id="editmenutypes" method="post">
          <div class="table-responsive">
              <table class="table table-striped">
                  <thead class="thead-inverse">
@@ -14,29 +13,51 @@
                  </thead>
                  <tbody>
                  {{#if args.list.success}}
-                {{!-- TODO add form field visibility to manipulated via on-click events --}}
                     {{#each args.list.success}}
-                         <tr class="edit-mode" id="edit-menutype-{{this.id}}">
-                             <td class="id">
-                                 <p>{{this.id}}</p>
-                                 <input id="menutype_id" name="menutype_id" type="hidden" value="{{this.id}}" required>
-                             </td>
-                             <td class="name">
-                                 <input type="text" class="form-control" name="menutype_name-{{this.id}}" id="menutype_name-{{this.id}}" value="{{this.menu_type_name}}" required />
-                             </td>
-                             <td class="description">
-                                <textarea class="form-control" name="menutype_description-" id="menutype_description-{{this.id}}">{{this.menu_type_description}}</textarea>
-                             </td>
-                             <td class="form-check input-group status">
-                                  <div class="col input-group status my-2">
-                                     <label class="form-check-label switch">
-                                         <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
-                                         <span class="slider"></span>
-                                     </label>
-                                 </div>
-                             </td>
-                             <td class="action">
-                                 <button type="reset" id="cancel-menutype-{{this.id}}" class="btn">Cancel</button> <button type="submit" class="btn btn-warning">Update</button>
+                         <div class="edit-mode" id="edit-menutype-{{this.id}}">
+                             <td colspan="7">
+                                 <form id="editmenutypes" method="post">
+                                     <div class="form-row">
+                                         <div class="id">
+                                             <p>{{this.id}}</p>
+                                             <input id="menutype_id" name="menutype_id" type="hidden" value="{{this.id}}" required>
+                                         </div>
+                                         <div class="col name">
+                                             <input type="text" class="form-control" name="menutype_name-{{this.id}}" id="menutype_name-{{this.id}}" value="{{this.menu_type_name}}" required />
+                                         </div>
+                                         <div class="col description">
+                                             <textarea class="form-control" name="menutype_description-" id="menutype_description-{{this.id}}">{{this.menu_type_description}}</textarea>
+                                         </div>
+
+                                         <div class="row">
+                                             <div class="col input-group status my-2 d-flex align-items-end">
+                                                 <label class="form-check-label switch">
+                                                     <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
+                                                     <span class="slider"></span>
+                                                 </label>
+                                             </div>
+                                         </div>
+
+                                         <!--<td class="form-check input-group status">
+                                             <div class="col input-group status my-2">
+                                                 <label class="form-check-label switch">
+                                                     <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
+                                                     <span class="slider"></span>
+                                                 </label>
+                                             </div>
+                                         </td>-->
+                                         <div class="col d-flex align-items-end justify-content-end">
+                                             <div class="row">
+                                                 <div class="col">
+                                                     <button type="reset" id="cancel-menutype-{{this.id}}" class="btn">Cancel</button>
+                                                 </div>
+                                                 <div class="col">
+                                                     <button type="submit" class="btn btn-warning">Update</button>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </form>
                              </td>
                          </tr>
                          <tr id="menutype-{{this.id}}">

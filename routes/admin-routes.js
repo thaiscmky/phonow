@@ -35,6 +35,17 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 
 });
 
+//search category by name
+router.get('/searchcategory/',ensureAuthenticated,(req, res) => {
+    const title = 'Pho Now\'s menu subcategories';
+    db.menu_category.findAll({where:{category_name : req.query.name}}).then((data) => {
+        res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
+
+    }).catch((err) => {
+        throw err
+    });
+  
+});
 // -------- Menu types route
 
 router.get('/categories', ensureAuthenticated, (req, res) => {
@@ -79,9 +90,7 @@ router.get('/menuitems', ensureAuthenticated, (req, res) => {
 });
 
 router.get('/settings', ensureAuthenticated, (req, res) => {
-
     const title = 'Pho Now\'s restaurant settings';
-
     db.restaurant_hour.findAll({
     }).then(function (resHours) {
         res.render('./admin/settings', { layout: 'main-admin', title: title, settings: resHours});
@@ -90,22 +99,9 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
 
 // ---------- Add category route
 router.post('/category', ensureAuthenticated,(req, res) => {
-    /*console.log(req.body);
-    db.menu_category.create(
-        {
-            category_name: req.body.category_name,
-            category_description: req.body.category_description,
-            isActive: true
-        }
-    ).catch((err) => {
-        throw err
-
-    }).then((data) => {
-        console.log(data);
-    })*/
     values = {
-        "category_name": "chicken pox",
-        "category_description": "it's okay",
+        "category_name": req.body.category_name,
+        "category_description": req.body.category_description,
         "isActive": true
     };
 
@@ -115,9 +111,8 @@ router.post('/category', ensureAuthenticated,(req, res) => {
 
     let options = {"method":"POST", "uri": queryUrl, "json": true, "body" : values};
     request(options).then(parsedBody => {
-        /*let menuTypes = { list: response };
-        res.render('./admin/categories', { layout: 'main-admin', title: title, args: menuTypes });*/
-        res.json(parsedBody);
+        let settings = { list: parsedBody };
+         res.render('./admin/categories', { layout: 'main-admin', title: title, args: settings });
     }).catch(error => {
         //res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
         res.json(error);
@@ -134,15 +129,48 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.render('./admin/index', { layout: 'main-admin' });
 });
 
-// -------- Authorized route - dashboard
-router.get('/dash',ensureAuthenticated, (req, res) => {
-    res.render('./admin/dash-sample', { layout: 'main-admin' });
+//add resturant_hours 
+router.post('/addresturanthours',ensureAuthenticated, (req, res) => {
+    db.restaurant_hour.create({
+        day_name: req.body.day_name,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time,
+        isActive: true
+    }).then((result) => {
+        //res.json(result);
+    }).catch((err) => {
+        throw err;
+    });
 });
 
+//update resturant_hours 
+router.put('/editresturanthours', ensureAuthenticated,(req, res) => {
+    db.restaurant_hour.update({
+        day_name: req.body.day_name,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time,
+        isActive: req.body.isActive
+    }, { where: { id: req.body.id } }).then((result) => {
+        //res.json(result);
+    }).catch((err) => {
+        throw err;
+    });
+});
 
-//TODO review other routes
+//update categories
+router.put('/editcategories/',(req, res) => {
+    console.log(req.body );
+    db.menu_category.update({
+        category_name: req.body.name,
+        category_description: req.body.discription
+        // isActive: req.body.isActive
+    }, { where: { id:req.body.id } }).then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        throw err;
+    });
 
-
+});
 
 module.exports = router;
 
