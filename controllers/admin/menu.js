@@ -19,19 +19,22 @@ let menu = {
         let categories = {};
 
         let menutype = new Controller('menu_type');
-        return menutype.getData().then(menuData => {
-            menuTypes = menuData;
-            menu.getCategories().then(categoriesData => {
-                categories = categoriesData;
-                menu.getItems().then(menuData => {
-                    menuItems = menuData;
-                    args.categories = categories;
-                    args.menuTypes = menuTypes;
-                    args.menuItems = menuItems;
-                    return args;
+
+        return menutype.getData()
+            .then(menuData => {
+                menuTypes = menuData;
+                menu.getCategories()
+                    .then(categoriesData => {
+                        categories = categoriesData;
+                        menu.getItems()
+                        .then(menuData => {
+                            menuItems = menuData;
+                            args.categories = categories;
+                            args.menuTypes = menuTypes;
+                            args.menuItems = menuItems;
+                            return args;
                 });
             });
-
         }).catch(err => JSON.stringify(err));
     },
     insertCategory: async (values) => {
