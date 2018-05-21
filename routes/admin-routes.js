@@ -40,7 +40,7 @@ router.get('/subcategories', ensureAuthenticated, (req, res) => {
 router.get('/categories', ensureAuthenticated, (req, res) => {
     const host = 'http://'+req.headers.host;
     const title = 'Pho Now\'s menu categories';
-    const queryUrl = host + '/categories';
+    const queryUrl = host + '/api/categories';
 
     let options = {"method":"GET", "uri": queryUrl, "json": true};
     request(options).then(response => {
