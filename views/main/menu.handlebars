@@ -1,0 +1,32 @@
+{{> main/_navbar}}
+<section class="mini-hero">
+    <div class="menu-hero mini-hero-img"></div>
+</section>
+<section id="menu" class="section">
+    <div class="sub title text-center">
+        <a>MENU</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav id="menu-nav">
+                    <ul class="row no-gutters text-center" style="width:100%">
+                        {{#each menu.menuitem.menu_types}}
+                        <li class="nav-category col-lg col-md-3" style="order:8" data-categoryname={{id}}>
+                            <a class="hvr-under">{{name}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row content no-gutters">
+            <div class="col-12">
+                <div id="menu-content">
+                    <div id="menu-content-loader" class="text-center" style="font-size: 4rem;">Loading</div>
+                    {{>main/_menuitems}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

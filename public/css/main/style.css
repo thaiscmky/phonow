@@ -1,0 +1,354 @@
+/* Root Stuff for media query stuff */
+html, body {font-size: 1rem; background: #111}
+body {font-size: 1em; font-family: '', sans-serif;     overflow-x: hidden;
+}
+
+/* This is the footer fixer */
+
+/* Gets rid of stupid blue outline on chrome HNGH RAGEFACE */
+button:focus {outline:none;}
+
+/*********************/
+/*   Main-Page CSS   */
+/*********************/
+
+/* Main Hero CSS */
+section.hero {
+    position: relative;
+    height: 100vh;    
+    background: url("../../img/main/main-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    resize: both;    
+    z-index: 1;
+}
+
+.hero-island .title {
+    font-size: 2.618em;
+    color: #333;
+    margin-bottom: 1rem;
+    
+}
+
+.hero-island .subtitle {
+    font-size: 1.618rem;
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+.hero-center {
+    position: absolute;    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+    z-index: 1;
+}
+
+/* End Main Hero CSS */
+
+/* Main Section CSS */
+section.section {    
+    position: relative;
+    padding: 1.618em 0;
+    background-color: #111;    
+    z-index: 2;
+}
+
+section.menu {
+    background-color: #111;
+}
+
+section.info {
+    background-color: #500;
+}
+
+section.contact {
+    background-color: #555;
+}
+
+.title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2.618em;
+    color: #fff;    
+    margin-bottom: 1rem;        
+}
+
+.subtitle {    
+    font-size: 1rem;
+    color: #fff;
+    margin: 1rem 0;    
+}
+
+.sec-sub.subtitle {
+    border-left: 3px solid #fff;
+    border-right: 3px solid #fff;
+}
+
+.main-sub.subtitle {
+    font-weight: bold;
+    white-space:nowrap
+}
+
+.navlink-custom {
+    font-family: 'Economica', sans-serif;    font-size: 1.618em;    
+    font-weight: bold;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.main-brand {
+    position: relative;
+    top: -10px;
+}
+
+.section-img {
+    height: 300px;
+    width: 300px;
+    border: #fff solid 5px;
+}
+
+/* End Main Section CSS */
+
+/*********************/
+/* End Main-Page CSS */
+/*********************/
+
+/*********************/
+/*   Sub-Pages CSS   */
+/*********************/
+
+/*   Menu Page CSS   */
+
+#menu-nav {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+#menu-nav > ul {
+    list-style-type: none;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.nav-category {
+    margin: 0 auto;
+    margin-bottom: .618em;    
+}
+
+.nav-category > a {
+    cursor: pointer !important;    
+}
+
+.category > .title {
+    color: #333;
+    font-size: 2.618rem;
+}
+
+#menu-content {
+    background: #fff;
+    padding: 1.618em;    
+}
+
+.items {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.item {
+    border-top: 1px solid #333;
+}
+
+.item-name {
+    font-size: 1.618em;
+    float: left;
+}
+
+.item-price {
+    font-size: 1.618em;
+}
+
+.item-viet {
+    font-size: 1rem;        
+}
+
+/* End Menu Page CSS */
+
+/*   About Page CSS   */
+
+#info {
+    color: #fff;  
+}
+
+#info > div {
+    margin-bottom: 1rem;
+}
+
+.small-title {
+    margin-bottom: .618em;
+}
+
+.small-title > span {
+    font-weight: bold;
+    border-bottom: 3px solid #fff;
+    margin-bottom: .618em;
+}
+
+#contact > div,
+#contact > a {
+    margin-bottom: .618em;
+}
+
+#map {
+    height: 500px;
+}
+
+/* End About Page CSS */
+
+/*   Contact Page CSS   */
+
+#contact {
+    color: #fff;
+}
+
+.name {
+    font-size: 1.618rem;    
+}
+
+.nameplate {
+    margin-bottom: 2.618rem;
+}
+
+#owner-img {
+    margin-bottom: 2.618rem;
+}
+
+.message {
+    margin-bottom: 1.618rem;
+}
+
+.thanks {
+    padding-bottom: 1.618rem;
+    margin-bottom: 1.168rem;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* End Contact Page CSs */
+
+/* General Sub Page CSS */
+
+.about-hero {    
+    background: url("../../img/main/about-hero.png");
+}
+
+.menu-hero {    
+    background: url("../../img/main/menu-hero.png");
+}
+
+.contact-hero {    
+    background: url("../../img/main/contact-hero.png");
+}
+
+.mini-hero-img {
+    height: 400px;
+    background-size: cover;
+    background-position: center;    
+}
+
+.sub.title > a {
+    padding: 0 1rem;
+    border-left: 5px solid #500;
+    border-right: 5px solid #500;
+}
+
+/* End General Sub Page CSS */
+
+/* Sug-Pages Nav Bar */
+.navbar-custom {
+    position: absolute;
+    width: 100%;
+}
+
+/* End Sub-Pages Nav Bar */
+
+/*********************/
+/* End Sub-Pages CSS */
+/*********************/
+
+/***********************/
+/*   General classes   */
+/***********************/
+
+.vcenter-img {
+    background: #333;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-black {
+    background: #000;
+    color: #fff;    
+}
+
+.fat-font {
+    font-family: 'Raleway', sans-serif;
+}
+
+.skinny-font {
+    font-family: 'Economica', sans-serif;    
+}
+
+.bg-bt {
+    background: url("../../img/main/bt.png");
+    position: fixed;
+}
+
+.font-c-b {
+    color: #111 !important;
+}
+
+.font-c-w {
+    color: #fff !important;
+}
+
+/***********************/
+/* End General classes */
+/***********************/
+
+/***************************/
+/*   Bootstrap Overrides   */
+/***************************/
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+  
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.navbar {
+    padding-bottom: 0;
+}
+
+/***************************/
+/* End Bootstrap Overrides */
+/***************************/
+
+/*********************/
+/*   Media Queries   */
+/*********************/
+
+/*********************/
+/* End Media Queries */
+/*********************/

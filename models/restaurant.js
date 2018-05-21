@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     Restaurant.associate = function(models) {
       //TODO  
       Restaurant.hasMany(models.restaurant_hour);
-      Restaurant.hasMany(models.menu_type)
+     
     };
     return Restaurant;
   };

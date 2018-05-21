@@ -1,0 +1,20 @@
+{{#each menu.menuitem.categories}}
+<div class="category" data-categorytype={{menu_type_id}} style="">
+{{!-- <div class="category" data-categoryid={{categoryID}} style="display: none;"> --}}
+    <div class="title">{{name}}</div>
+    <div class="description">{{description}}</div>
+    <ul class="items">        
+        {{#each @root.menu.menuitem.list}}
+        {{#returnSelf item_category ../name}}
+        <li class="item row">
+            <div class="col-10 item-name">{{item_name_english}}
+                <span class="item-viet">{{item_name_vietnamese}}</span>
+            </div>
+            <div class="col-2 item-price text-right">{{item_price}}</div>
+            <div class="col-12 item-des">{{item_description}}</div>
+        </li>
+        {{/returnSelf}}
+        {{/each}}
+    </ul>
+</div>
+{{/each}}
