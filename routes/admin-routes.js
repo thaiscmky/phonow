@@ -28,17 +28,25 @@ router.get('/settings', ensureAuthenticated, (req, res) => {
 // -------- Menu Categories route
 
 router.get('/subcategories',ensureAuthenticated,(req, res) => {
-
     const title = 'Pho Now\'s menu subcategories';
     db.menu_category.findAll({}).then((data) => {
-        //res.json(data);
-          res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
-
+        res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
     }).catch((err) => {
         throw err
     });
 });
 
+//search category by name
+router.get('/searchcategory/',ensureAuthenticated,(req, res) => {
+    const title = 'Pho Now\'s menu subcategories';
+    db.menu_category.findAll({where:{category_name : req.query.name}}).then((data) => {
+        res.render('./admin/subcategories', { layout: 'main-admin', title: title, settings: data });
+
+    }).catch((err) => {
+        throw err
+    });
+  
+});
 // -------- Menu types route
 // TODO data still refers to subcategories, correct it
 
@@ -99,22 +107,22 @@ router.post('/addcategory', (req, res) => {
         category_description:req.body.add_description,
         isActive:true}
    ).then((data)=>{
-    console.log(data);
+    //console.log(data);
+    
+    res.redirect('./subcategories');
  }).catch((err)=>{
     throw err
 });
+
 });
-
-
-
-
 //update categories
-router.put('/editcategories', ensureAuthenticated,(req, res) => {
+router.put('/editcategories/',(req, res) => {
+  console.log(req.body );
     db.menu_category.update({
-        category_name: req.body.category_name,
-        category_description: req.body.discription,
-        isActive: req.body.isActive
-    }, { where: { id: req.body.id } }).then((result) => {
+        category_name: req.body.name,
+        category_description: req.body.discription
+        // isActive: req.body.isActive
+    }, { where: { id:req.body.id } }).then((result) => {
         res.json(result);
     }).catch((err) => {
         throw err;
