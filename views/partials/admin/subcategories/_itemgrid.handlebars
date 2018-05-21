@@ -27,9 +27,9 @@
                                             <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}" required />
                                         </div>
                                         <div class="category">
-                                            <div class="col input-group category">
-                                                {{assignJSON 'menutypes' ../typelist.success}}
-                                                {{assignJSON 'currenttype' (filterObject this.menu_type_id ../typelist.success)}}
+                                            <div class="col input-group category">}
+                                                {{assignJSON 'menutypes' ../typelist}}
+                                                {{assignJSON 'currenttype' (filterObject this.menu_type_id ../typelist)}}
                                                 <select class="form-control" id="category_menutype-{{this.id}}" name="category_menutype-{{this.id}}">
                                                     {{#unless this.currenttype.id}}<option value="">Select..</option>{{/unless}}
                                                     {{#each this.menutypes}}

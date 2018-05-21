@@ -49,6 +49,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         let newcat = {
             category_name: req.body.category_name,
             category_description:req.body.category_description,
+            menu_type_id: req.body.menu_type_id,
             isActive:true
         };
 

@@ -39,6 +39,8 @@ module.exports = {
         return options.inverse(this);
     },
     filterObject: function(id, obj, context){
+        if(typeof  obj === 'undefined' || obj === null)
+            return {};
         return obj.find((obj) =>  obj.id === id);
     }
 };

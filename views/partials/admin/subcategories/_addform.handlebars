@@ -10,12 +10,12 @@
                 </label>
                 <label for="add_menutype" class="col">Add to category
                     <span class="col">
-                        {{assignJSON 'typelist' args.menuTypes}}
+                        {{assignJSON 'typelist' args.menuTypes.success}}
                         <select class="form-control" id="add_menutype" name="add_menutype" required>
                             <option value="">Select..</option>
                             {{#each this.typelist}}
                                 <option value="{{this.id}}">
-                                    {{this.name}}
+                                    {{this.menu_type_name}}
                                 </option>
                             {{/each}}
                         </select>
