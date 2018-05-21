@@ -7,7 +7,7 @@ module.exports = {
         return str;
     },
     capitalize: function(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+        // return string.charAt(0).toUpperCase() + string.slice(1);
     },
     debug: function(value, context){
         console.log(`TYPEOF ${typeof value}`);

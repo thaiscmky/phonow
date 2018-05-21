@@ -8,18 +8,10 @@ $(document).ready(function () {
 function handleAddMenuFormSubmit(event) {
     event.preventDefault();
 
-    var menuItem = {
-        item_name_english: "",
-        item_name_vietnamese: "",
-        item_description: "",
-        item_price: 0,
-        rating: 0,
-        isActive: 1,
-        created_by: "",
-        updatedAt: "",
-        menuTypeId: 0,
-        menuCategoryId: 0
-
+    var newCategory = {
+        category_name: "",
+        category_description: "",
+        isActive: true,
     }
 
     // Don't do anything if the item  name fields hasn't been filled out
@@ -30,18 +22,13 @@ function handleAddMenuFormSubmit(event) {
     menuItem.item_name_english = $("#item_name_english").val();
     menuItem.item_name_vietnamese = $("#item_name_vietnamese").val();
     menuItem.item_description = $("#item_description").val();
-    menuItem.item_price = $("#item_price").val();
-    menuItem.rating = $("#item_rating").val();
-    menuItem.isActive = 1;
-    menuItem.menuTypeId = $("#optionMenuType option:selected").val();
-    menuItem.menuCategoryId = $("#optionMenuCategory option:selected").val();
   
-    addMenu( menuItem);
+    addCategory( newCategory);
 }
 
 
  
-  function addMenu(menuItem) {
-    $.post("/api/menuitem",menuItem);
+  function addCategory(newCategory) {
+    $.post("/api/newCategory",newCategory);
       
   }

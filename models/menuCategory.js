@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     updated_by: {
       type: DataTypes.STRING
     },
+    menu_type_id: {
+      type: DataTypes.INTEGER
+    }
   }, {});
   menuCategory.associate = function (models) {
 
