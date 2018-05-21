@@ -24,7 +24,7 @@ const db=require("./models");
  require('./config/passport')(passport);
 
 //handlebars helpers
-const {truncate,capitalize,debug,assignJSON,equals,returnSelf} = require('./helpers/hbs.js');
+const {truncate,capitalize,debug,assignJSON,equals,returnSelf, filterObject} = require('./helpers/hbs.js');
 
 // Routes
 const auth = require('./routes/auth');
@@ -41,7 +41,8 @@ app.engine('handlebars', exphbs({
         debug: debug,
         assignJSON: assignJSON,
         equals: equals,
-        returnSelf: returnSelf
+        returnSelf: returnSelf,
+        filterObject: filterObject
     },
     defaultLayout: 'main',
 }));

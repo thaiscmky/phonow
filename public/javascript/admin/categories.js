@@ -7,7 +7,6 @@ $(document).ready(function () {
 function onAddNew(){
     $(".newmenutype").submit(function( event ) {
             event.preventDefault();
-            var formid = $(this).id;
             var formdata = $(this).serializeArray();
             var values = formdata.map(field => field.value);
             var request = {
@@ -20,7 +19,7 @@ function onAddNew(){
 
         $.ajax({
             url: '/api/category',
-            type: 'post',
+            type: 'put',
             data: JSON.stringify(request),
             headers: {
                 "x-auth-token": localStorage.accessToken,
