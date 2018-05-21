@@ -60,6 +60,7 @@ class Controller {
                 let data = models;
                 return data;
             })
+            .then( id => this.getById(id))
             .catch((err) => err);
         return this.response = data;
     }
@@ -72,6 +73,7 @@ class Controller {
                 let data = models;
                 return data;
             })
+            .then( id => this.getById(id))
             .catch((err) => err);
         return this.response = data;
     }
