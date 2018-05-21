@@ -38,4 +38,7 @@ module.exports = {
         }
         return options.inverse(this);
     },
+    filterObject: function(id, obj, context){
+        return obj.find((obj) =>  obj.id === id);
+    }
 };

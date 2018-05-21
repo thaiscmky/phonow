@@ -1,81 +1,93 @@
-<div class="row my-4 mx-0 grid" id="category-items">
+<div class="row my-4 mx-0 grid" id="subcategory-items">
     <div class="col">
-        <form id="editcategories" method="post">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead class="thead-inverse">
-                    <tr>
-                        <th>#ID</th>
-                        <th>Name</th>
-                        <th>In Category</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#if args.list.success}}
-                        {{#each args.list.success}}
-                            <tr class="edit-mode" id="edit-category-{{this.id}}">
-                                <td class="id">
-                                    <p>{{this.id}}</p>
-                                    <input id="category_id" name="category_id" type="hidden" value="{{this.id}}" required />
-                                </td>
-                                <td class="name">
-                                    <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}" required />
-                                </td>
-                                <td class="category">
-                                    <div class="col input-group category">
-                                        {{assignJSON 'menutypes' args.list.menutypes}}
-                                        {{assignJSON 'currenttype' this.category_menutype}}
-                                        <select class="form-control" id="category_menutype-{{this.id}}">
-                                            {{#unless this.currenttype}}<option value="">Select..</option>{{/unless}}
-                                            {{#each this.menutypes}}
-                                                <option value="{{this.id}}"
-                                                        {{#if (equals this.name ../this.currenttype)}}selected="selected"{{/if}}
-                                                >
-                                                    {{this.name}}
-                                                </option>
-                                            {{/each}}
-                                        </select>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>#ID</th>
+                    <th>Name</th>
+                    <th>In Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#if args.list.success}}
+                    {{#each args.list.success}}
+                        <tr class="edit-mode">
+                            <td colspan="6">
+                                <form id="edit-category-{{this.id}}">
+                                    <div class="form-row">
+                                        <div class="id">
+                                            <p>{{this.id}}</p>
+                                            <input id="category_id" name="category_id" type="hidden" value="{{this.id}}" required>
+                                        </div>
+                                        <div class="col-3 name">
+                                            <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}" required />
+                                        </div>
+                                        <div class="category">
+                                            <div class="col input-group category">
+                                                {{assignJSON 'menutypes' ../typelist.success}}
+                                                {{assignJSON 'currenttype' (filterObject this.menu_type_id ../typelist.success)}}
+                                                <select class="form-control" id="category_menutype-{{this.id}}" name="category_menutype-{{this.id}}">
+                                                    {{#unless this.currenttype.id}}<option value="">Select..</option>{{/unless}}
+                                                    {{#each this.menutypes}}
+                                                        <option value="{{this.id}}"
+                                                                {{#if (equals this.menu_type_name ../this.currenttype.menu_type_name)}}selected="selected"{{/if}}
+                                                        >
+                                                            {{this.menu_type_name}}
+                                                        </option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col description">
+                                            <textarea class="form-control" name="category_description-" id="category_description-{{this.id}}">{{this.category_description}}</textarea>
+                                        </div>
+                                        <div class="col input-group">
+                                            <div class="row">
+                                                <div class="col-3 status my-2">
+                                                    <label class="form-check-label switch">
+                                                        <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}}>
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="col d-flex align-items-end justify-content-end">
+                                                    <div class="row action">
+                                                        <div class="col">
+                                                            <button type="reset" id="cancel-category-{{this.id}}" class="btn">Cancel</button>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="submit" class="btn btn-warning">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                                <td class="description">
-                                    <textarea class="form-control" name="category_description-" id="category_description-{{this.id}}">{{this.category_description}}</textarea>
-                                </td>
-                                <td class="form-check input-group status">
-                                    <div class="col input-group status my-2">
-                                        <label class="form-check-label switch">
-                                            <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-" name="status-{{this.id}}" {{#if this.isActive}}checked{{/if}} required>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                </td>
-                                <td class="action">
-                                    <button type="reset" class="btn" id="cancel-category-{{this.id}}" name="cancel-category-{{this.id}}">Cancel</button>
-                                    <button type="submit" class="btn btn-warning" id="update-category-{{this.id}}" name="update-category-{{this.id}}">Update</button>
-                                </td>
-                            </tr>
-                            <tr id="category-{{this.id}}">
-                                <td class="id">{{this.id}}</td>
-                                <td class="name">{{this.category_name}}</td>
-                                <td class="category">{{this.category_menutype}}</td>
-                                <td class="description">{{this.category_description}}</td>
-                                <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                                <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
-                            </tr>
-                        {{/each}}
-                    {{else}}
-                        <tr class="no-results">
-                            <td colspan="7">
-                                <p>There are no categories in your menu</p>
-                                <p><strong>Error</strong> {{args.list.error}}</p>
+                                </form>
                             </td>
                         </tr>
-                    {{/if}}
-                    </tbody>
-                </table>
-            </div>
+                        <tr id="category-{{this.id}}">
+                            <td class="id">{{this.id}}</td>
+                            <td class="name">{{this.category_name}}</td>
+                            <td class="menutype">{{this.currenttype.menu_type_name}}</td>
+                            <td class="description">{{this.category_description}}</td>
+                            <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
+                            <td class="action"><button class="fa fa-edit"></button> <button class="fa fa-trash"></button></td>
+                        </tr>
+                    {{/each}}
+                {{else}}
+                    <tr class="no-results">
+                        <td colspan="7">
+                            <p>There are no subcategories in your menu{{args.list.error}}</p>
+                        </td>
+                    </tr>
+                {{/if}}
+                </tbody>
+            </table>
+        </div>
         </form>
     </div>
 </div>

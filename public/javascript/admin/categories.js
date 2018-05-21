@@ -61,18 +61,19 @@ $(document).ready(function () {
 
     //show and hide 
 
-    $(".fa-edit ").on('click', function () {
+    $("tr[id^='category-'").on('click', '.fa-edit', function () {
+        console.log('hi');
         var id = $(this).val();
         $("#edit-category-" + id).show();
         $("#category-" + id).hide();
-    })
+    });
     $(".fa-trash ").on('click', function () {
         var id = $(this).val();
 
         $("#edit-category-" + id).show();
         $("#category-" + id).hide();
 
-       
+
     })
 
 });

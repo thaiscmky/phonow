@@ -1,15 +1,14 @@
-<div class="edit-mode">
+<div class="add-mode col">
     <fieldset class="card card-body">
     <h2>Add a Subcategory</h2>
-        <form id="newcategory" method="post">
-            <div class="form-group">
-                <div class="form-row">
-                    <div class="col input-group">
-                        <label for="add_name">Name</label>
-                        <input type="text" class="form-control" name="add_name" id="add_name" required/>
-                    </div>
-                    <div class="col input-group">
-                        <label for="add_menutype">Add to category</label>
+        <form id="newcategory">
+            <div class="form-group form-row">
+                <div class="col input-group">
+                    <label for="add_name">Name
+                     <input type="text" class="form-control" name="add_name" id="add_name" required/></label>
+                </div>
+                <div class="col input-group">
+                    <label for="add_menutype">Add to category
                         {{assignJSON 'typelist' args.menuTypes}}
                         <select class="form-control" id="add_menutype" name="add_menutype" required>
                             <option value="">Select..</option>
@@ -19,13 +18,14 @@
                                 </option>
                             {{/each}}
                         </select>
-                    </div>
+                    </label>
                 </div>
             </div>
             <div class="form-group form-row">
                     <div class="col input-group">
-                        <label for="add_description">Description</label>
-                        <textarea class="form-control" name="add_description" id="add_description" ></textarea>
+                        <label for="add_description">Description
+                            <textarea class="form-control" name="add_description" id="add_description" ></textarea>
+                        </label>
                     </div>
             </div>
             <div class="form-group form-row actions">

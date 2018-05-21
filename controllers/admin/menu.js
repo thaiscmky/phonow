@@ -19,13 +19,11 @@ let menu = {
     },
     insertCategory: async (values) => {
         let category = new Controller('menu_category');
-        return category.createData(values).then(categoryData => {
-            return {"id": categoryData.id};
-        }).catch(err => JSON.stringify(err));
+        return category.createData(values).then(categoryData => categoryData).catch(err => JSON.stringify(err));
     },
     updateCategory: async (id, values) => {
         let category = new Controller('menu_category');
-        return category.setData(id,values).then(categoryData => categoryData)
+        return category.setData(id,values).then(categoryData => JSON.stringify(categoryData))
             .catch(err => JSON.stringify(err));
     },
     updateMenuItem: async (id, values) => {

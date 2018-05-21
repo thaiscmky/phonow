@@ -1,34 +1,53 @@
-console.log('LOADED: admin/menu.js');
-
 $(document).ready(function () {
-    $(document).on("click", "#menuItem-form", handleAddMenuFormSubmit);
+
+    onGridSubmit();
+    onGridEvents();
 });
 
-// A function to handle what happens when the form is submitted to create a new Author
-function handleAddMenuFormSubmit(event) {
-    event.preventDefault();
-
-    var newCategory = {
-        category_name: "",
-        category_description: "",
-        isActive: true,
-    }
-
-    // Don't do anything if the item  name fields hasn't been filled out
-    if (!$("#item_name_english").val().trim().trim()) {
-        return;
-    }
-
-    menuItem.item_name_english = $("#item_name_english").val();
-    menuItem.item_name_vietnamese = $("#item_name_vietnamese").val();
-    menuItem.item_description = $("#item_description").val();
-  
-    addCategory( newCategory);
+function onGridSubmit(){
+    $(".grid form").submit(function( event ) {
+        event.preventDefault();
+        var formid = $(this).id;
+        var formdata = $(this).serializeArray();
+        var values = formdata.map(field => field.value);
+        var request = {
+            id: values[0],
+            category_name: values[1],
+            menu_type_id: values[2],
+            category_description: values[3],
+            isActive: values.length >=5
+        };
+        $(this).parents('.edit-mode').hide();
+        $('.loading').show();
+        $('.spinner').show();
+        $.ajax({
+            url: '/api/category',
+            type: 'put',
+            data: JSON.stringify(request),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            context: this,
+            success: function (response, request) {
+                window.location.reload();
+            }
+        });
+    });
 }
 
+function onGridEvents(){
+    $(".grid tr[id^='category-']").on('click', '.fa-edit', function (e) {
+        e.preventDefault();
+        $(this).parents("tr[id^='category-']").prev().show();
+    });
 
- 
-  function addCategory(newCategory) {
-    $.post("/api/newCategory",newCategory);
-      
-  }
+    $('.grid .action button').on('click', function(e) {
+        $(this).parents('.edit-mode').hide();
+    });
+
+    $(".grid tr[id^='category-']").on('click', '.fa-trash', function (e) {
+        e.preventDefault();
+    })
+}
