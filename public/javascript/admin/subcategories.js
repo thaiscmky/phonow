@@ -7,7 +7,6 @@ $(document).ready(function () {
 function onAddNew(){
     $(".newcategory").submit(function( event ) {
         event.preventDefault();
-        var formid = $(this).id;
         var formdata = $(this).serializeArray();
         var values = formdata.map(field => field.value);
         var request = {

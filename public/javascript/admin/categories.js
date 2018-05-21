@@ -5,20 +5,20 @@ $(document).ready(function () {
 });
 
 function onAddNew(){
-    $(".newmenutype").submit(function( event ) {
-        event.preventDefault();
-        var formid = $(this).id;
-        var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        var request = {
+    $("#newmenutype").submit(function( event ) {
+            event.preventDefault();
+            var formdata = $(this).serializeArray();
+            var values = formdata.map(field => field.value);
+            var request = {
             menu_type_name: values[0],
             menu_type_description: values[1]
         };
 
         $('.loading').show();
         $('.spinner').show();
+
         $.ajax({
-            url: '/api/category',
+            url: '/api/menutype',
             type: 'post',
             data: JSON.stringify(request),
             headers: {
@@ -50,7 +50,7 @@ function onGridSubmit(){
         $('.loading').show();
         $('.spinner').show();
         $.ajax({
-            url: '/api/category',
+            url: '/api/menutype',
             type: 'put',
             data: JSON.stringify(request),
             headers: {
@@ -77,6 +77,7 @@ function onGridEvents(){
         $(this).parents('.edit-mode').hide();
     });
     //On request to delete row
+
     $(".grid tr[id^='menutype-']").on('click', '.fa-trash', function (e) {
         e.preventDefault();
         //TODO
