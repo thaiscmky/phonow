@@ -12,6 +12,7 @@
                      </tr>
                  </thead>
                  <tbody>
+                     {{debug args}}
                  {{#if args.list.success}}
                     {{#each args.list.success}}
                          <tr class="edit-mode" id="edit-menutype-{{this.id}}">
@@ -53,6 +54,7 @@
                              </td>
                          </tr>
                          <tr id="menutype-{{this.id}}">
+                             {{debug this.id }}
                              <td class="id">{{this.id}}</td>
                              <td class="name">{{this.menu_type_name}}</td>
                              <td class="description">{{this.menu_type_description}}</td>

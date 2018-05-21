@@ -21,7 +21,7 @@ const app = express();
 const db=require("./models");
 
 //pasport config
-require('./config/passport')(passport);
+ require('./config/passport')(passport);
 
 //handlebars helpers
 const {truncate,capitalize,debug,assignJSON,equals,returnSelf, filterObject} = require('./helpers/hbs.js');
