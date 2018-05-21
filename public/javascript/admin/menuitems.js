@@ -5,6 +5,7 @@ $(document).ready(function () {
 
 function handleUpdateMenuFormSubmit(event)
 {
+    event.preventDefault();
     console.log( $( this ).serializeArray() );
 }
 // A function to handle what happens when the form is submitted to create a new Author
@@ -23,7 +24,7 @@ function handleAddMenuFormSubmit(event) {
         menuTypeId: 0,
         menuCategoryId: 0
 
-    }
+    };
 
     // Don't do anything if the item  name fields hasn't been filled out
     if (!$("#add_name_english").val().trim().trim()) {
@@ -39,7 +40,7 @@ function handleAddMenuFormSubmit(event) {
     menuItem.menuTypeId = $("#add_menutype option:selected").val();
     menuItem.menuCategoryId = $("#add_category option:selected").val();
   
-    addMenu( menuItem);
+    addMenu(menuItem);
 }
 
 
