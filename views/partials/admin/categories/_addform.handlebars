@@ -1,12 +1,12 @@
 <div class="edit-mode">
     <fieldset class="card card-body">
     <h2>Add a category</h2>
-        <form id="newmenutype" action="/api/addmenutype" method="post">
+        <form id="newmenutype" method="post">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col input-group">
                         <label for="add_name">Category Name</label>
-                        <input type="text" class="form-control" name="add_name" id="add_name"/>
+                        <input type="text" class="form-control" name="add_name" id="add_name" required />
                     </div>
                 </div>
                 <div class="form-row">

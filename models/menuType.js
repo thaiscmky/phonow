@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    menuCategoryId: {
+        type:DataTypes.INTEGER
+    },
     created_by: {
       type: DataTypes.STRING
     },
