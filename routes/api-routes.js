@@ -46,6 +46,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
      */
 
     router.post('/subcategory', ensureAuthenticated, (req,res)=>{
+        
         let newcat = {
             category_name: req.body.category_name,
             category_description:req.body.category_description,
@@ -61,13 +62,12 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     });
 
     router.post('/category', ensureAuthenticated, (req,res)=>{
-        let newcat = {
-            category_name: req.body.category_name,
-            category_description:req.body.category_description,
+        let newtype= {
+            menu_type_name: req.body.menu_type_name,
+            menu_type_description:req.body.menu_type_description,
             isActive:true
         };
-
-        menuController.insertCategory(newcat).then( data => {
+        menuController.insertType(newtype).then( data => {
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});

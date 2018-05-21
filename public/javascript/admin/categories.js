@@ -5,19 +5,19 @@ $(document).ready(function () {
 });
 
 function onAddNew(){
-    $(".newcategory").submit(function( event ) {
-        event.preventDefault();
-        var formid = $(this).id;
-        var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        var request = {
-            category_name: values[0],
-            menu_type_id: values[1],
-            category_description: values[2]
+    $(".newmenutype").submit(function( event ) {
+            event.preventDefault();
+            var formid = $(this).id;
+            var formdata = $(this).serializeArray();
+            var values = formdata.map(field => field.value);
+            var request = {
+            menu_type_name: values[0],
+            menu_type_description: values[1]
         };
 
         $('.loading').show();
         $('.spinner').show();
+
         $.ajax({
             url: '/api/category',
             type: 'post',
@@ -43,10 +43,9 @@ function onGridSubmit(){
         var values = formdata.map(field => field.value);
         var request = {
             id: values[0],
-            category_name: values[1],
-            menu_type_id: values[2],
-            category_description: values[3],
-            isActive: values.length >=5
+            menu_type_name: values[1],
+            menu_type_description: values[2],
+            isActive: values.length >=4
         };
         $(this).parents('.edit-mode').hide();
         $('.loading').show();
@@ -70,16 +69,17 @@ function onGridSubmit(){
 
 function onGridEvents(){
     //On request to edit row
-    $(".grid tr[id^='category-']").on('click', '.fa-edit', function (e) {
+    $(".grid tr[id^='menutype-']").on('click', '.fa-edit', function (e) {
         e.preventDefault();
-        $(this).parents("tr[id^='category-']").prev().show();
+        $(this).parents("tr[id^='menutype-']").prev().show();
     });
     //On request to submit row
     $('.grid .action button').on('click', function(e) {
         $(this).parents('.edit-mode').hide();
     });
     //On request to delete row
-    $(".grid tr[id^='category-']").on('click', '.fa-trash', function (e) {
+
+    $(".grid tr[id^='menutype-']").on('click', '.fa-trash', function (e) {
         e.preventDefault();
         //TODO
     })
