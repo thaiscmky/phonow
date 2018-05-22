@@ -126,6 +126,12 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
+    router.delete('/deleteCategory', (req, res) => {
+        menuController.deleteCategory(req.body.id).then( result => {
+            console.log(result);
+        })
+    });
+
     router.put('/menuitem', (req, res) => {
         let update = {
             item_name_english: req.body.item_name_english,

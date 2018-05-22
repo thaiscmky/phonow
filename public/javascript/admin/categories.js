@@ -80,6 +80,22 @@ function onGridEvents(){
 
     $(".grid tr[id^='menutype-']").on('click', '.fa-trash', function (e) {
         e.preventDefault();
-        //TODO
+       
+        // //TODO
+        // let request = { id: "hi"}
+        // $.ajax({
+        //     url: '/api/deleteMenuType',
+        //     type: 'DELETE',
+        //     data: JSON.stringify(request),
+        //     headers: {
+        //         "x-auth-token": localStorage.accessToken,
+        //         "Content-Type": "application/json"
+        //     },
+        //     dataType: 'json',
+        //     context: this,
+        //     success: function (response, request) {
+        //         window.location.reload();
+        //     }
+        // });
     })
 }
