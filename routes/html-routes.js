@@ -49,7 +49,7 @@ router.get('/menu', (req, res) => {
 // --------------- Store Info
 router.get('/about', (req, res) => {
     const title = 'about';
-    // These are a bunch of dummy objects to be replace with real stuff later please THANKS!
+
     let hours = {};
     let address = {};
     let contact = {};
@@ -73,14 +73,20 @@ router.get('/about', (req, res) => {
 // --------------- Contact Us
 router.get('/contact', (req, res) => {
     const title = 'contact';
-    const address = {
-        fulladdress: '536 East Tidwell RD Houston, TX 77022'
-    }
-    const contact = {
-        phone: '(713) 699-4444',
-        email: 'PhoNowTexas@gmail.com'
-    }
-    res.render('./main/contact', { title: title, address: address, contact: contact });
+
+    let address = {};
+    let contact = {};
+
+    db.restaurant.findAll().then(function (data) {
+        address = getAddress(data);
+    }).then(function () {
+        db.restaurant_contact.findAll().then(function (data) {
+            contact = getContact(data);
+        }).then(function () {
+            res.render('./main/contact', { title: title, address: address, contact: contact });
+        });
+    });
+
 });
 
 router.post('/send', (req, res) => {
