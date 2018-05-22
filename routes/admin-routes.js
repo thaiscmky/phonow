@@ -159,7 +159,6 @@ router.put('/editresturanthours', ensureAuthenticated,(req, res) => {
 
 //update categories
 router.put('/editcategories/',(req, res) => {
-    console.log(req.body );
     db.menu_category.update({
         category_name: req.body.name,
         category_description: req.body.discription

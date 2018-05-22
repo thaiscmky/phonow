@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../models');
 const nodemailer = require('nodemailer');
 const menuList = require('../public/javascript/main/dummyobjects/menuList.js');
+const request = require('request-promise');
 
 // -------- Homepage route
 router.get('', (req, res) => {
@@ -12,10 +13,41 @@ router.get('', (req, res) => {
 
 // --------------- Menu
 router.get('/menu', (req, res) => {
+    const host = 'http://' + req.headers.host;
     const title = 'menu';
-    // menuList needs to eventually do this through a DB call
     var menuJson = require('../public/javascript/main/dummyobjects/menuJson.js');
-    res.render('./main/menu', { title: title, menu: menuJson });
+
+    var data = {
+        menuitem: {
+            list: [],
+            categories: [],
+            menu_types: []
+        }
+    };
+
+    db.menu_items.findAll().then(function (menuItem) {
+        menuItem.forEach(function (element) {
+            data.menuitem.list.push(element.dataValues);
+        });
+    }).then(function () {
+        db.menu_category.findAll().then(function (menuCategory) {
+            menuCategory.forEach(function (element) {
+                data.menuitem.categories.push(element.dataValues);
+                console.log(element);
+            });
+        }).then(function () {
+            db.menu_type.findAll().then(function (menuType) {
+                menuType.forEach(function (element) {
+                    data.menuitem.menu_types.push(element.dataValues);
+                });
+            }).then(function () {
+                res.render('./main/menu', { title: title, menu: data });
+            });
+        });
+    });
+
+
+    // res.render('./main/menu', { title: title, menu: menuJson });
 });
 
 // --------------- Store Info
@@ -55,7 +87,7 @@ router.get('/contact', (req, res) => {
 });
 
 router.post('/send', (req, res) => {
-    const emailContent= `
+    const emailContent = `
     <p>New email from Pho Now contact form</p>
     <h3>Details</h3>
     <ul>
@@ -109,7 +141,7 @@ router.post('/send', (req, res) => {
         // Preview only available when sending through an Ethereal account
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     });
-    req.flash('success_msg','Your email has been sent.');
+    req.flash('success_msg', 'Your email has been sent.');
     res.redirect('/contact');
 });
 

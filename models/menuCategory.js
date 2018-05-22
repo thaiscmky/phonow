@@ -10,12 +10,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
+    menu_type_id: {
+        type: DataTypes.INTEGER
+    },
     created_by: {
       type: DataTypes.STRING
     },
     updated_by: {
       type: DataTypes.STRING
-    },
+    }
   }, {});
   menuCategory.associate = function (models) {
 

@@ -4,15 +4,23 @@ $('#menu-content').ready(function () {
 });
 $(document).ready(function () {
     $('.nav-category').on('click', function () {
-        let categoryID = $(this).data('categoryname') + '';
-        console.log(categoryID);
-        loadMenu(categoryID);
+        let menuID = $(this).data('menuid') + '';
+        console.log(menuID);
+        loadMenu(menuID);
     });
     $('#menu-content')
 
-    var loadMenu = function (id) {
+    var loadMenu = function (menuID) {
+        console.log(menuID);
         $('.category').hide();
-        $(`[data-categorytype=${id}]`).show();
+        $(`[data-categorytype=${menuID}]`).show();
     }
     // loadMenu(['1']);
 });
+
+// $.ajax('/api/subcategories/', {
+//     type: 'GET',
+// }).then(function (asdf) {
+//     console.log(asdf);
+//     res.render('./main/menu', { title: title, menu: menuJson, data: asdf });
+// });
