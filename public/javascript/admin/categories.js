@@ -85,7 +85,7 @@ function onGridEvents(){
 
         $.ajax({
             url: '/api/menutype',
-            type: 'DELETE',
+            type: 'delete',
             data: JSON.stringify({id: catId}),
             headers: {
                 "x-auth-token": localStorage.accessToken,
@@ -95,6 +95,8 @@ function onGridEvents(){
             context: this,
             success: function (response, request) {
                 $(this).parents("tr[id^='menutype-']").detach();
+                $('.loading').hide();
+                $('.spinner').hide();
             }
         });
        

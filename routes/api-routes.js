@@ -11,7 +11,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
      */
     router.get('/menuitems', (req, res) => {
         menuController.getItems().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -19,7 +19,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.get('/subcategories', (req, res) => {
         menuController.getCategories().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -27,7 +27,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.get('/categories', (req, res) => {
         menuController.getMenuTypes().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -35,7 +35,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.get('/getresturanthours', (req, res) => {
         restaurantController.getBusinessHours().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -55,7 +55,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         };
 
         menuController.insertCategory(newcat).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -68,7 +68,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             isActive:true
         };
         menuController.insertMenuType(newtype).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -86,7 +86,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         };
 
         menuController.insertMenuItem(newitem).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -105,7 +105,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             }
         }
         restaurantController.udpatetRestaurantHours(values).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -122,7 +122,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             isActive: req.body.isActive
         };
         menuController.updateCategory(req.body.id,update).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -137,7 +137,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         };
         menuController.updateMenuType(req.body.id,update).then( data => {
             console.log(data);
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -155,7 +155,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         };
 
         menuController.updateMenuItem(req.body.id,update).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -175,7 +175,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             }
         }
         restaurantController.udpatetRestaurantHours(values).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });

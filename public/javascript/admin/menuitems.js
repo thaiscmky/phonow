@@ -98,6 +98,8 @@ function onGridEvents(){
             context: this,
             success: function (response, request) {
                 $(this).parents("tr[id^='menuitem-']").detach();
+                $('.loading').hide();
+                $('.spinner').hide();
             }
         });
     })
