@@ -1,88 +1,132 @@
 {{assignJSON 'javascript' 'dash'}}
-<div class="row mb-3">
-    <div class="col-xl-3 col-sm-6 py-2">
-        <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success">
-                <div class="rotate">
-                    <i class="fa fa-list fa-4x"></i>
+<div class="col">
+    <div id="dashboard">
+        <div class="row mb-3">
+            <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card bg-success text-white h-100">
+                    <div class="card-body bg-success">
+                        <div class="rotate">
+                            <i class="fa fa-list fa-4x"></i>
+                        </div>
+                        <h6 class="text-uppercase">Menu Items</h6>
+                        <h1 class="display-4">{{count.items.length}}</h1>
+                    </div>
                 </div>
-                <h6 class="text-uppercase">Menu Items</h6>
-                <h1 class="display-4">134</h1>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 py-2">
-        <div class="card text-white bg-danger h-100">
-            <div class="card-body bg-danger">
-                <div class="rotate">
-                    <i class="fa fa-list fa-4x"></i>
+            <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card text-white bg-danger h-100">
+                    <div class="card-body bg-danger">
+                        <div class="rotate">
+                            <i class="fa fa-list fa-4x"></i>
+                        </div>
+                        <h6 class="text-uppercase">Categories</h6>
+                        <h1 class="display-4">{{count.cats.length}}</h1>
+                    </div>
                 </div>
-                <h6 class="text-uppercase">Categories</h6>
-                <h1 class="display-4">12</h1>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 py-2">
-        <div class="card text-white bg-info h-100">
-            <div class="card-body bg-info">
-                <div class="rotate">
-                    <i class="fa fa-twitter fa-4x"></i>
+            {{!-- TODO contact us UI for the last 10 sent messages
+            <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card text-white bg-info h-100">
+                    <div class="card-body bg-info">
+                        <div class="rotate">
+                            <i class="fa fa-twitter fa-4x"></i>
+                        </div>
+                        <h6 class="text-uppercase">Inbox</h6>
+                        <h1 class="display-4">25</h1>
+                    </div>
                 </div>
-                <h6 class="text-uppercase">Inbox</h6>
-                <h1 class="display-4">25</h1>
             </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 py-2">
-        <div class="card text-white bg-warning h-100">
-            <div class="card-body">
-                <div class="rotate">
-                    <i class="fa fa-user fa-4x"></i>
-                </div>
-                <h6 class="text-uppercase">Users</h6>
-                <h1 class="display-4">5</h1>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row mb-3">
-    <div class="col-lg-12">
-        <div class="card mb-3">
-            <div class="card-header">
-                <h3>Restaurant Information</h3>
-            </div>
-            <div class="card-body">
-                <h4 class="card-title"></h4>
-                <p class="card-text"></p>
-            </div>
-        </div>
-    </div>
-</div>
-{{!-- Dashboard Main Content --}}
-<div class="row mb-3">
-    <div class="col-lg-6">
-        <div class="card mb-3">
-            <div class="card-header">
-                <h3>Menu Management</h3>
-            </div>
-            <div class="card-body">
-                <h4 class="card-title"></h4>
-                <p class="card-text"></p>
-                <button type="button" class="btn btn-warning btn-lg">Add menu items</button>
-            </div>
-        </div>
-    </div>
+              --TODO feature to add and edit admins
 
-    <div class="col-lg-6">
-        <div class="card mb-3">
-            <div class="card-header">
-                <h3>Users Module</h3>
+            <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card text-white bg-warning h-100">
+                    <div class="card-body">
+                        <div class="rotate">
+                            <i class="fa fa-user fa-4x"></i>
+                        </div>
+                        <h6 class="text-uppercase">Users</h6>
+                        <h1 class="display-4">5</h1>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h4 class="card-title"></h4>
-                <p class="card-text"></p>
-                <button type="button" class="btn btn-warning btn-lg">Add a Catagory</button>
+            --}}
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Upcoming Updates</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><span class="badge badge-secondary">New</span> Restaurant settings section being released this August</h5>
+                        <p class="card-text">You'll soon be able to update the store hours and address information without contacting support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Restaurant Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="contact">
+                            <div class="small-title fat-font">
+                                <strong>CONTACT INFORMATION</strong>
+                            </div>
+                            <div id="phone">
+                                <i class="fas fa-phone-square fa-md"></i> Phone: {{contact.phone}}
+                            </div>
+                            <div id="email">
+                                <i class="fas fa-envelope-square fa-md"></i> Email: {{contact.email}}
+                            </div>
+                            <div id="address">
+                                <i class="fas fa-map-marker-alt fa-md"></i> Address: {{address.fulladdress}}
+                            </div>
+                        </div>
+                        <br>
+                        <div id="hours">
+                            <div class="small-title">
+                                <strong>RESTAURANT HOURS</strong>
+                            </div>
+                            {{#each hours}}
+                                <div class="hours">{{this.day_name}}: {{this.start_time}} - {{this.end_time}}</div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- Dashboard Main Content --}}
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Menu Management</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text">Manage or add new items to your restaurant's menu.</p>
+                        <a href="/admin/menuitems" class="btn btn-warning">Add menu items</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Menu Categories</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title"></h4>
+                        <p class="card-text">Manage or add new items to your restaurant's menu.</p>
+                        <a href="/admin/categories" class="btn btn-warning">Add a Catagory</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

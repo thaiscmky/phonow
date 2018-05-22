@@ -78,6 +78,9 @@ input:checked + .slider:before {
 #main .container{
     margin-bottom: 100px;
 }
+
+/*** Misc***/
+
 /***************************/
 /*   Bootstrap Overrides   */
 /***************************/
@@ -109,8 +112,15 @@ input:checked + .slider:before {
     transition-property: color, background-color;
   }
   .hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
-    background-color: #2098D1;
+    background-color: #202020;
     color: white;
+  }
+
+  .nav-link {
+      color: #202020;
+  }
+  .nav-link:hover {
+      color: white;
   }
 /*********************/
 /* End Hover Effects */

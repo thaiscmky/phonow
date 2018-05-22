@@ -25,6 +25,10 @@ let menu = {
         let type = new Controller('menu_type');
         return type.createData(values).then(typeData => typeData).catch(err => JSON.stringify(err));
     },
+    insertMenuItem: async (values) => {
+        let item = new Controller('menu_items');
+        return item.createData(values).then(typeData => typeData).catch(err => JSON.stringify(err));
+    },
     updateCategory: async (id, values) => {
         let category = new Controller('menu_category');
         return category.setData(id,values).then(categoryData => JSON.stringify(categoryData))
@@ -36,16 +40,23 @@ let menu = {
             .catch(err => JSON.stringify(err));
     },
     updateMenuItem: async (id, values) => {
-        let item = new Controller('menu_item');
+        let item = new Controller('menu_items');
         return item.setData(id,values).then(data => data)
             .catch(err => JSON.stringify(err));
     },
-    /**
-     * TODO delete operations
-     */
-    
+
+    deleteCategory: async (id) => {
+        let item = new Controller('menu_category');
+        return item.deleteById(id).then(data => data)
+            .catch(err => JSON.stringify(err));
+    },
     deleteMenuType: async (id) => {
         let item = new Controller('menu_type');
+        return item.deleteById(id).then(data => data)
+            .catch(err => JSON.stringify(err));
+    },
+    deleteMenuItem: async (id) => {
+        let item = new Controller('menu_items');
         return item.deleteById(id).then(data => data)
             .catch(err => JSON.stringify(err));
     },

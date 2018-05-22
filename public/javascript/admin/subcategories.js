@@ -5,20 +5,17 @@ $(document).ready(function () {
 });
 
 function onAddNew(){
-    $(".newcategory").submit(function( event ) {
+    $("#newcategory").submit(function( event ) {
         event.preventDefault();
         var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        var request = {
-            category_name: values[0],
-            menu_type_id: values[1],
-            category_description: values[2]
-        };
+        var request = {};
+        formdata.forEach(field => request[field.name] = field.value);
+        request.isActive = typeof request.isActive !== 'undefined' && request.isActive !== null;
 
         $('.loading').show();
         $('.spinner').show();
         $.ajax({
-            url: '/api/menutype',
+            url: '/api/category',
             type: 'post',
             data: JSON.stringify(request),
             headers: {
@@ -37,21 +34,15 @@ function onAddNew(){
 function onGridSubmit(){
     $(".grid form").submit(function( event ) {
         event.preventDefault();
-        var formid = $(this).id;
         var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        var request = {
-            id: values[0],
-            category_name: values[1],
-            menu_type_id: values[2],
-            category_description: values[3],
-            isActive: values.length >=5
-        };
+        var request = {};
+        formdata.forEach(field => request[field.name] = field.value);
+        request.isActive = typeof request.isActive !== 'undefined' && request.isActive !== null;
         $(this).parents('.edit-mode').hide();
         $('.loading').show();
         $('.spinner').show();
         $.ajax({
-            url: '/api/menutype',
+            url: '/api/category',
             type: 'put',
             data: JSON.stringify(request),
             headers: {
@@ -72,31 +63,38 @@ function onGridEvents(){
     $(".grid tr[id^='category-']").on('click', '.fa-edit', function (e) {
         e.preventDefault();
         $(this).parents("tr[id^='category-']").prev().show();
+        $(this).parents("tr[id^='category-']").hide();
+        $('.grid .action i').css('opacity','0.2');
     });
     //On request to submit row
     $('.grid .action button').on('click', function(e) {
         $(this).parents('.edit-mode').hide();
+        $("tr[id^='category-']").show();
+        $('.grid .action i').css('opacity','1');
     });
     //On request to delete row
     $(".grid tr[id^='category-']").on('click', '.fa-trash', function (event) {
         event.preventDefault();
-        debugger;
-        let  parent  = $(this).parents("tr[id^='category-']").prev();
-        let catId = parent.prevObject[0].id.split("-")[1];
-        console.log(catId);
-      
-        let request = { id: catId === undefined ? -1 : catId}
+        let catId = $(this).parents("tr[id^='category-']")[0].id;
+        catId = parseInt(catId.replace('category-',''));
+
+        $('.loading').show();
+        $('.spinner').show();
+
         $.ajax({
-            url: '/api/deletemenutype',
-            type: 'DELETE',
-            data: JSON.stringify(request),
+            url: '/api/category',
+            type: 'delete',
+            data: JSON.stringify({id: catId}),
             headers: {
                 "x-auth-token": localStorage.accessToken,
                 "Content-Type": "application/json"
             },
             dataType: 'json',
+            context: this,
             success: function (response, request) {
-                window.location.reload();
+                $(this).parents("tr[id^='category-']").detach();
+                $('.loading').hide();
+                $('.spinner').hide();
             }
         });
     })
