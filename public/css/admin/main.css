@@ -78,6 +78,9 @@ input:checked + .slider:before {
 #main .container{
     margin-bottom: 100px;
 }
+
+/*** Misc***/
+
 /***************************/
 /*   Bootstrap Overrides   */
 /***************************/
