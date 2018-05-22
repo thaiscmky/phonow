@@ -29,7 +29,7 @@
                                         <div class="category">
                                             <div class="col input-group category">}
                                                 {{assignJSON 'menutypes' ../typelist}}
-                                                {{assignJSON 'currenttype' (filterObject this.menu_type_id ../typelist)}}
+                                                {{assignJSON 'currenttype' (filterObjectId this.menu_type_id ../typelist)}}
                                                 <select class="form-control" id="category_menutype-{{this.id}}" name="category_menutype-{{this.id}}">
                                                     {{#unless this.currenttype.id}}<option value="">Select..</option>{{/unless}}
                                                     {{#each this.menutypes}}
