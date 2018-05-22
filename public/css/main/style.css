@@ -70,18 +70,52 @@ section.menu > .container > .title {
     font-size: 5em;    
 }
 
-section.menu > .strip {
+.strip {
     position: absolute;
     background: url("../../img/main/menu-strip.png");
-    height: 100px;
-    top: calc(4.236em/2);
+    height: 100px;    
     width: 100%;
     z-index: -1;
+}
+
+.stripmini {
+    position: absolute;
+    background: url("../../img/main/menu-strip.png");
+    height: 30px;    
+    width: 100%;
+    z-index: -1;
+}
+
+.red-bg {
+    background-color: #111;
+    padding: 1rem;
 }
 
 #section-top {
     position: relative;
     top: 2em;
+}
+
+.popped {
+    position: relative;
+    bottom: 50px;
+    background: url("../../img/main/menu-strip.png");
+    padding: 1rem 1.1rem;
+}
+
+.stripmini2 {
+    position: absolute;
+    background: url("../../img/main/menu-strip2.png");
+    height: 50px;    
+    width: 100%;
+    z-index: -1;
+}
+
+.popped2 {
+    position: relative;
+    bottom: 50px;
+    background: url("../../img/main/menu-strip2.png");
+    padding: 1rem;
 }
 
 
@@ -101,18 +135,22 @@ section.info {
 }
 
 .grey-box {
-    
+    padding: 1.618rem 0;
 }
 
 section.contact {
-    /* background-color: #500; */
+    background-color: #111;
 }
 
 .title {
     font-family: 'Raleway', sans-serif;
-    font-size: 2.618em;
+    font-size: 4.236em;
     color: #fff;    
     margin-bottom: 1rem;        
+}
+
+.popped {
+
 }
 
 .subtitle {    
@@ -216,6 +254,10 @@ section.contact {
 /* End Menu Page CSS */
 
 /*   About Page CSS   */
+
+#about {
+    margin: 1.618em 0;
+}
 
 #info {    
     color: #fff;  
@@ -354,6 +396,7 @@ section.contact {
 }
 
 .btn-white {    
+    cursor: pointer;
     padding: .314rem 1.618rem;
     font-family: 'Roboto', sans-serif;
     background-color: #111;
