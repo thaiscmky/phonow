@@ -5,6 +5,12 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+#loginscreen h3 {
+    font-size: 2.4rem;
+    padding-bottom: 1rem;
+    margin-top: 0;
+}
 .hero-text .form-signin{
     background-color:#000;
     color: #f8efda;
@@ -22,10 +28,10 @@
     /* color: white; */
 }
 
-.btn {
+#loginscreen .btn.login {
     background-color: #A11212;
 }
-.btn:hover, .btn:focus {
+#loginscreen .btn.login:hover, .btn.login:focus {
     opacity: 0.9;
     background-color: #d81700;
 }

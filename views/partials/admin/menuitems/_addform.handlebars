@@ -13,11 +13,16 @@
                         <input type="text" class="form-control" name="add_name_vietnamese" id="add_name_vietnamese" />
                     </span>
                 </label>
+                <label for="add_price" class="col">Add Price
+                    <span class="col">
+                        <input type="text" placeholder="$" class="form-control" name="add_price" id="add_price" />
+                    </span>
+                </label>
             </div>
             <div class="form-group form-row mb-0 pt-2">
                 <label for="add_menutype" class="col">Add to category
                     <span class="col">
-                        {{assignJSON 'typelist' args.menuTypes.success}}
+                        {{assignJSON 'typelist' args.menutypes.success}}
                         <select class="form-control" id="add_menutype" name="add_menutype" required>
                             <option value="">Select..</option>
                             {{#each this.typelist}}

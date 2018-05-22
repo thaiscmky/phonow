@@ -74,6 +74,23 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
+    router.post('/menuitem', (req, res) => {
+        let newitem = {
+            item_name_english: req.body.item_name_english,
+            item_name_vietnamese : req.body.item_name_vietnamese,
+            item_price: req.body.item_price,
+            menuCategoryId: req.body.menuCategoryId,
+            menuTypeId: req.body.menuTypeId,
+            isActive: true
+        };
+
+        menuController.insertMenuItem(newitem).then( data => {
+            res.json({'success': data});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
     router.post('/resturanthours', ensureAuthenticated, (req,res)=> {
         let count = req.body.day_name.length;
         let values = [];
@@ -110,9 +127,6 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
-    /**
-     * Put routes
-     */
     router.put('/menutype', (req, res) => {
         let update = {
             category_name: req.body.menu_type_name,
@@ -121,21 +135,6 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         };
         menuController.updateMenuType(req.body.id,update).then( data => {
             res.json({'success': data});
-        }).catch((err)=>{
-            res.json({'error': err});
-        });
-    });
-
-    router.delete('/deletemenutype', (req, res) => {
-        menuController.deleteMenuType(req.body.id).then( result => {
-            res.json({'success': result});
-        }).catch((err)=>{
-            res.json({'error': err});
-        });
-    });
-    router.delete('/deleteCategory', (req, res) => {
-        menuController.deleteCategory(req.body.id).then( result => {
-            res.json({'success': result});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -177,6 +176,33 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             res.json({'error': err});
         });
 
+    });
+
+    /**
+     * Delete Routes
+     */
+    router.delete('/menutype', (req, res) => {
+        menuController.deleteMenuType(req.body.id).then( result => {
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.delete('/category', (req, res) => {
+        menuController.deleteCategory(req.body.id).then( result => {
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.delete('/menuitem', (req, res) => {
+        menuController.deleteMenuItem(req.body.id).then( result => {
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
     });
 
 module.exports = router;
