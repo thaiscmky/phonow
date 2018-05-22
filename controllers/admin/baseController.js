@@ -97,9 +97,16 @@ class Controller {
     }
 
     async deleteById(id) {
-        //TODO
+        // values.raw = true;
+        const data = await this.model.destroy({ where: {id} })
+            .then( models => {
+                let data = models;
+                return data;
+            })
+            .then( id => this.getById(id))
+            .catch((err) => err);
+        return this.response = data;
     }
-
 }
 
 module.exports = Controller;

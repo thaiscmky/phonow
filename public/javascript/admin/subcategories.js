@@ -18,7 +18,7 @@ function onAddNew(){
         $('.loading').show();
         $('.spinner').show();
         $.ajax({
-            url: '/api/category',
+            url: '/api/menutype',
             type: 'post',
             data: JSON.stringify(request),
             headers: {
@@ -51,7 +51,7 @@ function onGridSubmit(){
         $('.loading').show();
         $('.spinner').show();
         $.ajax({
-            url: '/api/category',
+            url: '/api/menutype',
             type: 'put',
             data: JSON.stringify(request),
             headers: {
@@ -78,8 +78,26 @@ function onGridEvents(){
         $(this).parents('.edit-mode').hide();
     });
     //On request to delete row
-    $(".grid tr[id^='category-']").on('click', '.fa-trash', function (e) {
-        e.preventDefault();
-        //TODO
+    $(".grid tr[id^='category-']").on('click', '.fa-trash', function (event) {
+        event.preventDefault();
+        debugger;
+        let  parent  = $(this).parents("tr[id^='category-']").prev();
+        let catId = parent.prevObject[0].id.split("-")[1];
+        console.log(catId);
+      
+        let request = { id: catId === undefined ? -1 : catId}
+        $.ajax({
+            url: '/api/deletemenutype',
+            type: 'DELETE',
+            data: JSON.stringify(request),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            success: function (response, request) {
+                window.location.reload();
+            }
+        });
     })
 }
