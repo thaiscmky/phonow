@@ -33,7 +33,6 @@ router.get('/menu', (req, res) => {
         db.menu_category.findAll().then(function (menuCategory) {
             menuCategory.forEach(function (element) {
                 data.menuitem.categories.push(element.dataValues);
-                console.log(element);
             });
         }).then(function () {
             db.menu_type.findAll().then(function (menuType) {
@@ -45,45 +44,49 @@ router.get('/menu', (req, res) => {
             });
         });
     });
-
-
-    // res.render('./main/menu', { title: title, menu: menuJson });
 });
 
 // --------------- Store Info
 router.get('/about', (req, res) => {
     const title = 'about';
-    // These are a bunch of dummy objects to be replace with real stuff later please THANKS!
-    const hours = {
-        monday: { open: '11:00am', close: '10:00pm' },
-        tuesday: { open: '11:00am', close: '10:00pm' },
-        wednesday: { open: '11:00am', close: '10:00pm' },
-        thursday: { open: '11:00am', close: '10:00pm' },
-        friday: { open: '11:00am', close: '11:00pm' },
-        saturday: { open: '11:00am', close: '11:00pm' },
-        sunday: { open: '11:00am', close: '10:00pm' }
-    }
-    const address = {
-        fulladdress: '536 East Tidwell RD Houston, TX 77022'
-    }
-    const contact = {
-        phone: '(713) 699-4444',
-        email: 'PhoNowTexas@gmail.com'
-    }
-    res.render('./main/about', { title: title, hours: hours, address: address, contact: contact });
+
+    let hours = {};
+    let address = {};
+    let contact = {};
+
+    db.restaurant.findAll().then(function (data) {
+        address = getAddress(data);
+    }).then(function () {
+        db.restaurant_contact.findAll().then(function (data) {
+            contact = getContact(data);
+        }).then(function () {
+            db.restaurant_hour.findAll().then(function (data) {
+                hours = getHours(data);
+            }).then(function () {
+                res.render('./main/about', { title: title, hours: hours, address: address, contact: contact });
+            });
+        });
+    });
+
 });
 
 // --------------- Contact Us
 router.get('/contact', (req, res) => {
     const title = 'contact';
-    const address = {
-        fulladdress: '536 East Tidwell RD Houston, TX 77022'
-    }
-    const contact = {
-        phone: '(713) 699-4444',
-        email: 'PhoNowTexas@gmail.com'
-    }
-    res.render('./main/contact', { title: title, address: address, contact: contact });
+
+    let address = {};
+    let contact = {};
+
+    db.restaurant.findAll().then(function (data) {
+        address = getAddress(data);
+    }).then(function () {
+        db.restaurant_contact.findAll().then(function (data) {
+            contact = getContact(data);
+        }).then(function () {
+            res.render('./main/contact', { title: title, address: address, contact: contact });
+        });
+    });
+
 });
 
 router.post('/send', (req, res) => {
@@ -215,5 +218,36 @@ router.put('/categories/:id', (req, res) => {
         done();
     })
 });
+
+// Tay's Helper functions
+var getAddress = (ormData) => {
+    let data = ormData[0].dataValues;
+    return { fulladdress: `${data.address} ${data.resturant_city}, ${data.restaurant_state} ${data.restaurant_zip}` };
+}
+
+var getContact = (ormData) => {
+    let data = ormData[0].dataValues;
+    // This line below reformats the phone number to correct format. If something is breaking it's probably the line below
+    data.contact_phone1 = `(${data.contact_phone1.substr(0, 3)}) ${data.contact_phone1.substr(3, 3)}-${data.contact_phone1.substr(6)}`;
+    return { phone: `${data.contact_phone1}`, email: `${data.contact_email}` };
+}
+
+var getHours = (ormData) => {
+    let fullobject = {}
+    ormData.forEach(function (element) {
+        for (var key in element.dataValues) {
+            fullobject[element.dataValues.day_name] = {};
+        }
+    });
+    for (var key in fullobject) {
+        ormData.forEach(function (element) {
+            if (key === element.dataValues.day_name) {
+                fullobject[key].open = element.dataValues.start_time;
+                fullobject[key].close = element.dataValues.end_time;
+            }
+        })
+    }
+    return fullobject
+}
 
 module.exports = router;

@@ -27,7 +27,7 @@
                                             <input type="text" class="form-control" name="category_name-{{this.id}}" id="category_name-{{this.id}}" value="{{this.category_name}}" required />
                                         </div>
                                         <div class="category">
-                                            <div class="col input-group category">}
+                                            <div class="col input-group category">
                                                 {{assignJSON 'menutypes' ../typelist}}
                                                 {{assignJSON 'currenttype' (filterObjectId this.menu_type_id ../typelist)}}
                                                 <select class="form-control" id="category_menutype-{{this.id}}" name="category_menutype-{{this.id}}">
@@ -75,7 +75,7 @@
                             <td class="menutype">{{this.currenttype.menu_type_name}}</td>
                             <td class="description">{{this.category_description}}</td>
                             <td class="status">{{#if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                            <td class="action"><button class="fa fa-edit"></button> <button class="fa fa-trash"></button></td>
+                            <td class="action"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i></td>
                         </tr>
                     {{/each}}
                 {{else}}
