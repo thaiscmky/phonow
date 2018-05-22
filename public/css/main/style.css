@@ -438,3 +438,7 @@ section.contact {
 /*********************/
 /* End Media Queries */
 /*********************/
+
+.hours {
+    text-transform: capitalize;
+}
