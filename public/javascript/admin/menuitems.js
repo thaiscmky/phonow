@@ -40,12 +40,14 @@ function onGridSubmit(){
         var formid = $(this).id;
         var formdata = $(this).serializeArray();
         var values = formdata.map(field => field.value);
-        /*var request = {
+        var request = {
             id: values[0],
-            category_name: values[1],
-            menu_type_id: values[2],
-            category_description: values[3],
-            isActive: values.length >=5
+            item_name_english: values[1],
+            item_name_vietnamese: values[2],
+            item_price: values[3],
+            menuCategoryId: values[4],
+            menuTypeId: values[5],
+            isActive: values.length >=6
         };
         $(this).parents('.edit-mode').hide();
         $('.loading').show();
@@ -63,7 +65,7 @@ function onGridSubmit(){
             success: function (response, request) {
                 window.location.reload();
             }
-        });*/
+        });
     });
 }
 

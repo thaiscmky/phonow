@@ -131,7 +131,9 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             item_name_english: req.body.item_name_english,
             item_name_vietnamese : req.body.item_name_vietnamese,
             item_price: req.body.item_price,
-            menuCategoryId: req.body.menuCategoryId
+            menuCategoryId: req.body.menuCategoryId,
+            menuTypeId: req.body.menuTypeId,
+            isActive: req.body.isActive
         };
 
         menuController.updateMenuItem(req.body.id,update).then( data => {
