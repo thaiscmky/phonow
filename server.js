@@ -24,7 +24,7 @@ const db=require("./models");
  require('./config/passport')(passport);
 
 //handlebars helpers
-const {truncate,capitalize,debug,assignJSON,equals,returnSelf, filterObjectId, filterObjectName} = require('./helpers/hbs.js');
+const {truncate,capitalize,debug,assignJSON,equals,returnSelf, filterObjectId, filterObjectName,formattedPrice} = require('./helpers/hbs.js');
 
 // Routes
 const auth = require('./routes/auth');
@@ -43,7 +43,8 @@ app.engine('handlebars', exphbs({
         equals: equals,
         returnSelf: returnSelf,
         filterObjectId: filterObjectId,
-        filterObjectName: filterObjectName
+        filterObjectName: filterObjectName,
+        formattedPrice: formattedPrice
     },
     defaultLayout: 'main',
 }));

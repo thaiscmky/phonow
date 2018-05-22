@@ -47,5 +47,11 @@ module.exports = {
         if(typeof  obj === 'undefined' || obj === null)
             return {};
         return obj.find((obj) =>  obj[name] === name);
+    },
+    formattedPrice: function formatDollar(num) {
+        var p = num.toFixed().split('.');
+        return '$' + p[0].split('').reverse().reduce(function (acc, num, i, orig) {
+            return num == '-' ? acc : num + (i && !(i % 3) ? ',' : '') + acc;
+        }, '');
     }
 };
