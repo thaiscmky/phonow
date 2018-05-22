@@ -11,7 +11,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
      */
     router.get('/menuitems', (req, res) => {
         menuController.getItems().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -19,7 +19,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.get('/subcategories', (req, res) => {
         menuController.getCategories().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -27,7 +27,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.get('/categories', (req, res) => {
         menuController.getMenuTypes().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -35,7 +35,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.get('/getresturanthours', (req, res) => {
         restaurantController.getBusinessHours().then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -49,13 +49,13 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         
         let newcat = {
             category_name: req.body.category_name,
-            category_description:req.body.category_description,
+            category_description: req.body.category_description,
             menu_type_id: req.body.menu_type_id,
             isActive:true
         };
 
         menuController.insertCategory(newcat).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -68,7 +68,25 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             isActive:true
         };
         menuController.insertMenuType(newtype).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.post('/menuitem', (req, res) => {
+        let newitem = {
+            item_name_english: req.body.item_name_english,
+            item_name_vietnamese : req.body.item_name_vietnamese,
+            item_price: req.body.item_price,
+            item_description: req.body.item_description,
+            menuCategoryId: req.body.menuCategoryId,
+            menuTypeId: req.body.menuTypeId,
+            isActive: true
+        };
+
+        menuController.insertMenuItem(newitem).then( data => {
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -87,7 +105,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             }
         }
         restaurantController.udpatetRestaurantHours(values).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -104,38 +122,22 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             isActive: req.body.isActive
         };
         menuController.updateCategory(req.body.id,update).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
     });
 
-    /**
-     * Put routes
-     */
     router.put('/menutype', (req, res) => {
         let update = {
-            category_name: req.body.menu_type_name,
-            category_description: req.body.menu_type_description,
-            isActive: req.body.isActive
+            menu_type_name: req.body.menu_type_name,
+            menu_type_description: req.body.menu_type_description,
+            isActive: req.body.isActive,
+            menuCategoryId: 0 //TODO remove this table and its relationship from models
         };
         menuController.updateMenuType(req.body.id,update).then( data => {
-            res.json({'success': data});
-        }).catch((err)=>{
-            res.json({'error': err});
-        });
-    });
-
-    router.delete('/deletemenutype', (req, res) => {
-        menuController.deleteMenuType(req.body.id).then( result => {
-            res.json({'success': result});
-        }).catch((err)=>{
-            res.json({'error': err});
-        });
-    });
-    router.delete('/deleteCategory', (req, res) => {
-        menuController.deleteCategory(req.body.id).then( result => {
-            res.json({'success': result});
+            console.log(data);
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -146,13 +148,14 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             item_name_english: req.body.item_name_english,
             item_name_vietnamese : req.body.item_name_vietnamese,
             item_price: req.body.item_price,
+            item_description: req.body.item_description,
             menuCategoryId: req.body.menuCategoryId,
             menuTypeId: req.body.menuTypeId,
             isActive: req.body.isActive
         };
 
         menuController.updateMenuItem(req.body.id,update).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
@@ -172,11 +175,41 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             }
         }
         restaurantController.udpatetRestaurantHours(values).then( data => {
-            res.json({'success': data});
+            res.json({'success': data.reverse()});
         }).catch((err)=>{
             res.json({'error': err});
         });
 
+    });
+
+    /**
+     * Delete Routes
+     */
+    router.delete('/menutype', (req, res) => {
+        let id = parseInt(req.body.id);
+        menuController.deleteMenuType(id).then( result => {
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.delete('/category', (req, res) => {
+        let id = parseInt(req.body.id);
+        menuController.deleteCategory(id).then( result => {
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.delete('/menuitem', (req, res) => {
+        let id = parseInt(req.body.id);
+        menuController.deleteMenuItem(id).then( result => {
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
     });
 
 module.exports = router;

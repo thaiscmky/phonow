@@ -145,6 +145,7 @@ html {
 
 .grid .table-responsive .edit-mode{
     display: none;
+    background-color: #F2F2F2;
 }
 
 form .action {
@@ -169,7 +170,7 @@ form .action button[type="reset"]:hover{
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
-    z-index: 999;
+    z-index: 2200;
     font-weight: bold;
 }
 .panel.loading {
@@ -182,6 +183,7 @@ form .action button[type="reset"]:hover{
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.7);
-    z-index: 99;
+    z-index: 2000;
     cursor: pointer;
 }
+
