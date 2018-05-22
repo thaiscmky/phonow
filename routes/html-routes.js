@@ -48,43 +48,51 @@ router.get('/menu', (req, res) => {
 
 // --------------- Store Info
 router.get('/about', (req, res) => {
+    const host = 'http://'+req.headers.host;
     const title = 'about';
+    let restaurant = {};
+    const queryHours = host + '/api/resturanthours';
+    const queryAddress = host + '/api/resturantaddress';
+    const queryContact = host + '/api/restaurantcontact';
 
-    let hours = {};
-    let address = {};
-    let contact = {};
+    let options = {"method":"GET", "uri": queryHours, "json": true};
 
-    db.restaurant.findAll().then(function (data) {
-        address = getAddress(data);
-    }).then(function () {
-        db.restaurant_contact.findAll().then(function (data) {
-            contact = getContact(data);
-        }).then(function () {
-            db.restaurant_hour.findAll().then(function (data) {
-                hours = getHours(data);
-            }).then(function () {
-                res.render('./main/about', { title: title, hours: hours, address: address, contact: contact });
+    request(options).then(response => {
+        restaurant.hours = response.success;
+        options.uri = queryAddress;
+        request(options).then(response => {
+            restaurant.address = response.success;
+            options.uri = queryContact;
+            request(options).then(response => {
+                restaurant.contact = response.success;
+                res.render('./main/about', { title: title, hours: restaurant.hours, address: getAddress(restaurant.address), contact: (restaurant.contact) });
             });
         });
+    }).catch(error => {
+        res.render('./main/index', {error: JSON.stringify(error)});
     });
-
 });
 
 // --------------- Contact Us
 router.get('/contact', (req, res) => {
     const title = 'contact';
+    const host = 'http://'+req.headers.host;
+    let restaurant = {};
 
-    let address = {};
-    let contact = {};
+    const queryAddress = host + '/api/resturantaddress';
+    const queryContact = host + '/api/restaurantcontact';
 
-    db.restaurant.findAll().then(function (data) {
-        address = getAddress(data);
-    }).then(function () {
-        db.restaurant_contact.findAll().then(function (data) {
-            contact = getContact(data);
-        }).then(function () {
-            res.render('./main/contact', { title: title, address: address, contact: contact });
+    let options = {"method":"GET", "uri": queryAddress, "json": true};
+
+    request(options).then(response => {
+        restaurant.address = response.success;
+        options.uri = queryContact;
+        request(options).then(response => {
+            restaurant.contact = response.success;
+            res.render('./main/contact', { title: title, address: getAddress(restaurant.address), contact: getContact(restaurant.contact) });
         });
+    }).catch(error => {
+        res.render('./main/index', {error: JSON.stringify(error)});
     });
 
 });
@@ -148,7 +156,40 @@ router.post('/send', (req, res) => {
     res.redirect('/contact');
 });
 
+//TODO refactor helper functions
+// Tay's Helper functions
+var getAddress = (ormData) => {
+    let data = ormData[0];
+    return { fulladdress: `${data.address} ${data.resturant_city}, ${data.restaurant_state} ${data.restaurant_zip}` };
+}
 
+var getContact = (ormData) => {
+    let data = ormData[0];
+    // This line below reformats the phone number to correct format. If something is breaking it's probably the line below
+    data.contact_phone1 = `(${data.contact_phone1.substr(0, 3)}) ${data.contact_phone1.substr(3, 3)}-${data.contact_phone1.substr(6)}`;
+    return { phone: `${data.contact_phone1}`, email: `${data.contact_email}` };
+}
+
+var getHours = (ormData) => {
+    let fullobject = {}
+    ormData.forEach(function (element) {
+        for (var key in element) {
+            fullobject[element.day_name] = {};
+        }
+    });
+    for (var key in fullobject) {
+        ormData.forEach(function (element) {
+            if (key === element.day_name) {
+                fullobject[key].open = element.start_time;
+                fullobject[key].close = element.end_time;
+            }
+        })
+    }
+    return fullobject
+}
+
+//TODO convert the bellow into API calls
+//TODO correct query by passing post/put vars in the payload
 //add user
 router.post('/user/:id/:fName/:lName/:email/:secGrpId', (req, res) => {
     db.sequelize.sync().then(() => {
@@ -218,36 +259,5 @@ router.put('/categories/:id', (req, res) => {
         done();
     })
 });
-
-// Tay's Helper functions
-var getAddress = (ormData) => {
-    let data = ormData[0].dataValues;
-    return { fulladdress: `${data.address} ${data.resturant_city}, ${data.restaurant_state} ${data.restaurant_zip}` };
-}
-
-var getContact = (ormData) => {
-    let data = ormData[0].dataValues;
-    // This line below reformats the phone number to correct format. If something is breaking it's probably the line below
-    data.contact_phone1 = `(${data.contact_phone1.substr(0, 3)}) ${data.contact_phone1.substr(3, 3)}-${data.contact_phone1.substr(6)}`;
-    return { phone: `${data.contact_phone1}`, email: `${data.contact_email}` };
-}
-
-var getHours = (ormData) => {
-    let fullobject = {}
-    ormData.forEach(function (element) {
-        for (var key in element.dataValues) {
-            fullobject[element.dataValues.day_name] = {};
-        }
-    });
-    for (var key in fullobject) {
-        ormData.forEach(function (element) {
-            if (key === element.dataValues.day_name) {
-                fullobject[key].open = element.dataValues.start_time;
-                fullobject[key].close = element.dataValues.end_time;
-            }
-        })
-    }
-    return fullobject
-}
 
 module.exports = router;

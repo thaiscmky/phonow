@@ -33,9 +33,25 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         });
     });
 
-    router.get('/getresturanthours', (req, res) => {
+    router.get('/resturanthours', (req, res) => {
         restaurantController.getBusinessHours().then( data => {
-            res.json({'success': data.reverse()});
+            res.json({'success': data});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.get('/resturantaddress', (req, res) => {
+        restaurantController.getRestaurant().then( data => {
+            res.json({'success': data});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
+    });
+
+    router.get('/restaurantcontact', (req, res) => {
+        restaurantController.getContacts().then( data => {
+            res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
         });

@@ -17,9 +17,9 @@
                         <span>CONTACT</span>
                     </div>
                     <div id="phone">
-                        <i class="fas fa-phone-square fa-md"></i> Phone: {{contact.phone}}</div>
+                        <i class="fas fa-phone-square fa-md"></i> Phone: {{contact.1.contact_phone1}}</div>
                     <div id="email">
-                        <i class="fas fa-envelope-square fa-md"></i> Email: {{contact.email}}</div>
+                        <i class="fas fa-envelope-square fa-md"></i> Email: {{contact.1.contact_email}}</div>
                     <a href="/contact">
                         <button type="button" class="btn-white hvr-white">CONTACT US</button>
                     </a>
@@ -35,13 +35,9 @@
                     <div class="small-title">
                         <span>HOURS</span>
                     </div>
-                    <div id="hour-mo">Monday : {{hours.monday.open}} - {{hours.monday.close}}</div>
-                    <div id="hour-tu">Tuesday : {{hours.tuesday.open}} - {{hours.tuesday.close}}</div>
-                    <div id="hour-we">Wednesday : {{hours.wednesday.open}} - {{hours.wednesday.close}}</div>
-                    <div id="hour-th">Thursday : {{hours.thursday.open}} - {{hours.thursday.close}}</div>
-                    <div id="hour-fr">Friday : {{hours.friday.open}} - {{hours.friday.close}}</div>
-                    <div id="hour-sa">Saturday : {{hours.saturday.open}} - {{hours.saturday.close}}</div>
-                    <div id="hour-su">Sunday : {{hours.sunday.open}} - {{hours.sunday.close}}</div>
+                    {{#each hours}}
+                        <div class="hours">{{this.day_name}}: {{this.start_time}} - {{this.end_time}}</div>
+                    {{/each}}
                 </div>
 
             </div>
