@@ -9,7 +9,7 @@ var db        = {};
 
 
 if(process.env.JAWSDB_URL) {
-    var sequelize = new Sequelize(process.env.JAWSDB_URL);
+    var sequelize = new Sequelize(process.env.JAWSDB_URL, {"logging": false}); //turn off logs on production
 } else {
     var config = require(__dirname + '/../config/config.json').dbconfig;
     var sequelize = new Sequelize(config.database, config.username, config.password, config);

@@ -74,10 +74,12 @@ function onGridEvents(){
     $(".grid tr[id^='menuitem-']").on('click', '.fa-edit', function (e) {
         e.preventDefault();
         $(this).parents("tr[id^='menuitem-']").prev().show();
+        $('.grid .action i').css('opacity','0.2');
     });
     //On request to submit row
     $('.grid .action button').on('click', function(e) {
         $(this).parents('.edit-mode').hide();
+        $('.grid .action i').css('opacity','1');
     });
     //On request to delete row
     $(".grid tr[id^='menuitem-']").on('click', '.fa-trash', function (e) {
