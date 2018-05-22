@@ -145,6 +145,7 @@ html {
 
 .grid .table-responsive .edit-mode{
     display: none;
+    background-color: #F2F2F2;
 }
 
 form .action {
@@ -185,3 +186,4 @@ form .action button[type="reset"]:hover{
     z-index: 99;
     cursor: pointer;
 }
+

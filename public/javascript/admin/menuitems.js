@@ -80,7 +80,6 @@ function onGridEvents(){
     //On request to delete row
     $(".grid tr[id^='menuitem-']").on('click', '.fa-trash', function (e) {
         e.preventDefault();
-        console.log('delete');
         let itemId = $(this).parents("tr[id^='menuitem-']")[0].id;
         itemId = parseInt(itemId.replace('menuitem-',''));
 
@@ -98,7 +97,7 @@ function onGridEvents(){
             dataType: 'json',
             context: this,
             success: function (response, request) {
-                window.location.reload();
+                $(this).parents("tr[id^='menuitem-']").detach();
             }
         });
     })

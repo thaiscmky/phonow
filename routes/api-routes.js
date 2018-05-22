@@ -49,7 +49,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
         
         let newcat = {
             category_name: req.body.category_name,
-            category_description:req.body.category_description,
+            category_description: req.body.category_description,
             menu_type_id: req.body.menu_type_id,
             isActive:true
         };
@@ -130,11 +130,13 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.put('/menutype', (req, res) => {
         let update = {
-            category_name: req.body.menu_type_name,
-            category_description: req.body.menu_type_description,
-            isActive: req.body.isActive
+            menu_type_name: req.body.menu_type_name,
+            menu_type_description: req.body.menu_type_description,
+            isActive: req.body.isActive,
+            menuCategoryId: 0 //TODO remove this table and its relationship from models
         };
         menuController.updateMenuType(req.body.id,update).then( data => {
+            console.log(data);
             res.json({'success': data});
         }).catch((err)=>{
             res.json({'error': err});
