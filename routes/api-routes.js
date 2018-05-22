@@ -128,14 +128,17 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
 
     router.delete('/deletemenutype', (req, res) => {
         menuController.deleteMenuType(req.body.id).then( result => {
-            console.log(result);
-            
-        })
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
     });
     router.delete('/deleteCategory', (req, res) => {
         menuController.deleteCategory(req.body.id).then( result => {
-            console.log(result);
-        })
+            res.json({'success': result});
+        }).catch((err)=>{
+            res.json({'error': err});
+        });
     });
 
     router.put('/menuitem', (req, res) => {
