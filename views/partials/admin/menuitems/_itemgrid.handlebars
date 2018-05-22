@@ -1,7 +1,7 @@
 <div class="row my-4 mx-0 grid" id="menu_items">
     <div class="col">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table">
                     <thead class="thead-inverse">
                         <tr>
                             <th>#ID</th>
@@ -22,18 +22,18 @@
                                 <div class="form-row">
                                     <div class="id">
                                         <p>{{this.id}}</p>
-                                        <input id="menuitem_id" name="menuitem_id" type="hidden" value="{{this.id}}" required>
+                                        <input id="menuitem_id" name="id" type="hidden" value="{{this.id}}" required>
                                     </div>
                                     <div class="col name">
                                         <div class="row">
                                             <div class="col">
-                                                <input type="text" class="form-control" name="menuitem_name-{{this.id}}" id="menuitem_name-{{this.id}}" value="{{item_name_english}}"
+                                                <input type="text" class="form-control" name="item_name_english" id="menuitem_name-{{this.id}}" value="{{item_name_english}}"
                                                        required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <input type="text" class="form-control" name="menuitem_name_viet-{{this.id}}" id="menuitem_name_viet-{{this.id}}" value="{{item_name_vietnamese}}"
+                                                <input type="text" class="form-control" name="item_name_vietnamese" id="menuitem_name_viet-{{this.id}}" value="{{item_name_vietnamese}}"
                                                        required />
                                             </div>
                                         </div>
@@ -43,7 +43,7 @@
                                             <div class="col input-group menutype">
                                                 {{assignJSON 'currentype' (filterObjectId this.menuTypeId @root.args.menutypes.success)}}
                                                 {{assignJSON 'currentcat' (filterObjectId this.menuCategoryId @root.args.categories.success)}}
-                                                <select class="form-control" id="menuitem_menutype-{{this.id}}">
+                                                <select class="form-control" id="menuitem_menutype-{{this.id}}" name="menuTypeId">
                                                     {{#unless this.currentype}}<option value="">Select..</option>{{/unless}}
                                                     {{#each ../this.typelist}}
                                                         <option value="{{this.id}}" {{#if (equals this.menu_type_name ../this.currentype.menu_type_name)}}selected="selected" {{/if}}>
@@ -53,7 +53,7 @@
                                                 </select>
                                             </div>
                                             <div class="col input-group category">
-                                                <select class="form-control" id="menuitem_subcategory-{{this.id}}">
+                                                <select class="form-control" id="menuitem_subcategory-{{this.id}}" name="menuCategoryId">
                                                     {{#unless this.currentcat}}<option value="">Select..</option>{{/unless}}
                                                     {{#each ../this.catlist}}
                                                         <option value="{{this.id}}" {{#if (equals this.category_name ../this.currentcat.category_name)}}selected="selected" {{/if}}>
@@ -65,14 +65,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col input-group price">
-                                                <input type="text" placeholder="$" class="form-control" name="menuitem_price-{{this.id}}" id="menuitem_price-{{this.id}}" value="{{item_price}}" required
+                                                <input type="text" placeholder="$" class="form-control" name="item_price" id="menuitem_price-{{this.id}}" value="{{item_price}}" required
                                                 />
                                             </div>
                                             <div class="col input-group status my-2 d-flex align-items-end">
                                                 <span class="caption mr-2">Enabled</span>
                                                 <label class="form-check-label switch">
-                                                    <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-{{this.id}}" name="status-{{this.id}}"
-                                                        {{#if this.isActive}}checked{{/if}}>
+                                                    <input class="form-check-input" type="checkbox" value="{{this.isActive}}" id="status-{{this.id}}" name="isActive"
+                                                        {{#if this.isActive}}checked{{/if}} >
                                                     <span class="slider"></span>
                                                 </label>
                                             </div>
@@ -81,15 +81,15 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col input-group description">
-                                        <textarea class="form-control" name="menuitem_description-{{this.id}}" id="menuitem_description-{{this.id}}">{{item_description}}</textarea>
+                                        <textarea class="form-control" name="item_description" id="menuitem_description-{{this.id}}">{{item_description}}</textarea>
                                     </div>
                                     <div class="col d-flex align-items-end justify-content-end">
                                         <div class="row action">
                                             <div class="col">
-                                                <button type="reset" class="btn" id="cancel-item-{{this.id}}" name="cancel-item-{{this.id}}">Cancel</button>
+                                                <button type="reset" class="btn" id="cancel-item-{{this.id}}">Cancel</button>
                                             </div>
                                             <div class="col">
-                                                <button type="submit" id="update-item-{{this.id}}" name="update-item-{{this.id}}" class="btn btn-warning">Update</button>
+                                                <button type="submit" id="update-item-{{this.id}}" class="btn btn-warning">Update</button>
                                             </div>
                                         </div>
                                     </div>

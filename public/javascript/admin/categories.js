@@ -6,13 +6,12 @@ $(document).ready(function () {
 
 function onAddNew(){
     $("#newmenutype").submit(function( event ) {
-            event.preventDefault();
-            var formdata = $(this).serializeArray();
-            var values = formdata.map(field => field.value);
-            var request = {
-            menu_type_name: values[0],
-            menu_type_description: values[1]
-        };
+        event.preventDefault();
+        var formdata = $(this).serializeArray();
+        var request = {};
+        formdata.forEach(field => request[field.name] = field.value);
+        request.isActive = typeof request.isActive !== 'undefined' && request.isActive !== null;
+
         $('.loading').show();
         $('.spinner').show();
 
@@ -36,18 +35,16 @@ function onAddNew(){
 function onGridSubmit(){
     $(".grid form").submit(function( event ) {
         event.preventDefault();
-        var formid = $(this).id;
         var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        var request = {
-            id: values[0],
-            menu_type_name: values[1],
-            menu_type_description: values[2],
-            isActive: values.length >=4
-        };
+        var request = {};
+        formdata.forEach(field => request[field.name] = field.value);
+        request.isActive = typeof request.isActive !== 'undefined' && request.isActive !== null;
+
         $(this).parents('.edit-mode').hide();
+
         $('.loading').show();
         $('.spinner').show();
+
         $.ajax({
             url: '/api/menutype',
             type: 'put',
@@ -79,28 +76,29 @@ function onGridEvents(){
 
     $(".grid tr[id^='menutype-']").on('click', '.fa-trash', function (e) {
         e.preventDefault();
-       
-        // //TODO
-        event.preventDefault();
-        debugger;
-        let  parent  = $(this).parents("tr[id^='menutype-']").prev();
-        let catId = parent.prevObject[0].id.split("-")[1];
-        console.log(catId);
-      
-        let request = { id: catId === undefined ? -1 : catId}
+
+        let catId = $(this).parents("tr[id^='menutype-']")[0].id;
+        catId = parseInt(catId.replace('menutype-',''));
+
+        $('.loading').show();
+        $('.spinner').show();
+
         $.ajax({
-            url: '/api/deletemenutype',
-            type: 'DELETE',
-            data: JSON.stringify(request),
+            url: '/api/menutype',
+            type: 'delete',
+            data: JSON.stringify({id: catId}),
             headers: {
                 "x-auth-token": localStorage.accessToken,
                 "Content-Type": "application/json"
             },
             dataType: 'json',
-            
-             })
-             
-             window.location.reload(); 
+            context: this,
+            success: function (response, request) {
+                $(this).parents("tr[id^='menutype-']").detach();
+                $('.loading').hide();
+                $('.spinner').hide();
+            }
+        });
        
-    })
+    });
 }

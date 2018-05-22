@@ -5,17 +5,17 @@
             <div class="form-group form-row mb-0 pt-2">
                 <label for="add_name_english" class="col">Name
                     <span class="col">
-                        <input type="text" class="form-control" name="add_name_english" id="add_name_english" required />
+                        <input type="text" class="form-control" name="item_name_english" id="add_name_english" required />
                     </span>
                 </label>
                 <label for="add_name_vietnamese" class="col">Name (Vietnamese)
                     <span class="col">
-                        <input type="text" class="form-control" name="add_name_vietnamese" id="add_name_vietnamese" />
+                        <input type="text" class="form-control" name="item_name_vietnamese" id="add_name_vietnamese" />
                     </span>
                 </label>
                 <label for="add_price" class="col">Add Price
                     <span class="col">
-                        <input type="text" placeholder="$" class="form-control" name="add_price" id="add_price" />
+                        <input type="text" placeholder="$" class="form-control" name="item_price" id="add_price" />
                     </span>
                 </label>
             </div>
@@ -23,7 +23,7 @@
                 <label for="add_menutype" class="col">Add to category
                     <span class="col">
                         {{assignJSON 'typelist' args.menutypes.success}}
-                        <select class="form-control" id="add_menutype" name="add_menutype" required>
+                        <select class="form-control" id="add_menutype" name="menuTypeId" required>
                             <option value="">Select..</option>
                             {{#each this.typelist}}
                                 <option value="{{this.id}}">
@@ -36,7 +36,7 @@
                 <label for="add_category" class="col">Add to Subcategory
                     <span class="col">
                         {{assignJSON 'catlist' args.categories.success}}
-                        <select class="form-control" id="add_category" name="add_category" required>
+                        <select class="form-control" id="add_category" name="menuCategoryId" required>
                             <option value="">Select..</option>
                             {{#each this.catlist}}
                                 <option value="{{this.id}}">
@@ -49,7 +49,7 @@
             </div>
             <div class="form-group form-row">
                 <label for="add_description" class="col">Description</label>
-                <textarea class="form-control" class="col" name="add_description" id="add_description" ></textarea>
+                <textarea class="form-control" class="col" name="item_description" id="add_description" ></textarea>
             </div>
             <div class="form-group form-row">
                 <button type="submit" id="submit_newmenuitem" class="btn btn-warning">Add Menu Item</button>
