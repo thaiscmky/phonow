@@ -1,47 +1,103 @@
-console.log('LOADED: admin/menu.js');
-
 $(document).ready(function () {
-    $(document).on("click", "#menuItem-form", handleAddMenuFormSubmit);
+    onAddNew();
+    onGridSubmit();
+    onGridEvents();
 });
 
-// A function to handle what happens when the form is submitted to create a new Author
-function handleAddMenuFormSubmit(event) {
-    event.preventDefault();
+function onAddNew(){
+    $(".newcategory").submit(function( event ) {
+        event.preventDefault();
+        var formdata = $(this).serializeArray();
+        var values = formdata.map(field => field.value);
+        var request = {
+            category_name: values[0],
+            menu_type_id: values[1],
+            category_description: values[2]
+        };
 
-    var menuItem = {
-        item_name_english: "",
-        item_name_vietnamese: "",
-        item_description: "",
-        item_price: 0,
-        rating: 0,
-        isActive: 1,
-        created_by: "",
-        updatedAt: "",
-        menuTypeId: 0,
-        menuCategoryId: 0
-
-    }
-
-    // Don't do anything if the item  name fields hasn't been filled out
-    if (!$("#item_name_english").val().trim().trim()) {
-        return;
-    }
-
-    menuItem.item_name_english = $("#item_name_english").val();
-    menuItem.item_name_vietnamese = $("#item_name_vietnamese").val();
-    menuItem.item_description = $("#item_description").val();
-    menuItem.item_price = $("#item_price").val();
-    menuItem.rating = $("#item_rating").val();
-    menuItem.isActive = 1;
-    menuItem.menuTypeId = $("#optionMenuType option:selected").val();
-    menuItem.menuCategoryId = $("#optionMenuCategory option:selected").val();
-  
-    addMenu( menuItem);
+        $('.loading').show();
+        $('.spinner').show();
+        $.ajax({
+            url: '/api/menutype',
+            type: 'post',
+            data: JSON.stringify(request),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            context: this,
+            success: function (response, request) {
+                window.location.reload();
+            }
+        });
+    });
 }
 
+function onGridSubmit(){
+    $(".grid form").submit(function( event ) {
+        event.preventDefault();
+        var formid = $(this).id;
+        var formdata = $(this).serializeArray();
+        var values = formdata.map(field => field.value);
+        var request = {
+            id: values[0],
+            category_name: values[1],
+            menu_type_id: values[2],
+            category_description: values[3],
+            isActive: values.length >=5
+        };
+        $(this).parents('.edit-mode').hide();
+        $('.loading').show();
+        $('.spinner').show();
+        $.ajax({
+            url: '/api/menutype',
+            type: 'put',
+            data: JSON.stringify(request),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            context: this,
+            success: function (response, request) {
+                window.location.reload();
+            }
+        });
+    });
+}
 
- 
-  function addMenu(menuItem) {
-    $.post("/api/menuitem",menuItem);
+function onGridEvents(){
+    //On request to edit row
+    $(".grid tr[id^='category-']").on('click', '.fa-edit', function (e) {
+        e.preventDefault();
+        $(this).parents("tr[id^='category-']").prev().show();
+    });
+    //On request to submit row
+    $('.grid .action button').on('click', function(e) {
+        $(this).parents('.edit-mode').hide();
+    });
+    //On request to delete row
+    $(".grid tr[id^='category-']").on('click', '.fa-trash', function (event) {
+        event.preventDefault();
+        debugger;
+        let  parent  = $(this).parents("tr[id^='category-']").prev();
+        let catId = parent.prevObject[0].id.split("-")[1];
+        console.log(catId);
       
-  }
+        let request = { id: catId === undefined ? -1 : catId}
+        $.ajax({
+            url: '/api/deletemenutype',
+            type: 'DELETE',
+            data: JSON.stringify(request),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            success: function (response, request) {
+                window.location.reload();
+            }
+        });
+    })
+}

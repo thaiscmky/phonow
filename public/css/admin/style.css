@@ -143,6 +143,45 @@ html {
 
 /* style for category */
 
-.edit-mode-category{
+.grid .table-responsive .edit-mode{
     display: none;
+}
+
+form .action {
+    padding: 10px;
+    text-align: center;
+}
+form .action button {
+    margin: 5px auto;
+}
+
+form .action button[type="reset"]:hover{
+    background-color: #c1c1c1;
+}
+
+.spinner{
+    position: fixed;
+    display: none;
+    left: calc(50% - 6em);
+    bottom: calc(50% - 4em);
+    color: #FDC313;
+    padding: 2rem 2rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    z-index: 999;
+    font-weight: bold;
+}
+.panel.loading {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 99;
+    cursor: pointer;
 }

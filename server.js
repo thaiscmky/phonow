@@ -21,10 +21,10 @@ const app = express();
 const db=require("./models");
 
 //pasport config
-require('./config/passport')(passport);
+ require('./config/passport')(passport);
 
 //handlebars helpers
-const {truncate,capitalize,debug,assignJSON,equals,returnSelf} = require('./helpers/hbs.js');
+const {truncate,capitalize,debug,assignJSON,equals,returnSelf, filterObjectId, filterObjectName} = require('./helpers/hbs.js');
 
 // Routes
 const auth = require('./routes/auth');
@@ -41,7 +41,9 @@ app.engine('handlebars', exphbs({
         debug: debug,
         assignJSON: assignJSON,
         equals: equals,
-        returnSelf: returnSelf
+        returnSelf: returnSelf,
+        filterObjectId: filterObjectId,
+        filterObjectName: filterObjectName
     },
     defaultLayout: 'main',
 }));

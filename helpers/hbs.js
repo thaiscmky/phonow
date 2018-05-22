@@ -7,7 +7,7 @@ module.exports = {
         return str;
     },
     capitalize: function(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+        // return string.charAt(0).toUpperCase() + string.slice(1);
     },
     debug: function(value, context){
         console.log(`TYPEOF ${typeof value}`);
@@ -38,4 +38,14 @@ module.exports = {
         }
         return options.inverse(this);
     },
+    filterObjectId: function(id, obj, context){
+        if(typeof  obj === 'undefined' || obj === null)
+            return {};
+        return obj.find((obj) =>  obj.id === id);
+    },
+    filterObjectName: function(name, obj, context){
+        if(typeof  obj === 'undefined' || obj === null)
+            return {};
+        return obj.find((obj) =>  obj[name] === name);
+    }
 };
