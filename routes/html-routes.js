@@ -186,7 +186,7 @@ var getHours = (ormData) => {
         })
     }
     return fullobject
-}
+};
 
 //TODO convert the bellow into API calls
 //TODO correct query by passing post/put vars in the payload

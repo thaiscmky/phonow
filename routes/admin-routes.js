@@ -126,7 +126,47 @@ router.get('/403', (req, res) => {
 
 // -------- Authorized route - dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('./admin/index', { layout: 'main-admin' });
+    const title = 'Pho Now Administrator Dashboard';
+    const host = 'http://'+req.headers.host;
+    let restaurant = {};
+    let count = {};
+    const queryHours = host + '/api/resturanthours';
+    const queryAddress = host + '/api/resturantaddress';
+    const queryContact = host + '/api/restaurantcontact';
+    const queryItems = host + '/api/menuitems';
+    const queryCats = host + '/api/categories';
+
+    let options = {"method":"GET", "uri": queryHours, "json": true};
+
+    request(options).then(response => {
+        restaurant.hours = response.success;
+        options.uri = queryAddress;
+        request(options).then(response => {
+            restaurant.address = response.success;
+            options.uri = queryContact;
+            request(options).then(response => {
+                restaurant.contact = response.success;
+                options.uri = queryItems;
+                request(options).then(response => {
+                    count.items = response.success;
+                    options.uri = queryCats;
+                    request(options).then(response => {
+                        count.cats = response.success;
+                        //render here
+                        res.render('./admin/index', { layout: 'main-admin',
+                            title: title,
+                            hours: restaurant.hours,
+                            address: getAddress(restaurant.address),
+                            contact: getContact(restaurant.contact),
+                            count: count
+                        });
+                    });
+                });
+            });
+        });
+    }).catch(error => {
+        res.render('./admin/index', { layout: 'main-admin', error: JSON.stringify(error)});
+    });
 });
 
 //add resturant_hours 
@@ -170,6 +210,38 @@ router.put('/editcategories/',(req, res) => {
     });
 
 });
+
+//TODO refactor helper functions
+// Tay's Helper functions
+var getAddress = (ormData) => {
+    let data = ormData[0];
+    return { fulladdress: `${data.address} ${data.resturant_city}, ${data.restaurant_state} ${data.restaurant_zip}` };
+}
+
+var getContact = (ormData) => {
+    let data = ormData[0];
+    // This line below reformats the phone number to correct format. If something is breaking it's probably the line below
+    data.contact_phone1 = `(${data.contact_phone1.substr(0, 3)}) ${data.contact_phone1.substr(3, 3)}-${data.contact_phone1.substr(6)}`;
+    return { phone: `${data.contact_phone1}`, email: `${data.contact_email}` };
+}
+
+var getHours = (ormData) => {
+    let fullobject = {}
+    ormData.forEach(function (element) {
+        for (var key in element) {
+            fullobject[element.day_name] = {};
+        }
+    });
+    for (var key in fullobject) {
+        ormData.forEach(function (element) {
+            if (key === element.day_name) {
+                fullobject[key].open = element.start_time;
+                fullobject[key].close = element.end_time;
+            }
+        })
+    }
+    return fullobject
+};
 
 module.exports = router;
 
