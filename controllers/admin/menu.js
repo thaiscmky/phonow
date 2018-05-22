@@ -46,7 +46,7 @@ let menu = {
     },
 
     deleteCategory: async (id) => {
-        let item = new Controller('menu_items');
+        let item = new Controller('menu_category');
         return item.deleteById(id).then(data => data)
             .catch(err => JSON.stringify(err));
     },
@@ -56,7 +56,7 @@ let menu = {
             .catch(err => JSON.stringify(err));
     },
     deleteMenuItem: async (id) => {
-        let item = new Controller('menu_category');
+        let item = new Controller('menu_items');
         return item.deleteById(id).then(data => data)
             .catch(err => JSON.stringify(err));
     },

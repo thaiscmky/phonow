@@ -79,6 +79,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             item_name_english: req.body.item_name_english,
             item_name_vietnamese : req.body.item_name_vietnamese,
             item_price: req.body.item_price,
+            item_description: req.body.item_description,
             menuCategoryId: req.body.menuCategoryId,
             menuTypeId: req.body.menuTypeId,
             isActive: true
@@ -145,6 +146,7 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
             item_name_english: req.body.item_name_english,
             item_name_vietnamese : req.body.item_name_vietnamese,
             item_price: req.body.item_price,
+            item_description: req.body.item_description,
             menuCategoryId: req.body.menuCategoryId,
             menuTypeId: req.body.menuTypeId,
             isActive: req.body.isActive
@@ -182,7 +184,8 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
      * Delete Routes
      */
     router.delete('/menutype', (req, res) => {
-        menuController.deleteMenuType(req.body.id).then( result => {
+        let id = parseInt(req.body.id);
+        menuController.deleteMenuType(id).then( result => {
             res.json({'success': result});
         }).catch((err)=>{
             res.json({'error': err});
@@ -190,7 +193,8 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     });
 
     router.delete('/category', (req, res) => {
-        menuController.deleteCategory(req.body.id).then( result => {
+        let id = parseInt(req.body.id);
+        menuController.deleteCategory(id).then( result => {
             res.json({'success': result});
         }).catch((err)=>{
             res.json({'error': err});
@@ -198,7 +202,8 @@ const userController = require(path.join(__basedir,'/controllers/admin/user.js')
     });
 
     router.delete('/menuitem', (req, res) => {
-        menuController.deleteMenuItem(req.body.id).then( result => {
+        let id = parseInt(req.body.id);
+        menuController.deleteMenuItem(id).then( result => {
             res.json({'success': result});
         }).catch((err)=>{
             res.json({'error': err});

@@ -10,16 +10,9 @@ function onAddNew(){
     $("#newmenuitem").submit(function( event ) {
         event.preventDefault();
         var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        var request = {
-            item_name_english: values[0],
-            item_name_vietnamese: values[1],
-            item_price: values[2],
-            menuCategoryId: values[3],
-            menuTypeId: values[4],
-            item_description: values[5],
-            isActive: values.length >=6
-        };
+        var request = {};
+        formdata.forEach(field => request[field.name] = field.value);
+        request.isActive = typeof request.isActive !== 'undefined' && request.isActive !== null;
 
         $('.loading').show();
         $('.spinner').show();
@@ -44,23 +37,15 @@ function onAddNew(){
 function onGridSubmit(){
     $(".grid form").submit(function( event ) {
         event.preventDefault();
-        var formid = $(this).id;
         var formdata = $(this).serializeArray();
-        var values = formdata.map(field => field.value);
-        console.log(values);
-        var request = {
-            id: values[0],
-            item_name_english: values[1],
-            item_name_vietnamese: values[2],
-            item_price: values[3],
-            menuCategoryId: values[4],
-            menuTypeId: values[5],
-            item_description: values[6],
-            isActive: values.length >=7
-        };
+        var request = {};
+        formdata.forEach(field => request[field.name] = field.value);
+        request.isActive = typeof request.isActive !== 'undefined' && request.isActive !== null;
         $(this).parents('.edit-mode').hide();
+
         $('.loading').show();
         $('.spinner').show();
+
         $.ajax({
             url: '/api/menuitem',
             type: 'put',
@@ -95,6 +80,26 @@ function onGridEvents(){
     //On request to delete row
     $(".grid tr[id^='menuitem-']").on('click', '.fa-trash', function (e) {
         e.preventDefault();
-        //TODO
+        console.log('delete');
+        let itemId = $(this).parents("tr[id^='menuitem-']")[0].id;
+        itemId = parseInt(itemId.replace('menuitem-',''));
+
+        $('.loading').show();
+        $('.spinner').show();
+
+        $.ajax({
+            url: '/api/menuitem',
+            type: 'delete',
+            data: JSON.stringify({id: itemId}),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            context: this,
+            success: function (response, request) {
+                window.location.reload();
+            }
+        });
     })
 }
