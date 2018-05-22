@@ -1,6 +1,6 @@
 /* Root Stuff for media query stuff */
 html, body {font-size: 1rem; background: #111}
-body {font-size: 1em; font-family: '', sans-serif;     overflow-x: hidden;
+body {font-size: 1em; font-family: 'Roboto', sans-serif;     overflow-x: hidden;
 }
 
 /* This is the footer fixer */
@@ -79,17 +79,33 @@ section.menu > .strip {
     z-index: -1;
 }
 
+#section-top {
+    position: relative;
+    top: 2em;
+}
+
 
 .menu-banner {
     background-color: #111;
 }
 
 section.info {
-    background-color: #500;
+    background-color: #555;
+    background: url("../../img/main/back.png");
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.where-content {
+    padding-top: 120px;
+}
+
+.grey-box {
+    
 }
 
 section.contact {
-    background-color: #555;
+    /* background-color: #500; */
 }
 
 .title {
@@ -122,10 +138,9 @@ section.contact {
     top: -10px;
 }
 
-.section-img {
-    /* height: 300px;
-    width: 300px; */
-    border: #111 solid 5px;
+.info {
+    padding: 200px 0;
+    margin-top: -200px;
 }
 
 /* End Main Section CSS */
@@ -172,8 +187,8 @@ section.contact {
 
 #menu-content {
     background: #fff;
-    padding: 1.618em;    
-}
+    padding: 1.618em;        
+}    
 
 .items {
     list-style-type: none;
@@ -202,7 +217,7 @@ section.contact {
 
 /*   About Page CSS   */
 
-#info {
+#info {    
     color: #fff;  
 }
 
@@ -292,7 +307,7 @@ section.contact {
 
 /* Sug-Pages Nav Bar */
 .navbar-custom {
-    position: absolute;
+    position: fixed;
     width: 100%;
 }
 
@@ -327,8 +342,7 @@ section.contact {
 }
 
 .bg-bt {
-    background: url("../../img/main/bt.png");
-    position: fixed;
+    background: url("../../img/main/bt.png");    
 }
 
 .font-c-b {
@@ -337,6 +351,14 @@ section.contact {
 
 .font-c-w {
     color: #fff !important;
+}
+
+.btn-white {    
+    padding: .314rem 1.618rem;
+    font-family: 'Roboto', sans-serif;
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #fff;
 }
 
 /***********************/
