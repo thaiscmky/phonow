@@ -87,7 +87,7 @@ function onGridEvents(){
       
         let request = { id: catId === undefined ? -1 : catId}
         $.ajax({
-            url: '/api/deleteCategory',
+            url: '/api/deletemenutype',
             type: 'DELETE',
             data: JSON.stringify(request),
             headers: {

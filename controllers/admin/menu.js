@@ -36,21 +36,16 @@ let menu = {
             .catch(err => JSON.stringify(err));
     },
     updateMenuItem: async (id, values) => {
-        let item = new Controller('menu_items');
+        let item = new Controller('menu_item');
         return item.setData(id,values).then(data => data)
             .catch(err => JSON.stringify(err));
     },
     /**
      * TODO delete operations
      */
-    deleteCategory: async (id) => {
-        let item = new Controller('menu_category');
-        return item.deleteById(id).then(data => data)
-            .catch(err => JSON.stringify(err));
-    },
-
-    deleteMenuItem: async (id) => {
-        let item = new Controller('menu_items');
+    
+    deleteMenuType: async (id) => {
+        let item = new Controller('menu_type');
         return item.deleteById(id).then(data => data)
             .catch(err => JSON.stringify(err));
     },

@@ -13,7 +13,6 @@ function onAddNew(){
             menu_type_name: values[0],
             menu_type_description: values[1]
         };
-
         $('.loading').show();
         $('.spinner').show();
 
@@ -82,20 +81,26 @@ function onGridEvents(){
         e.preventDefault();
        
         // //TODO
-        // let request = { id: "hi"}
-        // $.ajax({
-        //     url: '/api/deleteMenuType',
-        //     type: 'DELETE',
-        //     data: JSON.stringify(request),
-        //     headers: {
-        //         "x-auth-token": localStorage.accessToken,
-        //         "Content-Type": "application/json"
-        //     },
-        //     dataType: 'json',
-        //     context: this,
-        //     success: function (response, request) {
-        //         window.location.reload();
-        //     }
-        // });
+        event.preventDefault();
+        debugger;
+        let  parent  = $(this).parents("tr[id^='menutype-']").prev();
+        let catId = parent.prevObject[0].id.split("-")[1];
+        console.log(catId);
+      
+        let request = { id: catId === undefined ? -1 : catId}
+        $.ajax({
+            url: '/api/deletemenutype',
+            type: 'DELETE',
+            data: JSON.stringify(request),
+            headers: {
+                "x-auth-token": localStorage.accessToken,
+                "Content-Type": "application/json"
+            },
+            dataType: 'json',
+            
+             })
+             
+             window.location.reload(); 
+       
     })
 }
