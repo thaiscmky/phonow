@@ -8,6 +8,7 @@
 ## Application Developers
 * **Frontend**: The, Thais
 * **Backend**:  Vinanti, Yewbdar, Carlos
+* **DBA**: Yewbdar, Vinanti
 * **Scrum Master**: Thais
 * **Server Administrator**: Thais
 * **Tester**: Carlos
